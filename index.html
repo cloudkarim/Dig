@@ -123,7 +123,7 @@
     <button class="tab" data-tab="analytical">The Analytical</button>
   </div>
   <section id="page-wire">
-    <p class="wire-intro">Last 24 hours, by topic. 4-sentence briefs with everything defined inline. Tap "Learn more" for angles, predictions, and what to watch.</p>
+    <p class="wire-intro">Last 24 hours, by topic. Briefs with everything defined inline. Tap "Learn more" for angles, predictions, and what to watch.</p>
     <div id="wire-content"></div>
   </section>
   <section id="page-analytical" style="display: none;">
@@ -131,7 +131,7 @@
     <div id="ana-content"></div>
   </section>
   <div class="site-footer">
-    Briefing compiled May 6, 2026 &middot; Refreshes daily 4 PM EST (once API automation is live).<br/>
+    Briefing compiled May 8, 2026 &middot; Refreshes daily 4 PM EST.<br/>
     Source URLs verified at compile time.
   </div>
 </div>
@@ -139,225 +139,236 @@
 const wire = {
   "US Economy": [
     {
-      h: "ISM Services prices stuck at four-year high, signaling stagflation",
-      proseHTML: 'Every month a private group called ISM <span class="jargon">(Institute for Supply Management — surveys thousands of US business managers to measure the economy in real time)</span> reports on the services sector <span class="jargon">(restaurants, banks, hospitals, airlines, software — about 70% of all US economic activity)</span>. <span class="change">April\'s report showed business activity still growing at 53.6, but the prices managers pay for supplies hit 70.7% — the highest since 2022, with all 18 industries reporting higher costs.</span> With hiring also stalling nationwide, this is textbook stagflation <span class="jargon">(rising prices plus a weakening job market — the rare 1970s-style problem with no easy fix)</span>, putting the Federal Reserve <span class="jargon">(US central bank, controls interest rates that affect mortgages and loans)</span> in an impossible spot. Kevin Warsh <span class="jargon">(former Fed governor, takes over May 15; known as a "hawk" — prefers high rates to fight inflation)</span> is expected to keep rates high regardless of jobs, meaning mortgages stay near 7% through November.',
+      h: "April jobs beat at 115,000 — but participation falls for fifth straight month",
+      proseHTML: 'The BLS <span class="jargon">(Bureau of Labor Statistics — the federal agency that produces monthly employment data, releases the jobs report on the first Friday of each month)</span> reported today that the US economy added 115,000 jobs in April, more than double the 65,000 economists had forecast, while the unemployment rate held at 4.3%. <span class="change">But the labor force participation rate — the share of adults either working or actively looking for work — fell for the fifth consecutive month to 61.8%, down from 62.6% in November 2025, signaling that the low unemployment headline is partly an artifact of workers giving up on the job search entirely rather than finding employment.</span> Gains were concentrated in health care, transportation, and retail; manufacturing shed jobs for the 32nd consecutive month. CNN described the labor market as "stronger than expected but frozen."',
       sources: [
-        { name: "ISM official", url: "https://www.prnewswire.com/news-releases/services-pmi-at-53-6-april-2026-ism-services-pmi-report-302761674.html" },
-        { name: "Verified Investing", url: "https://verifiedinvesting.com/blogs/us-economic-metrics/us-ism-services-pmi-april-2026-prices-stuck-stagflation" },
-        { name: "Advisor Perspectives", url: "https://www.advisorperspectives.com/dshort/updates/2026/05/05/ism-services-pmi-april-2026" }
+        { name: "BLS Employment Situation (May 8)", url: "https://www.bls.gov/news.release/empsit.nr0.htm" },
+        { name: "CNN Business", url: "https://www.cnn.com/2026/05/08/economy/us-jobs-report-april" },
+        { name: "TheStreet", url: "https://www.thestreet.com/latest-news/stock-market-today-may-8-2026-updates" }
       ],
       learn: {
-        deeper: 'The 70.7% prices reading is unusual because it\'s sticking even after the worst of the Iran-driven oil shock. ISM\'s chair explicitly said prices will stay elevated "for several months — regardless of when the conflict in Iran ends" because cost increases are still working through global supply chains. That means inflation is now structural, not just war-driven.',
+        deeper: 'The participation rate decline is the shadow number policymakers watch but rarely explain in soundbites. A falling participation rate means people are dropping out of the labor force entirely — not getting jobs, not looking for work — which mechanically keeps the unemployment rate low even as the real job picture weakens. Kevin Warsh takes over the Fed on May 15 with a hawkish (rate-holding) bias. A "frozen" labor market complicates his options: holding rates too long risks tipping inactivity into contraction; cutting too soon risks re-igniting services inflation that is still running at 2.6% core CPI, well above the Fed\'s 2% target.',
         angles: [
-          { label: "Structural stagflation", text: "Tariffs + Iran war + AI-driven productivity gains create a permanent supply-side inflation regime. Fed can't ease without re-anchoring inflation expectations above 3%." },
-          { label: "Transitory blip", text: "Prices index normalizes by Q3 as oil shock fades and inventories rebuild. Services PMI drifts back to 55-57 range; Fed quietly cuts in late 2026." },
-          { label: "Recession ahead", text: "Employment index in contraction is the leading indicator everyone is missing. Real Estate already contracting. By Q4 the composite drops below 50 and recession debate begins." }
+          { label: "Green shoots headline", text: "115K beats 65K expectation; markets up 0.4-0.7%; Q1 business investment rose 10%. The US economy is absorbing the Iran shock better than feared — soft landing narrative survives." },
+          { label: "Frozen labor market", text: "Participation 61.8% = five months of workers exiting entirely. Low unemployment is statistical withdrawal, not real hiring. Warsh inherits a structural trap with no clean rate-path response." },
+          { label: "Manufacturing canary", text: "32nd consecutive month of factory job losses — the constituency tariffs were supposed to revive is still bleeding. Rural coalition pressure on the White House intensifies before November midterms." }
         ],
-        watch: 'Friday\'s April jobs report (May 8) and next week\'s April CPI release. A hot CPI plus weak jobs = worst-case for the Fed. June 3 brings May ISM Services — if Prices stays above 70%, structural inflation thesis confirmed.'
-      }
-    },
-    {
-      h: "Manufacturing prices spike to 84.6%, highest since 2022",
-      proseHTML: 'A separate ISM survey tracks manufacturing <span class="jargon">(factories making cars, steel, electronics, food — the physical-goods economy)</span>, one of the most reliable early signals of inflation and recession. <span class="change">April\'s release showed manufacturing growing at 52.7%, but factory prices for raw materials jumped 6.3 points to 84.6% — the highest since April 2022, up 25.6 points in just three months.</span> Manufacturers explicitly blamed the Iran war, since Iran controls the Strait of Hormuz <span class="jargon">(narrow waterway between Iran and the UAE that ships about 20% of the world\'s oil)</span>. The combination of rising prices and falling factory employment (46.4%) makes the stagflation signal across both ISM surveys impossible to ignore.',
-      sources: [
-        { name: "ISM official", url: "https://www.prnewswire.com/news-releases/manufacturing-pmi-at-52-7-april-2026-ism-manufacturing-pmi-report-302759226.html" },
-        { name: "Trading Economics", url: "https://tradingeconomics.com/united-states/business-confidence" }
-      ],
-      learn: {
-        deeper: 'Manufacturing employment has now contracted for 31 straight months. The 84.6% prices reading equals the April 2022 peak that triggered the most aggressive Fed tightening cycle in 40 years. The difference now is the Fed has less room because the labor market is already softer.',
-        angles: [
-          { label: "Tariffs working as designed", text: "High prices are temporary; reshoring of supply chains lifts mfg jobs by 2027. Trump owns the recovery narrative." },
-          { label: "Tariffs backfiring visibly", text: "Mfg jobs collapse despite the protectionism that was supposed to save them. Rural GOP coalition fractures." },
-          { label: "Iran war does the damage", text: "Iran-driven oil shock pushes mfg prices over a threshold where margins collapse, triggering a 2026 industrial recession independent of Fed policy." }
-        ],
-        watch: 'May 8 jobs report for manufacturing payrolls. If May Mfg PMI Prices stays above 80%, the inflation pipeline is open through year-end. Watch for Trump pressure on Warsh to NOT raise rates despite the data.'
+        watch: 'May CPI release (mid-May) — if core CPI ticks back up despite weak participation, the stagflation thesis hardens. June 3 next jobs report. Warsh\'s first public remarks on the labor market after his May 15 swearing-in at the Fed.'
       }
     }
   ],
   "US Politics": [
     {
-      h: "Kevin Warsh set to take Fed chair May 15, signaling hawkish turn",
-      proseHTML: 'Jerome Powell <span class="jargon">(current Fed chair, originally appointed by Trump in 2018, reappointed by Biden in 2022)</span> finishes his term this month, with the next chair inheriting an economy where prices rise while jobs weaken. <span class="change">Trump tapped Kevin Warsh — the most hawkish of three finalists — to take over May 15.</span> "Hawkish" means Warsh prefers high interest rates to fight inflation, even at the cost of jobs and housing. Wall Street had been betting on multiple Fed rate cuts in 2026, and the Warsh pick effectively kills that — mortgages stay around 7% and the housing slump deepens into the November midterms <span class="jargon">(elections held mid-presidential-term where all of the House and a third of the Senate are up)</span>.',
+      h: "Trump proclaims May 8 'Victory Day for WWII' — the first formal US observance",
+      proseHTML: 'May 8, 1945 is VE Day <span class="jargon">(Victory in Europe Day — the date Nazi Germany signed its unconditional surrender, ending World War II in Europe; widely observed as a national holiday in France and much of the EU, but never formally marked in the US)</span>. <span class="change">Trump signed a proclamation today declaring May 8, 2026 "Victory Day for World War II," honoring America\'s "monumental triumph over tyranny and evil in Europe" and the more than 250,000 American soldiers who died in the European theater — making it the first formal US national observance of the date.</span> The symbolic move lands in complicated context: Trump simultaneously redeployed 5,000 US troops from German soil this week and launched the February Iran strikes without informing NATO <span class="jargon">(North Atlantic Treaty Organization — the 32-member Western collective defense alliance)</span> allies in advance, making Allied solidarity symbolism resonate differently across the Atlantic than intended.',
       sources: [
-        { name: "Verified Investing", url: "https://verifiedinvesting.com/blogs/us-economic-metrics/us-ism-services-pmi-april-2026-prices-stuck-stagflation" }
+        { name: "White House", url: "https://www.whitehouse.gov/presidential-actions/2026/05/victory-day-for-world-war-ii-2026/" },
+        { name: "Newsmax", url: "https://www.newsmax.com/us/trump-proclamation-wwii-victory/2026/05/08/id/1255639/" },
+        { name: "NPR", url: "https://www.npr.org/2026/05/08/nx-s1-5810515/us-war-trump-nato-iran-europe-canada-germany" }
       ],
       learn: {
-        deeper: 'Warsh served on the Fed during the 2008 crisis and resigned in 2011 in protest of QE2 — meaning he has publicly opposed bond-buying stimulus for over a decade. He has no PhD in economics, unusual for a chair, meaning he\'ll lean on Fed staff for technical models but set the political tone himself. Markets are already pricing in 50bp higher rates than under Hassett.',
+        deeper: 'In Europe, May 8 is already "Liberation Day" in France and several other countries. Russia celebrates May 9 as Victory Day. Trump\'s framing — emphasizing American rather than Allied triumph — arrives in a week when NATO allies are demanding more transparency on Iran war decisions and Germany is accelerating autonomous European defense planning. The proclamation delivers patriotic symbolism for the midterms but reinforces European concerns about the alliance\'s reliability.',
         angles: [
-          { label: "Inflation fighter wins", text: "Warsh kills inflation by holding rates through 2027, gets credit for re-anchoring price stability. Painful but works." },
-          { label: "Recession architect", text: "Holding rates with weak jobs triggers a real recession in 2026. Trump fires (or pressures) Warsh by Q4. Fed independence damaged." },
-          { label: "Political hostage", text: "Trump publicly bullies Warsh on Truth Social to cut rates. Warsh resists, partially caves under pressure. Markets lose faith in Fed credibility." }
+          { label: "Clean domestic win", text: "Symbolic patriotism with no downside at home. Republican base energized; WWII veterans\' families honored. No political cost and a durable midterm talking point." },
+          { label: "NATO optics problem", text: "Celebrating Allied victory the same week the US sidelined its allies before the Iran strikes sends a contradictory message that further erodes alliance trust in European capitals." },
+          { label: "Historical rebranding", text: "Precursor to a broader American exceptionalism narrative project — May 8 Victory Day joins the 250th anniversary as a template for reshaping US patriotic identity around singular American power, not collective security." }
         ],
-        watch: 'May 15 swearing-in and first FOMC meeting June 17-18. Watch the dot plot for 2026/27 rate path. First Trump-Warsh public disagreement will be the market-moving event of summer.'
-      }
-    }
-  ],
-  "Foreign Policy / China": [
-    {
-      h: "Trump-Xi summit eight days out, Beijing publicly hedging",
-      proseHTML: 'Trump visits Beijing on May 14 to meet Xi Jinping <span class="jargon">(General Secretary of the Chinese Communist Party since 2012, China\'s most powerful leader since Mao)</span> — the first US presidential trip to China in nine years, originally meant to ease the trade war but delayed by the Iran conflict. <span class="change">This week, China\'s Foreign Ministry described the agenda as "still under discussion" — diplomatic code for renegotiating parts that were supposedly finalized, particularly on rare earths.</span> Rare earths are 17 metals <span class="jargon">(used in iPhones, EVs, F-35 fighter jets — China controls ~92% of global processing capacity)</span> giving China leverage over US tech and defense industries. The hedging suggests Xi is preserving leverage for in-person concessions, and Trump\'s domestic pressure on inflation tilts the summit\'s asymmetry toward Beijing.',
-      sources: [
-        { name: "Wikipedia: Iran war", url: "https://en.wikipedia.org/wiki/2026_Iran_war" }
-      ],
-      learn: {
-        deeper: 'CSIS surveyed 79 China experts: only 3% expect both sides to keep all summit commitments; 34% expect neither will. The "Board of Trade" framework being floated would create permanent bilateral commissions on tariffs, investment, and tech — a structural commitment outlasting the Trump administration. Beijing is also coordinating with Russia (Lavrov visited last week) and North Korea (Wang Yi visited Pyongyang in April) to maximize pre-summit positioning.',
-        angles: [
-          { label: "Managed-competition deal", text: "Both sides agree to a framework locking current tariff levels but creating a dispute resolution channel. 6-12 months of stability; markets rally." },
-          { label: "Symbolic visit only", text: "Communiqué signed, both sides claim victory at home, nothing changes. Decoupling continues; tariff war reignites by Q4." },
-          { label: "Taiwan-shaped wildcard", text: "Side deal: Xi accepts US AI export framework in exchange for Trump softening Taiwan rhetoric. Blows up GOP coalition over China hawkishness." }
-        ],
-        watch: 'May 12-13 final pre-summit communiqués from both sides. May 14 arrival ceremony, especially body language. Whether Trump tweets about Taiwan in the 72 hours before landing in Beijing.'
-      }
-    }
-  ],
-  "War & Conflict": [
-    {
-      h: "UAE intercepts second day of Iranian missiles; Trump pauses Hormuz operation",
-      proseHTML: 'A war between the US-Israel coalition and Iran began February 28; a fragile ceasefire <span class="jargon">(temporary halt in fighting, mediated by Pakistan)</span> took effect April 8, but Iran has continued to block the Strait of Hormuz. <span class="change">On May 4-5, Iran fired 12 ballistic missiles, 3 cruise missiles, and 4 drones at the UAE <span class="jargon">(United Arab Emirates — Gulf country, key US ally, hosts a major US air base)</span>, hitting an oil facility in Fujairah; on May 6, Trump halted "Project Freedom" — the US Navy mission escorting commercial ships through Hormuz — citing "great progress" toward a deal.</span> The pause could mean a breakthrough is close, or Trump backing off after the strikes proved Iran can still hit US allies. Until tankers move freely, imported gasoline stays expensive in the US, feeding the inflation problem hurting Trump heading into November.',
-      sources: [
-        { name: "Al Jazeera (May 5)", url: "https://www.aljazeera.com/news/2026/5/5/uae-intercepts-missiles-and-drones-for-second-day" },
-        { name: "CNBC (May 4)", url: "https://www.cnbc.com/2026/05/04/iran-war-uae-trump-ceasefire-missiles.html" },
-        { name: "The National (UAE)", url: "https://www.thenationalnews.com/news/uae/2026/05/04/uae-intercepts-four-missiles-as-new-safety-alerts-issued/" }
-      ],
-      learn: {
-        deeper: 'UAE air defense has engaged 549 ballistic missiles, 29 cruise missiles, and 2,260 drones since Feb 28 — one of the most intense missile defense operations in modern history. The Fujairah facility is critical because it handles ~1.7M barrels per day, half UAE export capacity, by piping oil around Hormuz. Iran\'s denial of the May 5 attacks (while admitting May 4) suggests internal IRGC factions operating independently of Tehran central command.',
-        angles: [
-          { label: "Real breakthrough", text: "Trump halts Project Freedom because a backchannel deal is close — Hormuz reopens by end of May, oil drops $15/barrel, summer inflation eases." },
-          { label: "Face-saving retreat", text: "UAE strikes proved deterrence isn't working; Trump halts to avoid escalation right before Beijing. Iran reads the pause as US weakness." },
-          { label: "Calm before bigger storm", text: "IRGC factions act independently and escalate further; Israel uses the pause to hit Hezbollah harder; full ceasefire collapse by June." }
-        ],
-        watch: 'Whether tanker traffic in Hormuz visibly increases this week. Iran\'s next public statement on the ceasefire. Whether IRGC commanders make public appearances signaling unity or factional split.'
+        watch: 'Allied capitals\' public responses this weekend. Whether Merz or Macron issue statements about NATO\'s future direction. German Bundestag vote on military hub funding for postwar Ukraine, expected next week.'
       }
     },
     {
-      h: "Israel kills 11+ in Lebanon strikes; Hezbollah leader rejects peace talks",
-      proseHTML: 'Lebanon was supposed to be covered under the April 8 ceasefire, but PM Netanyahu rejected its inclusion, and Israeli forces have continued daily strikes against Hezbollah <span class="jargon">(Iran-backed Shia militia and political party that effectively runs southern Lebanon — designated a terrorist group by the US)</span>. <span class="change">Israeli airstrikes on May 6 killed 11+ across southern and eastern Lebanon, bringing the toll since fighting resumed in March to ~2,700, with about 1.2 million Lebanese displaced; Hezbollah leader Naim Qassem publicly rejected peace talks this week.</span> Lebanon is the linchpin: as long as Israel keeps striking, Iran has political cover to keep blocking Hormuz. If the Lebanon front escalates, the Iran ceasefire collapses, oil spikes globally, and the Trump-Xi summit becomes much harder.',
+      h: "Roberts warns Court seen as 'political actors' — Trump attacks his own appointees",
+      proseHTML: 'Chief Justice John Roberts <span class="jargon">(appointed by George W. Bush in 2005; the Court\'s institutional moderate; longest-serving current justice)</span> publicly lamented that Americans increasingly view the Supreme Court as politically driven rather than legally principled — a rare break from the Court\'s traditional silence on its own public image. <span class="change">Trump responded by calling out two of the three justices he personally appointed — Neil Gorsuch and Amy Coney Barrett — labeling their ruling on an undisclosed case "an embarrassment to their families," a level of public attack on sitting justices that is virtually unprecedented from a sitting president.</span> Federal courts across the country are simultaneously reviewing Trump\'s Iran war authorities, tariff executive orders, and immigration enforcement — making judicial-executive friction the defining institutional conflict of the second term.',
       sources: [
-        { name: "Al Jazeera (May 6)", url: "https://www.aljazeera.com/news/2026/5/6/israeli-attacks-on-southern-eastern-lebanon-kill-at-least-six-people" },
-        { name: "Times of Israel (May 5)", url: "https://www.timesofisrael.com/liveblog-may-5-2026/" },
-        { name: "UN Security Council", url: "https://www.securitycouncilreport.org/monthly-forecast/2026-05/lebanon-38.php" }
+        { name: "The Daily Record", url: "https://thedailyrecord.com/2026/05/08/roberts-supreme-court-political-perception/" },
+        { name: "Just Security", url: "https://www.justsecurity.org/138358/early-edition-may-8-2026/" }
       ],
       learn: {
-        deeper: 'Israel has 5 divisions inside southern Lebanon, with stated plans to maintain a "buffer zone" up to the Litani River. The April 8 strikes killed 357 in 24 hours — the heaviest single-day toll of the war. Hezbollah has been using fiber-optic-guided drones effective against Israeli tanks, killing 3 IDF soldiers in the past week. Lebanon\'s government has held first direct talks with Israel since 1983 — a real diplomatic shift Hezbollah is sabotaging.',
+        deeper: 'Roberts spent years carefully managing the Court\'s public image — occasionally siding with liberals on major cases to avoid appearing purely partisan. Trump\'s willingness to attack his own appointees publicly signals he has concluded the Court is no longer reliable for his agenda. This raises the question of whether a sustained pattern of adverse rulings on executive power could trigger a White House push for court expansion or jurisdiction-stripping legislation.',
         angles: [
-          { label: "Diplomatic breakthrough", text: "Lebanon-Israel direct talks succeed despite Hezbollah opposition. IDF withdraws to Litani; Hezbollah disarmed under Lebanese army control. UNIFIL ends Dec 2026." },
-          { label: "Frozen low-grade war", text: "Strikes continue at current pace; neither side escalates to full war but neither backs down. Lebanon's reconstruction stalls; humanitarian crisis deepens." },
-          { label: "Regional explosion", text: "Hezbollah scores a major hit on Israel (e.g., Tel Aviv casualties); Israel goes full-scale, Iran re-enters openly, Hormuz fully closes, oil spikes to $130." }
+          { label: "Court holds the line", text: "Roberts\' statement reinforces institutional independence. Conservative majority remains intact but less predictable. Rule-of-law norm survives the confrontation and the Court\'s legitimacy is preserved." },
+          { label: "Court packing on the table", text: "If the conservative bloc rules against Trump on Iran powers or immigration, the White House formalizes a court expansion push. The 2021 Democratic playbook, inverted." },
+          { label: "Roberts\' legacy play", text: "Roberts is positioning the Court for 2027-28 by distancing it from Trump now. He wants to be the Chief Justice who preserved the institution\'s legitimacy during the most politically volatile term in a generation." }
         ],
-        watch: 'Whether the Lebanese government openly demands Hezbollah disarm. Hezbollah\'s drone attack frequency. Any Israeli strike beyond the Litani River — that\'s the escalation threshold.'
+        watch: 'Upcoming SCOTUS rulings on Iran war authorization and tariff executive authority. Any White House signals about court restructuring legislation. Whether Trump nominates additional lower-court judges this summer.'
       }
     }
   ],
   "Healthcare": [
     {
-      h: "Top medical journal calls Trump's drug pricing pilot \"hollow\"",
-      proseHTML: 'In January, Trump launched a program called GENEROUS that extends "Most Favored Nation" pricing — meaning the US pays no more for a drug than the cheapest price any other rich country pays — to Medicaid <span class="jargon">(federal-state program covering ~80M low-income Americans, including children, disabled people, and nursing home residents)</span>. <span class="change">This week, the New England Journal of Medicine <span class="jargon">(the most respected medical research journal globally — publication there shapes US health policy debate)</span> published an op-ed calling the design "voluntary in name, hollow in benchmarks" — meaning drug companies can opt out and price comparison rules have loopholes.</span> If GENEROUS fails, Trump loses his main healthcare achievement just as ACA premiums <span class="jargon">(Affordable Care Act marketplace plans, ~24M working-age enrollees)</span> spiked because Biden-era subsidies expired Jan 1. The combined picture: seniors on Medicare get cheaper drugs; working-age Americans get hit with higher premiums and tighter Medicaid — politically explosive heading into midterms.',
+      h: "ACA enrollment crashes 20%; Nebraska first state to enforce Medicaid work requirements",
+      proseHTML: 'The ACA <span class="jargon">(Affordable Care Act — the 2010 law creating federal health insurance marketplaces; Biden-era enhanced subsidies had kept average premiums at historic lows for millions)</span> marketplace enrolled 24 million people in early 2026, a record high. <span class="change">That number has fallen to roughly 19 million — a drop of approximately 5 million people, or 20%, after Congress failed to extend the enhanced subsidies that expired January 1 — the fastest single-year collapse since ACA marketplaces opened in 2014; simultaneously, Nebraska became the first state to enforce Medicaid work requirements under the Big Beautiful Bill Act <span class="jargon">(the sweeping Republican reconciliation bill passed earlier this year, requiring able-bodied Medicaid recipients to work, volunteer, or complete job training to maintain coverage)</span>, without waiting for federal implementation guidance due in June.</span> With ACA premiums spiking and Medicaid eligibility tightening at the same time, millions of working-age Americans are falling out of coverage from both directions at once.',
       sources: [
-        { name: "NEJM", url: "https://www.nejm.org/" }
+        { name: "KFF Health News (May 8)", url: "https://kffhealthnews.org/morning-briefing/friday-may-8-2026/" },
+        { name: "CMS MLN (May 7)", url: "https://www.cms.gov/training-education/medicare-learning-network/newsletter/mln-connects-newsletter-may-7-2026" },
+        { name: "CNBC", url: "https://www.cnbc.com/2026/05/03/healthcare-costs-parental-paid-leave-employee-benefits-cuts.html" }
       ],
       learn: {
-        deeper: 'Medicare\'s 10 negotiated drugs (Eliquis, Xarelto, Jardiance, etc.) account for $46.4B in 2022 Part D spending. Out-of-pocket costs are projected to fall over 50% — a real, tangible win for ~50M Medicare seniors. But on the same Jan 1 day, drugmakers raised prices on 350+ branded drugs (up from 250+ a year earlier), and ACA enhanced subsidies expired, raising average marketplace premiums by hundreds per month for working-age families.',
+        deeper: 'The 20% ACA enrollment drop is the fastest on record. The US uninsured rate hit an all-time low of 7.9% in early 2025 and is projected to rise sharply by mid-year surveys. The squeeze is also hitting insured workers: CNBC reported this week that employers are cutting parental leave and supplemental benefits to offset healthcare cost increases. Nebraska\'s early implementation is already being challenged in federal court — but if it survives, 20 states have similar requirements ready to activate immediately after federal guidance drops in June.',
         angles: [
-          { label: "GOP politically survives", text: "Medicare wins are tangible to retirees; ACA pain is diffuse. GOP holds rural seniors. Coalition holds through midterms." },
-          { label: "Coalition splits", text: "Working-class ACA losses overwhelm Medicare gains in suburban districts. Healthcare becomes 2026's #1 swing issue, costing the GOP the House." },
-          { label: "Trump pivots mid-year", text: "GENEROUS empirically fails; Trump pivots to direct price caps, alienating Pharma donors but neutralizing the issue politically." }
+          { label: "Political time bomb", text: "Every uninsured family in a swing district is a midterm story. ACA plus Medicaid losses in suburban and working-class geographies compound housing and inflation pain. Healthcare becomes the 2026 defining issue." },
+          { label: "Market self-corrects", text: "Higher premiums push employers to expand workplace coverage. The uninsured spike is temporary and resolves as workplace plans absorb dropped marketplace members. Effect diffuses by November." },
+          { label: "Nebraska is the test case", text: "If work requirements survive court challenge, 20 states activate by Q3. If struck down, the Big Beautiful Bill\'s Medicaid provisions face a constitutional challenge that reaches SCOTUS in 2027." }
         ],
-        watch: 'NEJM peer-reviewed studies on Medicare drug pricing impact (expected June). ACA enrollment numbers dropping. Whether Trump publicly distances from GENEROUS by July.'
+        watch: 'Federal court ruling on Nebraska\'s work requirements (expected within 60 days). Federal implementation guidance in June. July uninsured rate estimates from Census Bureau and KFF.'
       }
     }
   ],
   "Climate": [
     {
-      h: "Earth on track to breach Paris 1.5\u00B0C limit by 2029",
-      proseHTML: 'In 2015, almost every country signed the Paris Agreement <span class="jargon">(UN climate treaty pledging to keep warming below 2\u00B0C, ideally below 1.5\u00B0C, above pre-industrial levels)</span>, and Copernicus <span class="jargon">(EU\'s official climate monitor — most authoritative real-time temperature data globally)</span> tracks how close Earth is to that limit. <span class="change">Recent reports confirm 22 of the last 24 months were above 1.5\u00B0C, and scientists now project the formal long-term breach for May 2029 — about 16 years sooner than 2015 estimates predicted.</span> "Long-term breach" matters because Paris is breached only when the multi-decade average crosses 1.5\u00B0C — the line beyond which scientists predict severe and irreversible impacts (mass coral death, ice sheet collapse, intense storms). The next major UN summit, COP31 <span class="jargon">(31st annual UN climate conference, in Antalya Turkey this November)</span>, is now operating against a clock that has effectively run out.',
+      h: "2026 forecast to be fourth straight year above 1.4°C; Paris breach locked in for 2029",
+      proseHTML: 'The Paris Agreement <span class="jargon">(2015 UN climate treaty signed by 196 parties, pledging to keep long-term average warming below 2°C, ideally below 1.5°C above the 1850-1900 pre-industrial baseline)</span> uses a long-term average rather than a single year to define the 1.5°C threshold — meaning one hot year alone doesn\'t trigger the formal breach. <span class="change">The Met Office <span class="jargon">(UK\'s national weather service, one of the world\'s most authoritative climate forecast bodies)</span> projects 2026 will reach a central temperature of 1.46°C above pre-industrial levels — making it the fourth consecutive year above 1.4°C — while both Copernicus <span class="jargon">(the EU\'s official real-time climate monitoring program)</span> and Berkeley Earth now project the long-term 1.5°C breach will occur in 2029, roughly 16 years sooner than 2015 estimates predicted.</span> COP31 <span class="jargon">(the 31st annual UN climate conference, scheduled for Antalya, Turkey this November)</span> is now negotiating fossil fuel and deforestation phase-out roadmaps against a timeline scientists say has already effectively run out.',
       sources: [
-        { name: "Copernicus Climate", url: "https://climate.copernicus.eu/" }
+        { name: "Met Office", url: "https://www.metoffice.gov.uk/about-us/news-and-media/media-centre/weather-and-climate-news/2025/2026-outlook-likely-another-year-above-1.4c" },
+        { name: "PBS NewsHour", url: "https://www.pbs.org/newshour/science/scientists-say-another-hot-year-is-a-warning-shot-of-a-shifting-dangerous-climate" }
       ],
       learn: {
-        deeper: 'The IPCC says global emissions must fall ~43% by 2030 (vs. 2019) to stay under 1.5\u00B0C. Current NDCs (national pledges) project warming significantly above 1.5\u00B0C even if fully implemented. COP30 in Bel\u00E9m failed to land explicit fossil fuel phase-out language despite 80+ countries supporting it; COP31 has fossil fuel and deforestation roadmaps due. The Iran war, ironically, has strengthened the energy diversification case in some petrostates considering managed phase-down.',
+        deeper: 'The 2029 breach matters because the Paris Agreement\'s 1.5°C limit was specifically chosen to protect low-lying island nations from sea-level rise crossing an irreversible threshold. Once the long-term average breaches 1.5°C, the IPCC projects permanent coral die-off for 70-90% of reefs (versus 99% at 2°C) and ice sheet dynamics that lock in several meters of sea-level rise over centuries. COP31 must produce a fossil fuel phase-out roadmap — but the US is absent at senior level and India and China are resisting mandatory targets.',
         angles: [
-          { label: "Roadmap year", text: "Iran war makes diversification undeniable; petrostates accept managed phase-down. Paris framework survives despite US pullback through corporate + EU momentum." },
-          { label: "Coffin year", text: "US absent, China hedges, India blocks. Antalya produces a roadmap nobody implements. Paris becomes aspirational on paper." },
-          { label: "Parallel framework", text: "Small-island bloc + Brazil walk out, declare alternative framework with mandatory targets. Split kills Paris but births something with enforcement teeth." }
+          { label: "COP31 as last chance", text: "The Iran war energy shock creates a political opening for accelerated renewables investment among petrostates. Turkey-Australia draft text on phase-out survives watering-down. 2029 breach remains avoidable if NDCs strengthen." },
+          { label: "1.5°C now locked in", text: "US absent, OPEC resistant, China NDC weak. Antalya produces an aspirational roadmap nobody enforces. 1.5°C becomes a historical footnote by 2030." },
+          { label: "Parallel framework emerges", text: "Small island states and Brazil walk out of Antalya and declare a mandatory-target framework. Paris fractures but something with real enforcement teeth forms alongside it." }
         ],
-        watch: 'Pre-COP31 ministerial meetings (June, Bonn). Whether US sends senior officials. Australia-Turkey draft text on phase-out language (expected September). Trump statements on Paris specifically.'
+        watch: 'June climate ministerial in Bonn — the first formal pre-COP31 meeting. Whether the US sends any senior officials. COP31 opens November 9 in Antalya.'
       }
     }
   ],
-  "Tech / AI Policy": [
+  "Tech / AI": [
     {
-      h: "Nvidia's China revenue collapses to 9.1% under export controls",
-      proseHTML: 'Nvidia <span class="jargon">(US chipmaker — its GPUs power nearly all modern AI; briefly the world\'s most valuable company in 2024)</span> used to sell heavily into China, but the US has progressively banned exports of its top chips since 2022 to slow Chinese AI development. <span class="change">Nvidia\'s annual filing this week confirmed China and Hong Kong fell to just 9.11% of revenue in fiscal 2026, down from 20.24% two years ago — a near-halving driven entirely by US export controls.</span> Export controls are rules from the Commerce Department <span class="jargon">(federal agency regulating which technologies US companies can sell abroad)</span> that block sales of strategic tech to adversaries. The numbers preview how export controls hit US tech earnings broadly, and intensify pressure on Commerce to approve a less-powerful chip Nvidia could still sell to China — a likely Chinese ask of Trump in Beijing on May 14.',
+      h: "Snap cuts 1,000 jobs explicitly citing AI; states move as federal regulation stalls",
+      proseHTML: 'Snap <span class="jargon">(the company behind Snapchat — roughly 432 million daily active users globally, primarily Gen Z; known for augmented reality filters and disappearing-content formats)</span> CEO Evan Spiegel announced approximately 1,000 layoffs and the closure of over 300 open roles today, attributing the cuts explicitly to "rapid advancements in artificial intelligence" that allow smaller engineering teams to produce the same output as larger ones. <span class="change">The announcement arrives the same week Connecticut approved one of the nation\'s most comprehensive AI governance bills and Iowa Governor Kim Reynolds signed a chatbot safety law — both passing through state legislatures while federal AI regulation remains stalled in Congress — and a new Microsoft report estimated AI adoption has reached 17.8% of the world\'s working-age population, up from 16.3% last quarter, with generative AI now valued at $172 billion annually to US consumers alone.</span>',
       sources: [
-        { name: "Nvidia investor relations", url: "https://investor.nvidia.com/" }
+        { name: "AI Legislative Update (May 8)", url: "https://www.transparencycoalition.ai/news/ai-legislative-update-may8-2026" },
+        { name: "Microsoft On the Issues", url: "https://blogs.microsoft.com/on-the-issues/2026/05/07/the-state-of-global-ai-diffusion-in-2026/" },
+        { name: "Bloomberg", url: "https://www.bloomberg.com/news/articles/2026-05-08/tencent-alibaba-face-slowing-growth-as-ai-costs-mount" }
       ],
       learn: {
-        deeper: 'Nvidia\'s designed-for-China H20 chip was effectively banned in 2024; the company has been seeking approval for a successor for over a year. China has responded by accelerating domestic chip development through Huawei and SMIC, with mixed but improving results. The 9.1% number understates exposure because Nvidia GPUs still flow to China through third-country re-routing.',
+        deeper: 'The Snap cuts are significant not for their scale but for the stated rationale. Spiegel did not cite a revenue miss or a strategic pivot — he attributed reductions specifically to AI replacing team capacity. That framing is unusual in corporate communication and may signal a wave of similar disclosures as Q2 earnings season approaches. Connecticut\'s AI bill is expected to function as a national template in the same way California\'s CCPA (California Consumer Privacy Act) did — creating de facto national standards through state regulation when Congress cannot act.',
         angles: [
-          { label: "Export controls succeed", text: "China's AI development falls 18-24 months behind US frontier. Nvidia takes the revenue hit but US wins the AI race; Trump locks in the framework." },
-          { label: "Export controls backfire", text: "China achieves chip independence faster than expected; US tech loses its largest market without slowing China meaningfully." },
-          { label: "Summit deal reshapes everything", text: "Trump approves H20 successor in exchange for Chinese rare-earth supply deal. Nvidia stock pops; CHIPS Act hawks revolt." }
+          { label: "Creative destruction normalizes", text: "AI displacement is offset by new job categories. Snap-type cuts release talent into AI-adjacent roles; labor reallocates over 12-18 months. Markets absorb the transition as a routine productivity upgrade." },
+          { label: "State patchwork creates chaos", text: "Without a federal framework, 50 different AI rules create compliance chaos for national companies and drive innovation offshore. Worst outcome for long-term US AI competitiveness." },
+          { label: "Congress forced to act", text: "Visible AI layoffs in consumer tech — a category voters understand personally — generate the political pressure to break the congressional logjam on federal AI regulation by year-end." }
         ],
-        watch: 'Commerce Department announcements on H20 successor approval (any time). May 14-15 summit communiqu\u00E9 for chip-specific language. Q2 Nvidia earnings (late August).'
+        watch: 'Q2 tech earnings (July-August) for AI-related headcount language across the sector. Whether Connecticut\'s bill survives industry legal challenge. Senate Commerce Committee markup on any federal AI framework.'
       }
     }
   ],
   "Latin America": [
     {
-      h: "Venezuela transition stalls four months after US captured Maduro",
-      proseHTML: 'On January 3, US special forces captured Venezuelan dictator Nicol\u00E1s Maduro <span class="jargon">(authoritarian leader of Venezuela since 2013, drove the country into hyperinflation and an exodus of 8M Venezuelans)</span> in Operation Absolute Resolve, and Trump publicly said the US would "run" Venezuela until a transition. <span class="change">Four months later, the transition is stuck: Nobel laureate Mar\u00EDa Corina Machado <span class="jargon">(Venezuelan opposition leader, won 2024 Nobel for democracy work, currently in Miami)</span> and Edmundo Gonz\u00E1lez <span class="jargon">(Venezuela\'s rightful 2024 election winner, exiled in Spain)</span> can\'t agree on power-sharing, and VP Delcy Rodr\u00EDguez remains acting president.</span> The longer the transition stalls, the more it looks like occupation rather than liberation — especially as US energy companies negotiate control of Venezuelan oil. This sets a major precedent, since GOP lawmakers have publicly named Cuba and Nicaragua as next.',
+      h: "Venezuela debt hits 173% of GDP as US-backed transition stalls four months in",
+      proseHTML: 'The United States captured Venezuelan President Nicolás Maduro <span class="jargon">(authoritarian ruler since 2013 who oversaw Venezuela\'s economic collapse from a $350B peak GDP to under $100B, triggering the emigration of over 8 million Venezuelans)</span> in a special forces operation on January 3, with Trump publicly pledging the US would "run" Venezuela until a democratic transition was complete. <span class="change">Four months later, Citi <span class="jargon">(Citigroup — a major US bank that publishes sovereign debt analyses for emerging markets)</span> has marked Venezuela\'s total external obligations at $169 billion against a 2026 GDP of $98 billion — a debt-to-GDP ratio of 173%, among the world\'s highest — while opposition leaders María Corina Machado (still in Miami) and Edmundo González (still in Spain) have not returned to Caracas, and acting President Delcy Rodríguez remains in office.</span> Trump met with Brazil\'s Lula da Silva at the White House today, his most vocal regional critic of the operation.',
       sources: [
-        { name: "El Pa\u00EDs English", url: "https://english.elpais.com/" }
+        { name: "Rio Times Online", url: "https://www.riotimesonline.com/latin-american-pulse-for-wednesday-may-6-2026/" },
+        { name: "WOLA Venezuela", url: "https://www.wola.org/program/venezuela/" }
       ],
       learn: {
-        deeper: 'The operation killed ~100 Venezuelan forces; Cuba acknowledged 32 of its citizens died carrying out missions for Maduro. Pre-operation, the US conducted 32 strikes on alleged drug-trafficking vessels with 115+ killed. Trump said US will recover ~$3B in sanctioned oil with US companies paying to rebuild infrastructure — locking in private interests in any transition. Congress hasn\'t passed War Powers resolutions, but several are pending.',
+        deeper: 'The 173% debt-to-GDP ratio means any future Venezuelan government inherits a debt load requiring years of IMF-style restructuring before normal government services resume. US energy companies have reportedly negotiated access to Venezuela\'s remaining ~800,000 barrels-per-day oil output. If US corporate interests are embedded in Venezuelan oil before a legitimate government is installed, Washington has a structural incentive to delay rather than accelerate a genuine democratic transition — exactly the framing Lula and Colombia\'s Petro are now advancing publicly.',
         angles: [
-          { label: "Doctrine consolidates", text: "Cuba/Nicaragua get same treatment within 18 months. New Monroe doctrine; Western Hemisphere becomes a clean US sphere of influence." },
-          { label: "Doctrine collapses", text: "Transition fails, insurgency forms, Congress blocks next round via War Powers. Venezuela becomes a quagmire instead of a precedent." },
-          { label: "Iraq-style optics", text: "Russian/Iranian-trained ex-FAES officers form insurgency by Q4; oil infrastructure goes offline; Trump faces stability crisis 6 months before midterms." }
+          { label: "Transition succeeds", text: "Machado returns to Caracas in June; González sworn in; debt restructuring begins under IMF support; oil revenue rebuilds over 3-5 years. Monroe Doctrine precedent consolidated cleanly." },
+          { label: "Occupation turns quagmire", text: "Transition stalls; insurgency forms from Maduro loyalists and Cuban-trained forces; oil infrastructure sabotaged; Iraq 2003 parallels deepen in the six months before midterms." },
+          { label: "Resource capture narrative dominates", text: "Evidence of US companies locking in oil deals before transition surfaces publicly. Brazil, Colombia, Mexico condemn the operation explicitly. Hemispheric consensus against the US hardens." }
         ],
-        watch: 'Whether Machado actually flies back to Caracas. Any congressional War Powers vote. Cuba/Nicaragua-specific Trump statements. Venezuelan oil production numbers (proxy for US operational control).'
+        watch: 'Whether Machado announces a return date to Venezuela. Congressional War Powers votes. What Lula says publicly after today\'s White House meeting. Venezuelan oil production numbers as a proxy for US operational control.'
       }
     }
   ],
   "Africa / Middle East": [
     {
-      h: "Sudan: paramilitary force closes in on last army-held Darfur capital",
-      proseHTML: 'Sudan has been in civil war since April 2023 between the national army and the RSF <span class="jargon">(Rapid Support Forces — paramilitary descended from the Janjaweed militias responsible for the 2003 Darfur genocide, led by warlord Mohamed "Hemedti" Dagalo)</span>, producing the world\'s largest displacement crisis with 12M+ forced from their homes. <span class="change">This week, OCHA <span class="jargon">(UN Office for the Coordination of Humanitarian Affairs — manages global emergency aid)</span> warned of an imminent RSF siege of El Fasher, the last city in Darfur still held by the army.</span> Darfur is the western region of Sudan, mostly populated by non-Arab ethnic groups historically targeted by RSF\'s predecessor militias. If El Fasher falls, the RSF effectively partitions Sudan along ethnic lines, beginning the war\'s worst phase: mass starvation in a sealed enclave.',
+      h: "Famine confirmed in El Fasher — the last army-held city in Sudan's Darfur region",
+      proseHTML: 'Sudan has been in civil war since April 2023, pitting the national army against the RSF <span class="jargon">(Rapid Support Forces — a paramilitary descended from the Janjaweed militias responsible for the 2003 Darfur genocide, led by warlord Mohamed "Hemedti" Dagalo)</span>, now producing the world\'s largest and most complex humanitarian crisis with over 12 million displaced. <span class="change">OCHA <span class="jargon">(UN Office for the Coordination of Humanitarian Affairs — coordinates international emergency aid response)</span> confirmed this week that famine has been formally reached in El Fasher — the last city in Darfur still held by the national army — and in Kadugli in the Kordofan region, with nearly 20 additional areas at imminent risk as RSF forces block humanitarian access corridors.</span> If El Fasher falls militarily, the RSF would effectively partition Sudan along ethnic lines, having systematically depopulated a predominantly non-Arab western region.',
       sources: [
-        { name: "OCHA Sudan", url: "https://www.unocha.org/sudan" }
+        { name: "OCHA Sudan", url: "https://www.unocha.org/news/todays-top-news-middle-east-iran-lebanon-occupied-palestinian-territory-sudan-afghanistan" },
+        { name: "Middle East Eye", url: "https://www.middleeasteye.net/news/israel-palestine-syria-yemen-and-sudan-among-conflicts-watch-2026-report-says" }
       ],
       learn: {
-        deeper: 'El Fasher has been under siege for over a year, with hundreds of thousands trapped. The UAE has been documented supplying RSF with weapons (denied officially); Egypt and Saudi Arabia back the army. The conflict has produced more displacement than Ukraine and Gaza combined but receives a fraction of the international attention.',
+        deeper: 'Sudan\'s crisis has now produced more displacement than Ukraine and Gaza combined but receives a fraction of the international media attention. The UAE has been documented in UN Security Council panel reports as supplying the RSF with weapons and logistical support (officially denied). Egypt and Saudi Arabia back the national army. The result is a Gulf proxy war playing out inside a famine zone the international community cannot reach. Congress has held no hearings specifically on Sudan in 2026.',
         angles: [
-          { label: "Partition becomes reality", text: "RSF takes El Fasher; Sudan splits into RSF-held west and army-held east. Famine kills hundreds of thousands; international community accepts de facto borders." },
-          { label: "Foreign intervention", text: "UAE backing exposed forces a diplomatic crisis; Saudi-led coalition imposes ceasefire; tenuous peace allows aid corridors. Risk of regional spillover." },
-          { label: "Forgotten war continues", text: "Status quo grinds on through 2026; neither side achieves decisive victory; humanitarian disaster compounds without resolution." }
+          { label: "Partition becomes permanent", text: "RSF takes El Fasher; de facto border hardens; international community accepts facts on the ground. Mass starvation in a sealed western enclave. 2026 becomes Sudan\'s defining catastrophe." },
+          { label: "Gulf states broker a deal", text: "Saudi Arabia pressures UAE to halt RSF weapons flow under international scrutiny. Back-channel ceasefire enables aid corridors. Fragile peace, but the starvation curve begins to bend." },
+          { label: "Ignored war grinds on", text: "Status quo continues; neither side achieves decisive victory; international community chronically underfunds the response; famine spreads across eastern Darfur without resolution." }
         ],
-        watch: 'El Fasher humanitarian access reports (weekly). UAE-RSF documentation in UN reports. Egyptian military movements near Sudanese border. Trump statements on Sudan (he hasn\'t made any).'
+        watch: 'Weekly OCHA humanitarian access reports from El Fasher. UN Security Council emergency session (requested by the African Union). UAE arms documentation in the next Sudan Panel report.'
       }
     }
   ],
   "Europe / EU": [
     {
-      h: "Germany: Merz coalition fractures over Ukraine military funding",
-      proseHTML: 'Friedrich Merz <span class="jargon">(Germany\'s new chancellor as of last week — leader of the CDU, the center-right party, took over after early February elections)</span> took office leading a coalition with the SPD <span class="jargon">(center-left Social Democratic Party — historic German labor party, ideologically opposed to CDU on most issues)</span>, an awkward marriage forced by election math. <span class="change">This week, the partners split publicly over funding for UK-France-led military hubs in Ukraine — facilities that would store NATO weapons and train Ukrainian troops postwar — forcing a Bundestag <span class="jargon">(German parliament, similar to US House)</span> vote that could test Merz\'s grip on his own bloc.</span> If the vote fails or barely passes, Europe\'s largest economy signals weakness on Ukraine just as the US-pushed June peace deadline approaches. That weakness undercuts Western negotiating leverage with Russia and gives Putin reason to keep stalling rather than concede.',
+      h: "Ukraine net-recaptured 116 sq km in April; Russia declares Victory Day ceasefire",
+      proseHTML: 'After years of primarily defensive fighting following Russia\'s February 2022 full-scale invasion, Ukraine showed a potential momentum shift in April. <span class="change">The ISW <span class="jargon">(Institute for the Study of War — a Washington DC-based conflict research organization that publishes daily battlefield assessments)</span> observed Ukraine net-recaptured approximately 116 square kilometers in April — more territory than it lost for the first time in over a year — apparently aided by degraded Russian logistics from Ukrainian long-range strikes.</span> Russia simultaneously declared a unilateral ceasefire from May 8–9 to mark Victory Day <span class="jargon">(Russia\'s May 9 commemoration of the Soviet defeat of Nazi Germany in 1945)</span>, while Ukraine declared its own competing ceasefire window May 5–6; neither side fully observed the other\'s terms, and Russia cancelled its military parade equipment display in Moscow, reportedly out of concern for Ukrainian drone strikes.',
       sources: [
-        { name: "Der Spiegel International", url: "https://www.spiegel.de/international/" }
+        { name: "Al Jazeera — ISW analysis (May 8)", url: "https://www.aljazeera.com/news/2026/5/8/ukraine-may-have-turned-tide-of-russian-territorial-gains-says-think-tank" },
+        { name: "Al Jazeera — competing ceasefires", url: "https://www.aljazeera.com/news/2026/5/4/russia-and-ukraine-declare-competing-ceasefires" },
+        { name: "Al Jazeera — US-Germany rift", url: "https://www.aljazeera.com/news/2026/5/6/a-stress-test-us-germany-rift-widens-as-iran-war-drags-on" }
       ],
       learn: {
-        deeper: 'Merz won February\'s snap election promising stronger Ukraine support and tougher migration policy — both opposed by SPD coalition partners on cost grounds. The military hubs would be Europe\'s most concrete postwar Ukraine commitment. Russia\'s 2026 defense budget remains near record highs; Atlantic Council analysts now openly say the war won\'t end in 2026.',
+        deeper: 'Russia still controls roughly 20% of Ukrainian territory — 116 sq km is meaningful as a trend break but modest in absolute terms. The EU\'s €90 billion loan to Ukraine (€60 billion earmarked for military use) is funding this shift. The competing ceasefires reflect both sides positioning for the "peace narrative" ahead of Trump\'s June deadline for negotiations — without actually stopping the war. Germany\'s defense spending rose from 47 billion euros in 2021 to 108 billion euros today, driven by Russia\'s war and now accelerating doubt about US NATO reliability.',
         angles: [
-          { label: "Coalition holds", text: "Merz wins narrow Bundestag vote; military hubs proceed; Europe demonstrates real postwar commitment. Russia accepts frozen-conflict reality." },
-          { label: "Coalition fractures early", text: "Vote fails or passes by 1-2 seats; SPD threatens to leave; new elections by autumn. Putin reads chaos as opportunity, escalates spring offensive." },
-          { label: "Quiet workaround", text: "Merz routes funding through EU mechanisms to avoid Bundestag fight; coalition survives but signals EU institutional shift away from national treasuries." }
+          { label: "Turning point confirmed", text: "April recapture establishes a trend; EU funding plus long-range weapon authorization create conditions for sustained Ukrainian advances through summer. Negotiating position strengthens materially." },
+          { label: "Seasonal anomaly", text: "Russian spring offensive preparation paused in April for logistics regeneration; resumes in May-June. April Ukrainian gains are temporary; Russian manpower attrition still favors Moscow long-term." },
+          { label: "Ceasefire politics dominate", text: "Both sides are positioning for a Trump-brokered peace framework. The ceasefires are diplomatic theater, not military reality. The negotiating endgame begins by Q3 regardless of battlefield outcomes." }
         ],
-        watch: 'Bundestag vote (Thursday this week). Russian military movements in Donetsk/Sumy. Trump statement on Germany — he has been hostile to Merz personally.'
+        watch: 'ISW daily maps through May — do Ukrainian gains continue or reverse? Trump\'s June peace deadline and whether formal talks begin. German Bundestag vote on military hub funding for postwar Ukraine, expected next week.'
       }
     }
   ],
-  "Arctic": [
-    { h: "Nothing significant in 24h", empty: true }
+  "China": [
+    {
+      h: "Iran war expected to crowd out tariffs and rare earths at Trump-Xi summit, 6 days out",
+      proseHTML: 'Trump and Xi Jinping meet in Beijing on May 14–15 — the first US presidential visit to China in nine years — in a summit originally designed to address the trade war that pushed effective US tariff rates on Chinese goods as high as 147.6% before a partial rollback to an overall average of 11.8% in April. <span class="change">CNBC reported today that the Iran war is now expected to dominate the agenda, leaving "little room" to advance on tariffs, rare-earth export controls <span class="jargon">(China controls roughly 92% of global rare earth processing capacity — a chokepoint for US defense and tech supply chains)</span>, or chip rules; separately, The Wire China published analysis this week arguing that Trump\'s proposed "Board of Trade" framework <span class="jargon">(a proposed US-China bilateral commission to jointly manage trade flows)</span> signals Washington has given up on structurally changing China\'s trade behavior and is instead institutionalizing managed rivalry.</span> A 90-day tariff truce struck in Geneva in February collapsed after three weeks, with Trump accusing Beijing of violation.',
+      sources: [
+        { name: "CNBC (May 8)", url: "https://www.cnbc.com/2026/05/08/iran-focus-at-trump-xi-summit-may-delay-progress-on-tariffs-rare-earths.html" },
+        { name: "The Wire China (May 7)", url: "https://www.thewirechina.com/2026/05/07/trumps-board-of-trade-move-signals-the-u-s-has-given-up-on-changing-china/" },
+        { name: "US News", url: "https://www.usnews.com/news/world/articles/2026-05-06/u-s-president-trumps-renewed-trade-war-with-china" }
+      ],
+      learn: {
+        deeper: 'Xi enters this summit in a structurally stronger position than any prior Trump-Xi meeting. China\'s rare earth processing dominance is a live weapon: the US cannot build certain F-35 components or EV batteries without Chinese-processed materials. A CSIS survey of 79 former officials and China experts found only 3% expected both sides to keep all summit commitments; 34% expected neither to honor any. The "Board of Trade" concept — if formalized — would be historically significant: the first US acknowledgment that structural change in China\'s trade behavior is off the table.',
+        angles: [
+          { label: "Iran breakthrough anchors the summit", text: "Xi publicly commits to pressuring Tehran on Hormuz in exchange for US easing on chip export controls. Oil stabilizes, markets rally, Trump claims a foreign policy win before midterms." },
+          { label: "Board of Trade institutionalizes managed rivalry", text: "Framework locks in current US-China competition without resolving it. Decoupling slows but continues under a bureaucratic wrapper. China-hawk GOP coalition begins fracturing." },
+          { label: "Taiwan wildcard", text: "Xi privately tests Trump on a Taiwan arms sale or commitment; Trump softens rhetoric in exchange for Hormuz de-escalation help. Blows up the GOP defense hawk coalition overnight." }
+        ],
+        watch: 'May 14-15 summit communiqué — specifically whether it mentions rare earths, tariff timelines, or Iran. USTR announcements before or after the summit. Any Chinese statement on Hormuz tied to the meeting.'
+      }
+    }
+  ],
+  "War": [
+    {
+      h: "US and Iran exchange fire in Hormuz on day 70; Trump insists ceasefire 'still holding'",
+      proseHTML: 'The US-Iran war, which began February 28 when US-Israeli forces struck Iranian nuclear and military sites, has had a fragile ceasefire nominally in place since April 8, brokered by Pakistani PM Shehbaz Sharif — but the Strait of Hormuz <span class="jargon">(the narrow waterway between Iran and the UAE through which roughly 20% of global oil flows daily)</span> remains severely disrupted. <span class="change">On May 7 — day 70 of the conflict — US Navy destroyers and Iranian forces exchanged fire in the Strait; US Central Command said its forces "intercepted unprovoked Iranian attacks and responded with self-defense strikes," while Iran accused the US of striking civilian coastal areas along Iran\'s southern coast in violation of the ceasefire.</span> Trump said today the ceasefire is "still holding" but warned Iran of a "harsher response" if a deal is not reached "fast"; he separately paused Operation Project Freedom <span class="jargon">(the US Navy tanker escort mission through Hormuz, launched May 4)</span> on May 6, citing "great progress" toward a deal.',
+      sources: [
+        { name: "Al Jazeera (May 8)", url: "https://www.aljazeera.com/news/2026/5/8/iran-war-day-70-us-iran-trade-fire-in-hormuz-amid-ceasefire-tensions" },
+        { name: "PBS NewsHour", url: "https://www.pbs.org/newshour/show/u-s-destroyers-and-iran-trade-fire-in-strait-of-hormuz-in-serious-test-of-ceasefire" },
+        { name: "CNBC", url: "https://www.cnbc.com/2026/05/07/iran-war-hormuz-strait-ceasefire-trump.html" }
+      ],
+      learn: {
+        deeper: 'The contradiction between "ceasefire still holding" and "destroyers exchanging fire" reflects the chaotic information environment around the conflict. Iran\'s claim that the US struck civilian areas — if substantiated — would significantly complicate the US legal posture under international humanitarian law. CNN published analysis today arguing Trump has "abandoned many of his initial maximalist demands" on Iran, signaling the White House is searching for an exit. The Project Freedom pause, announced one day before the exchange of fire, may have unintentionally removed the protective cover that had been keeping Iranian forces in check.',
+        angles: [
+          { label: "Ceasefire still viable", text: "May 7 exchange is a controlled incident — each side signaling limits, not intent to escalate. Omani backchannel is active. Hormuz reopens by end of May, oil falls $10-15/barrel." },
+          { label: "Ceasefire effectively dead", text: "Competing narratives (each side says the other fired first) make verification impossible. Any deal collapses on implementation. Conflict re-escalates toward Iran\'s nuclear sites by June." },
+          { label: "IRGC acting independently", text: "Iran\'s IRGC hardliner faction is ordering strikes that Tehran\'s civilian leadership did not authorize — a state-within-a-state problem that makes any ceasefire unenforceable from the Iranian side regardless of negotiations." }
+        ],
+        watch: 'Whether tanker traffic through Hormuz increases in the next 72 hours. Any formal statement from the Omani backchannel that mediated the April 8 deal. Trump-Xi May 14 summit — whether Xi publicly calls on Iran to de-escalate as part of any joint framework.'
+      }
+    }
+  ],
+  "Flex": [
+    {
+      h: "NATO fracture widens: US sidelined allies before Iran strikes, troops leave Germany",
+      proseHTML: 'NATO <span class="jargon">(North Atlantic Treaty Organization — the 32-member Western collective defense alliance whose Article 5 treats an attack on one member as an attack on all; founded in 1949 explicitly to coordinate military decisions among allies)</span> has long operated on the principle that major military operations are discussed with allies in advance. <span class="change">NPR reported today that the US launched its February Iran strikes without consulting European allies and that Germany, France, and Canada learned of the operation only after it began — a breach that is now accelerating a fundamental European rethink of the alliance\'s future.</span> The US is simultaneously redeploying 5,000 troops from German soil and has not stationed the promised Tomahawk cruise missiles <span class="jargon">(long-range US cruise missiles with 1,600+ km range — Europe currently produces no equivalent in sufficient quantities)</span> in Germany, leaving a capability gap Berlin is trying to address by building the continent\'s strongest conventional army by 2039, backed by a defense budget that has grown from 47 billion euros in 2021 to 108 billion euros today.',
+      sources: [
+        { name: "NPR (May 8)", url: "https://www.npr.org/2026/05/08/nx-s1-5810515/us-war-trump-nato-iran-europe-canada-germany" },
+        { name: "Al Jazeera (May 6)", url: "https://www.aljazeera.com/news/2026/5/6/a-stress-test-us-germany-rift-widens-as-iran-war-drags-on" }
+      ],
+      learn: {
+        deeper: 'The Tomahawk gap matters militarily: European cruise missiles (UK Storm Shadow, French SCALP) have shorter ranges and are not produced in sufficient quantities. If the US drawdown from Germany becomes a long-term posture, Europe faces a decade-long capability shortfall it cannot close through spending alone — the industrial base to manufacture enough long-range missiles simply does not exist yet on the continent. Germany\'s defense budget doubling (47B to 108B euros) is necessary but not sufficient.',
+        angles: [
+          { label: "NATO adapts and survives", text: "Europe accelerates autonomous defense capacity; NATO restructures with a European command tier; US remains in the alliance but as senior, not sole, guarantor. The alliance emerges stronger long-term." },
+          { label: "Alliance fractures on Iran fault line", text: "Europe and Canada form a sub-coalition explicitly excluding the US from operational planning. Two-track NATO: political membership plus an autonomous European defense pole that the US is not part of." },
+          { label: "US uses troops as leverage", text: "The Germany redeployment is a bargaining chip for increased European defense spending, not a genuine drawdown. US returns forces if allies hit 3% GDP defense target by 2027." }
+        ],
+        watch: 'NATO foreign ministers meeting (expected late May or June). German Bundestag defense budget vote. Whether Canada\'s new government formalizes any bilateral defense arrangement with EU members that excludes US operational participation.'
+      }
+    }
   ]
 };
 
@@ -374,20 +385,20 @@ Object.keys(wire).forEach(topic => {
       inner += '<div class="wire-headline">' + escapeHtml(item.h) + '</div>';
       inner += '<div class="wire-prose">' + item.proseHTML + '</div>';
       inner += '<div class="wire-sources">Sources: ';
-      const links = item.sources.map(s => '<a href="' + escapeAttr(s.url) + '" target="_blank" rel="noopener">' + escapeHtml(s.name) + ' \u2197</a>').join(' <span class="sep">\u00B7</span> ');
+      const links = item.sources.map(s => '<a href="' + escapeAttr(s.url) + '" target="_blank" rel="noopener">' + escapeHtml(s.name) + ' ↗</a>').join(' <span class="sep">·</span> ');
       inner += links;
       inner += '</div>';
       if (item.learn) {
         inner += '<details class="learn-more"><summary>Learn more</summary>';
         inner += '<div class="learn-more-content">';
-        inner += '<div class="lm-section"><div class="lm-label">Deeper context</div><p>' + item.learn.deeper + '</p></div>';
+        inner += '<div class="lm-section"><div class="lm-label">Deeper context</div><p>' + escapeHtml(item.learn.deeper) + '</p></div>';
         inner += '<div class="lm-section"><div class="lm-label">Three angles</div><div class="lm-angles">';
         const angleClasses = ['angle-a', 'angle-b', 'angle-c'];
         item.learn.angles.forEach((ang, i) => {
           inner += '<div class="lm-angle ' + angleClasses[i] + '"><span class="ang-label">' + escapeHtml(ang.label) + '</span>' + escapeHtml(ang.text) + '</div>';
         });
         inner += '</div></div>';
-        inner += '<div class="lm-section"><div class="lm-label">What to watch</div><p>' + item.learn.watch + '</p></div>';
+        inner += '<div class="lm-section"><div class="lm-label">What to watch</div><p>' + escapeHtml(item.learn.watch) + '</p></div>';
         inner += '</div></details>';
       }
       inner += '</div>';
@@ -399,122 +410,93 @@ Object.keys(wire).forEach(topic => {
 
 const analytical = [
   {
-    tag: "China / trade",
-    headline: "Trump-Xi summit: ceiling already lowered, 8 days out",
-    skeletonHTML: 'AGD: <span class="frag">summit chemistry retired as a metric.</span> <b>Status quo</b> — first US presidential Beijing visit since 2017; tariffs <span class="jargon">(taxes on imports, currently 145% on key Chinese goods)</span> still 145%. <b>Move</b> — both sides pre-managing expectations: CSIS survey, 3% expect both sides to keep all commitments; 34% expect neither will. <b>Lever</b> — China dominates rare-earth processing. Hormuz adds Iran-pressure card to Xi.',
-    stats: [
-      { setup: "Tariffs reached as high as 145% on certain Chinese goods.", num: "Bilateral US-China trade contracted ~30%, erasing about $130B in Chinese exports to the US." },
-      { setup: "CSIS surveyed 79 former officials and China experts:", num: "only 3% expect both sides to keep all summit commitments; 34% expect neither side to." },
-      { setup: "China dominates the rare-earth supply chain globally —", num: "~69% of mine production and ~92% of processing capacity worldwide." }
-    ],
-    sideA: { label: "Bull case", text: "Managed-competition framework + Board of Trade structure = 6-12 months of supply-chain stability. Markets price in d\u00E9tente premium." },
-    sideB: { label: "Bear case", text: "Symbolic visit, no enforcement. Xi extracts concessions while keeping rare-earth chokehold. Decoupling continues by other names." },
-    sideC: { label: "Wildcard angle", text: "Summit produces a Taiwan-related side deal nobody saw coming. Xi accepts US AI export framework in exchange for Taiwan rhetorical concession. Risk: blows up GOP coalition." },
-    sources: [
-      { name: "CSIS China Power", url: "https://chinapower.csis.org/" },
-      { name: "Foreign Policy", url: "https://foreignpolicy.com/category/china/" }
-    ]
-  },
-  {
     tag: "Energy / war",
-    headline: "Hormuz reopening is now Trump's domestic-economy lever",
-    skeletonHTML: '<b>Status quo</b> — naval blockade holds; Iran charged $1M+/ship tolls; ~230 tankers waiting in early April per ADNOC. <b>Move</b> — UAE intercepts May 4-5; Trump halts Project Freedom May 6 citing "great progress." <b>Frame</b> — Hormuz crisis = midterm inflation crisis. Beijing visit is partially a Hormuz-pressure trip.',
+    headline: "Hormuz ceasefire on day 70: fire exchanged, deal claimed, nobody convinced",
+    skeletonHTML: '<b>Baseline</b> — ceasefire took effect April 8 (Pakistan-mediated 10-point proposal); Strait still partially blocked; Project Freedom launched May 4 to escort tankers through. <span class="frag">Disruption = global oil premium of ~$15/barrel above pre-war levels persisting since March.</span> <b>Change</b> — May 7 (day 70): US destroyers and Iranian forces exchange fire in Hormuz; each side says the other fired first. Trump: "ceasefire still holding." Project Freedom paused May 6 citing "great progress." <b>Fragility indicators</b> — Iran accused US of striking civilian coastal areas (if verified, serious legal exposure); CNN reports Trump has abandoned many initial maximalist demands on Iran, signaling an exit search. IRGC <span class="jargon">(Islamic Revolutionary Guard Corps — Iran\'s ideologically loyal parallel military, known to operate semi-independently of civilian leadership)</span> factions may be acting without central Tehran authorization. <b>Stakes</b> — Hormuz near-zero traffic → US inflation stays elevated → Warsh inherits Iran-driven price pressure on May 15; Trump\'s May 14 Beijing summit is partly a Hormuz-pressure trip.',
     stats: [
-      { setup: "Pre-war, Hormuz handled the bulk of Gulf oil exports daily.", num: "By March 10, only 15 ships had transited — a near-total collapse." },
-      { setup: "When Iran briefly opened the strait April 17,", num: "oil prices dropped ~11% in the immediate aftermath." },
-      { setup: "Of UAE air defense engagements since Feb 28,", num: "549 ballistic missiles, 29 cruise missiles, and 2,260 drones intercepted." }
+      { setup: "Pre-war, the Strait of Hormuz handled roughly 20% of global oil supply daily.", num: "By March 10, only 15 ships had transited — a near-total collapse from the pre-war average of 30-40 daily tankers." },
+      { setup: "When Iran briefly opened the strait on April 17,", num: "global oil prices dropped approximately 11% in the immediate aftermath — marking the scale of the risk premium the disruption has built in." },
+      { setup: "UAE air defense has intercepted since February 28:", num: "549 ballistic missiles, 29 cruise missiles, and 2,260 drones — one of the most intense interception campaigns in modern warfare history." }
     ],
-    sideA: { label: "Resolves by Q3", text: "Xi pressures Tehran post-summit, Lebanon front cools, Iran trades Hormuz for sanctions easing. Oil falls $15+/barrel." },
-    sideB: { label: "Frozen indefinitely", text: "Hezbollah-Israel front blocks any ceasefire architecture; Iran keeps Hormuz half-closed as leverage. Inflation re-anchors above 3%." },
-    sideC: { label: "Wildcard angle", text: "Project Freedom \"halt\" is a face-saving cover for full ceasefire collapse — Iran restarts proxy attacks, oil spikes to $110+ before midterms." },
+    sideA: { label: "Deal is close", text: "Trump paused Project Freedom as a de-escalatory signal; the May 7 exchange was a contained incident, not a breakdown. The Omani backchannel is active. Hormuz opens by end of May; oil falls $10-15/barrel and inflation relief arrives before midterms." },
+    sideB: { label: "Ceasefire is functionally dead", text: "Each side claiming the other fired first makes verification impossible. IRGC hardliners are operating independently of Tehran's civilian leadership. Any deal signed now collapses on implementation within days of signature." },
+    sideC: { label: "Wildcard", text: "Xi uses the May 14 summit to publicly call on Iran to de-escalate Hormuz in exchange for US easing chip export controls — the first real trilateral linkage of the Iran conflict, US-China trade, and the Beijing meeting in a single diplomatic moment." },
     sources: [
-      { name: "Al Jazeera", url: "https://www.aljazeera.com/news/2026/5/5/uae-intercepts-missiles-and-drones-for-second-day" },
-      { name: "Wikipedia: Iran war", url: "https://en.wikipedia.org/wiki/2026_Iran_war" }
+      { name: "Al Jazeera (May 8)", url: "https://www.aljazeera.com/news/2026/5/8/iran-war-day-70-us-iran-trade-fire-in-hormuz-amid-ceasefire-tensions" },
+      { name: "PBS NewsHour", url: "https://www.pbs.org/newshour/show/u-s-destroyers-and-iran-trade-fire-in-strait-of-hormuz-in-serious-test-of-ceasefire" },
+      { name: "CNBC", url: "https://www.cnbc.com/2026/05/07/iran-war-hormuz-strait-ceasefire-trump.html" }
     ]
   },
   {
-    tag: "Hemisphere / niche",
-    headline: "Venezuela transition: 4 months of US 'running' the country",
-    skeletonHTML: '<b>Status quo</b> — Maduro captured Jan 3; VP Rodr\u00EDguez sworn in as acting; Trump said US would "run" Venezuela. <b>Tension</b> — Machado (Miami) vs Gonz\u00E1lez (Spain); Trump publicly doubting Machado. <b>Cost</b> — operation killed ~100; pre-op strikes killed 115+ in 32 vessel strikes. <b>Precedent</b> — GOP naming Cuba, Nicaragua next.',
+    tag: "US economy",
+    headline: "115K jobs, five-month participation slide: the 'frozen' labor market paradox",
+    skeletonHTML: '<b>Baseline</b> — unemployment held near 4.3% since late 2025; labor force participation peaked at 62.6% November 2025; core CPI at 2.6% (above Fed\'s 2% target). <b>Change today</b> — April jobs: 115,000 added vs. 65,000 expected → headline beats by 77%. Participation fell to 61.8% — fifth consecutive monthly decline. Manufacturing shed jobs for 32nd straight month. <span class="frag">CNN: "stronger than expected but frozen."</span> <b>The paradox</b> — unemployment "stable" because workers are exiting the labor force, not because they are being hired. Low headline masks structural withdrawal. <b>Fed complication</b> — Warsh takes over May 15 with hawkish (rate-holding) preference; if participation keeps falling while Iran-driven energy costs keep prices sticky → textbook stagflation with no clean policy exit. Q1 business investment rose 10% — the one unambiguous bright spot.',
     stats: [
-      { setup: "Venezuela\'s Interior Minister put the operation\'s death toll at", num: "~100 killed; Cuba acknowledged 32 of its citizens died carrying out missions." },
-      { setup: "From the September 2025 buildup,", num: "the US conducted at least 32 strikes on alleged drug-trafficking vessels with 115+ killed." },
-      { setup: "Trump said the US will recover sanctioned oil", num: "reportedly worth ~$3B, with US companies paying to rebuild infrastructure." }
+      { setup: "Labor force participation peaked at 62.6% in November 2025.", num: "It has fallen each of the last five months to 61.8% in April 2026 — the longest consecutive monthly decline since the 2020 pandemic shock." },
+      { setup: "April payrolls came in at 115,000, well above the 65,000 economist forecast,", num: "but manufacturing shed jobs for the 32nd consecutive month — the sector tariffs were specifically designed to revive." },
+      { setup: "Core CPI (excluding food and energy) was 2.6% annually through March —", num: "down from 2.8% a year earlier but still 30% above the Federal Reserve's 2% target, with little sign of further decline." }
     ],
-    sideA: { label: "Doctrine consolidates", text: "Cuba/Nicaragua get same treatment within 18 months. New Monroe doctrine, energy reshoring, hemispheric realignment." },
-    sideB: { label: "Doctrine collapses", text: "Transition fails, insurgency forms, Congress blocks next round via War Powers. Venezuela becomes a quagmire." },
-    sideC: { label: "Wildcard angle", text: "Russian/Iranian-trained ex-FAES officers form an insurgency by Q4. Oil infrastructure offline. Iraq-style optics 6 months before midterms." },
+    sideA: { label: "Headline holds, Warsh stays hawkish", text: "115K beat gives political cover for Warsh to hold rates at the June FOMC meeting. Core CPI at 2.6% justifies the hold. Soft landing narrative survives another month; markets continue their modest recovery." },
+    sideB: { label: "Participation collapse is the leading indicator", text: "Five months of participation decline historically precede a recession by 6-9 months. Warsh inherits a trap: hold rates and hasten the slide; cut rates and re-ignite Iran-driven inflation. There is no clean path." },
+    sideC: { label: "Wildcard", text: "Warsh surprises markets with a hawkish June dot plot while simultaneously launching a public Fed review of data reliability after the 2025 shutdown distortions — triggering a public clash with Trump within his first 30 days as chair." },
     sources: [
-      { name: "CRS", url: "https://crsreports.congress.gov/" },
-      { name: "WOLA", url: "https://www.wola.org/program/venezuela/" }
+      { name: "BLS Employment Situation (May 8)", url: "https://www.bls.gov/news.release/empsit.nr0.htm" },
+      { name: "CNN Business", url: "https://www.cnn.com/2026/05/08/economy/us-jobs-report-april" },
+      { name: "BEA Q1 GDP advance estimate", url: "https://www.bea.gov/news/2026/gdp-advance-estimate-1st-quarter-2026" }
     ]
   },
   {
-    tag: "Niche / data integrity",
-    headline: "The CPI you cannot see: post-shutdown data fog",
-    skeletonHTML: '<b>Status quo</b> — no October 2025 CPI <span class="jargon">(Consumer Price Index, key inflation gauge)</span> report; BLS suspended collection. <b>Move</b> — Q4 GDP delayed to Feb 20; January payrolls revised +34K up, February revised -41K down. <b>Stake</b> — Powell called it "driving in the fog." Fed making rate calls on partial data into midterms.',
+    tag: "China / trade",
+    headline: "Trump-Xi Beijing summit, 6 days out: Iran is eating the agenda",
+    skeletonHTML: '<b>Baseline</b> — US tariffs on Chinese goods peaked at 147.6% on key items; fell to effective average of 11.8% in April after partial rollback and court challenges; China controls ~92% of rare earth processing and ~69% of mining — a live chokepoint for US tech and defense. Geneva 90-day truce (February) collapsed after 3 weeks; Trump accused Beijing of violation. <b>New signal</b> — CNBC: Iran focus expected to dominate May 14-15 summit, leaving "little room" for tariff or rare earth progress. Board of Trade framework floated. <b>Wire China analysis</b> — Trump\'s proposed bilateral trade management commission signals US has "given up on changing China" and is institutionalizing managed rivalry rather than seeking structural reform. <b>Stakes</b> — if summit produces no trade movement, 11.8% effective tariff rate becomes the new floor indefinitely; US tech sector remains cut off from Chinese rare earth pipeline; Nvidia H20 successor still in regulatory limbo.',
     stats: [
-      { setup: "BLS confirmed it could not produce one of the year\'s most-watched data series:", num: "no October 2025 CPI report due to shutdown collection suspension." },
-      { setup: "Q4 2025 GDP advance estimate was delayed —", num: "to Feb 20, weeks later than the normal calendar." },
-      { setup: "Even January 2026 reporting carried unusual revisions —", num: "January payrolls revised UP 34K; February revised DOWN 41K." }
+      { setup: "US tariffs on Chinese goods peaked at 147.6% on key categories.", num: "After the Geneva truce and SCOTUS challenges, the overall effective rate fell to 11.8% in April 2026 — still more than triple the 10.7% rate from January 2025." },
+      { setup: "China controls an estimated 69% of global rare earth mine production and", num: "approximately 92% of global rare earth processing capacity — the chokepoint for US F-35 production, EV batteries, and consumer electronics supply chains." },
+      { setup: "A CSIS survey of 79 former officials and China experts found:", num: "only 3% expected both sides to keep all summit commitments; 34% expected neither side to honor any." }
     ],
-    sideA: { label: "Self-correcting", text: "Spring data fills gap; Cleveland Fed nowcasts hold; markets price through the noise. By July it is a footnote." },
-    sideB: { label: "Structural damage", text: "Forecaster trust eroded; rate decisions post-rationalized; political weaponization of data prints accelerates." },
-    sideC: { label: "Wildcard angle", text: "Warsh's Fed deliberately under-weights soft data given known unreliability. Over-tightens. Triggers Q3 recession." },
+    sideA: { label: "Iran breakthrough anchors the summit", text: "Xi publicly commits to pressuring Tehran on Hormuz in exchange for US easing chip export controls. Oil stabilizes, US tech stocks rally, Trump claims a foreign policy win. Summit declared a success by both sides." },
+    sideB: { label: "Managed rivalry institutionalized", text: "Board of Trade framework signals US acceptance that structural change in China's behavior is off the table. Decoupling slows but continues under a new bureaucratic name. China-hawk GOP coalition begins a slow fracture." },
+    sideC: { label: "Wildcard", text: "Taiwan dominates the private session — Xi tests Trump on a specific arms sale or defense commitment; Trump softens Taiwan rhetoric in exchange for Hormuz de-escalation help. Blows up the GOP defense hawk coalition overnight." },
     sources: [
-      { name: "Cleveland Fed", url: "https://www.clevelandfed.org/" },
-      { name: "BLS", url: "https://www.bls.gov/" }
+      { name: "CNBC (May 8)", url: "https://www.cnbc.com/2026/05/08/iran-focus-at-trump-xi-summit-may-delay-progress-on-tariffs-rare-earths.html" },
+      { name: "Wire China (May 7)", url: "https://www.thewirechina.com/2026/05/07/trumps-board-of-trade-move-signals-the-u-s-has-given-up-on-changing-china/" },
+      { name: "PIIE", url: "https://www.piie.com/blogs/realtime-economics/2026/trump-china-trade-wars-five-takeaways-us-imports-2025" }
     ]
   },
   {
-    tag: "Climate / niche",
-    headline: "COP31 Antalya: roadmap year or coffin year for Paris",
-    skeletonHTML: '<b>Status quo</b> — Nov 9-20 in Antalya; Turkey-Australia shared lead. COP30 Bel\u00E9m failed phase-out language despite 80+ countries backing it. <b>Move</b> — fossil fuel + deforestation roadmaps due. April 2026 hottest April on record. <b>Stake</b> — IPCC needs ~43% emissions cut by 2030; current NDCs blow past 1.5\u00B0C.',
+    tag: "Europe / war",
+    headline: "Ukraine turns the April tide: net 116 sq km recaptured, Russia declares competing ceasefire",
+    skeletonHTML: '<b>Baseline</b> — Russia controls ~20% of Ukrainian territory; had been making incremental gains monthly through early 2026. EU committed €90B loan (€60B military). US approved long-range strike packages. <b>April shift</b> — ISW <span class="jargon">(Institute for the Study of War — DC-based conflict monitor tracking daily battlefield changes)</span> observed Ukraine net-recaptured ~116 sq km in April → first month of net Ukrainian territorial gain in over a year. Russian spring logistics apparently degraded by Ukrainian long-range strikes. <b>Political theater</b> — Russia declared unilateral May 8-9 ceasefire (Victory Day); Ukraine declared competing ceasefire May 5-6; neither side observed the other\'s. Russia cancelled military parade equipment display citing Ukrainian drone threat. <b>Alliance context</b> — US redeploying 5,000 troops from Germany; German defense spending now 108B euros (up from 47B in 2021); NATO rethinking structure after Iran war consultation failure.',
     stats: [
-      { setup: "To stay under 1.5\u00B0C, IPCC says global GHG emissions must fall —", num: "by ~43% by 2030 relative to 2019. Current NDCs project warming significantly above 1.5\u00B0C." },
-      { setup: "COP30 set climate finance ambition at", num: "$1.3 trillion annually by 2035 — committing to double adaptation by 2025, triple by 2035." },
-      { setup: "On the corporate side,", num: "the UNEZA Alliance pledged $66B annually for renewables and $82B for transmission." }
+      { setup: "ISW tracked Russian net territorial gains averaging dozens of sq km monthly in early 2026.", num: "April 2026: Ukraine net-recaptured approximately 116 square kilometers — the first month of net Ukrainian territorial gain in over a year." },
+      { setup: "The EU allocated a €90 billion loan to Ukraine,", num: "with €60 billion earmarked specifically for military needs — the largest single foreign military funding commitment in the conflict's history." },
+      { setup: "Germany's defense budget was 47 billion euros in 2021.", num: "It has risen to 108 billion euros today — more than doubled in five years, driven by Russia's war and now accelerating US reliability concerns within NATO." }
     ],
-    sideA: { label: "Roadmap year", text: "Iran war makes diversification undeniable; petrostates accept managed phase-down. Paris framework survives Trump pullback." },
-    sideB: { label: "Coffin year", text: "US absent, China hedges, India blocks. Antalya produces a roadmap nobody implements." },
-    sideC: { label: "Wildcard angle", text: "Small-island bloc + Brazil walk out of Antalya. Declare parallel framework with mandatory targets. Kills Paris but births something with teeth." },
+    sideA: { label: "Momentum shift is real", text: "EU funding plus long-range strike capability plus degraded Russian logistics establish a new battlefield equilibrium. Gains continue through summer; Ukraine's negotiating position at any peace table strengthens materially." },
+    sideB: { label: "Seasonal anomaly, not structural shift", text: "Russia paused the spring offensive for logistics regeneration; resumes May-June with fresh forces. April Ukrainian gains are temporary; Russian manpower attrition still favors Moscow over a multi-year horizon." },
+    sideC: { label: "Wildcard", text: "Trump uses Ukraine's April gains as leverage to force a deal: Ukraine's position is finally strong enough to accept a defensible ceasefire line. Trump pressures Zelenskyy to accept a June framework before the momentum reverses — Kyiv has little choice." },
     sources: [
-      { name: "UN T\u00FCrkiye COP31", url: "https://turkiye.un.org/" },
-      { name: "WRI", url: "https://www.wri.org/" }
+      { name: "Al Jazeera — ISW analysis (May 8)", url: "https://www.aljazeera.com/news/2026/5/8/ukraine-may-have-turned-tide-of-russian-territorial-gains-says-think-tank" },
+      { name: "Al Jazeera — competing ceasefires", url: "https://www.aljazeera.com/news/2026/5/4/russia-and-ukraine-declare-competing-ceasefires" },
+      { name: "Al Jazeera — US-Germany rift", url: "https://www.aljazeera.com/news/2026/5/6/a-stress-test-us-germany-rift-widens-as-iran-war-drags-on" }
     ]
   },
   {
-    tag: "Tech / labor",
-    headline: "Productivity-up, hiring-down: the AI economy paradox",
-    skeletonHTML: '<b>Status quo</b> — Q3 2025 productivity +4.9%, well above 1.5-2% norm. Data center capex $25.2B in Q3 alone, +22% annualized. <b>But</b> — Q3 monthly job gains ~29K; manufacturing -68K in 2025. <b>Frame</b> — growth without jobs is historically unstable.',
+    tag: "Healthcare / politics",
+    headline: "ACA loses 5 million enrollees; Nebraska's Medicaid work requirements are the first domino",
+    skeletonHTML: '<b>Baseline</b> — ACA marketplace enrollment peaked at 24 million early 2026 under Biden-era enhanced subsidies; US uninsured rate hit all-time low of 7.9% in early 2025; subsidies expired January 1. <b>Change</b> — enrollment now ~19 million, a drop of ~5 million (~20%) → fastest single-year collapse since ACA marketplaces opened in 2014. Nebraska first state to enforce Medicaid work requirements under the Big Beautiful Bill Act <span class="jargon">(sweeping Republican reconciliation bill requiring able-bodied Medicaid recipients to work, volunteer, or train to maintain coverage)</span> without waiting for federal guidance (due June). 20 states have similar requirements on standby. <b>Compounding squeeze</b> — ACA premium spike + Medicaid tightening simultaneously; drugmakers raised prices on 350+ branded drugs on January 1. <b>Political map</b> — ACA losses concentrated in suburban and working-class districts → exactly the November midterm battleground geography.',
     stats: [
-      { setup: "US nonfarm productivity normally grows ~1.5-2% annually.", num: "It rose 4.1% in Q2 2025 and 4.9% in Q3." },
-      { setup: "Real data center construction spending —", num: "reached $25.2B in Q3 2025, up 22% annualized YTD." },
-      { setup: "Manufacturing employment, the constituency tariffs were meant to protect,", num: "fell by 68K jobs in 2025." }
+      { setup: "ACA marketplace enrollment peaked at 24 million under Biden's enhanced subsidies.", num: "It has fallen to approximately 19 million — a drop of roughly 5 million people, or 20%, after the subsidies expired January 1, 2026." },
+      { setup: "The US uninsured rate hit an all-time low of 7.9% in early 2025.", num: "KFF and Urban Institute analysts project it will rise significantly in mid-year surveys as ACA and Medicaid coverage simultaneously narrows." },
+      { setup: "Drugmakers raised prices on 350+ branded drugs on January 1, 2026,", num: "up from 250+ a year earlier — stacking pharmaceutical cost increases directly on top of the ACA premium spike from subsidy expiration." }
     ],
-    sideA: { label: "Productivity wins", text: "Wages catch up by 2027 as labor reallocates. AI dividend funds tax cuts and infra. Trump owns boom narrative." },
-    sideB: { label: "Jobless growth breaks politics", text: "Manufacturing and services bleed simultaneously. Populist backlash hits both parties. UBI debate goes mainstream by 2027." },
-    sideC: { label: "Wildcard angle", text: "First major union signs an AI-revenue-sharing contract in 2026, sparking copycat deals across Big Tech." },
+    sideA: { label: "Politically survivable for GOP", text: "Medicare drug pricing wins are concrete for seniors; ACA losses are diffuse and abstract to many voters. Republican base prioritizes immigration and the economy. The effect diffuses before November." },
+    sideB: { label: "Healthcare defines the midterms", text: "Working-class voters losing coverage in battleground districts — combined with Medicaid work requirements — represents the biggest healthcare rollback in a decade. Democrats nationalize the issue and it moves suburban voters." },
+    sideC: { label: "Wildcard", text: "Nebraska's work requirements struck down in federal court before federal guidance is released. 20 states forced to stand down. The Big Beautiful Bill's Medicaid provisions face a constitutional challenge that reaches SCOTUS in 2027 — healthcare becomes a multi-year legal saga, not a midterm issue." },
     sources: [
-      { name: "US Treasury", url: "https://home.treasury.gov/" },
-      { name: "Stanford SIEPR", url: "https://siepr.stanford.edu/" }
-    ]
-  },
-  {
-    tag: "Healthcare",
-    headline: "Two-track healthcare: Medicare wins, ACA bleeds",
-    skeletonHTML: '<b>Status quo</b> — Jan 1 Medicare drug prices live: $46.4B in 2022 spending on the 10 drugs (19% of Part D). Out-of-pocket projected >50% lower. <b>Same day</b> — ACA premiums spiked, Medicaid cuts phasing in. Drugmakers raised prices on 350+ drugs Jan 1. <b>Stake</b> — covered seniors get cheaper care; working-age priced out.',
-    stats: [
-      { setup: "The 10 drugs in the first negotiation round —", num: "$46.4B in 2022 spending alone, 19% of total Part D." },
-      { setup: "Negotiated prices are at least 38% off 2023 list prices —", num: "out-of-pocket projected to fall over 50%; CMS estimates $1.5B beneficiary savings + $6B program savings." },
-      { setup: "On the other side of the ledger,", num: "drugmakers raised prices on 350+ branded drugs Jan 1, up from 250+ a year earlier." }
-    ],
-    sideA: { label: "Politically survivable", text: "Medicare wins are tangible to retirees; ACA pain is diffuse. GOP holds rural seniors. Coalition holds." },
-    sideB: { label: "Splits the GOP coalition", text: "Working-class ACA losses overwhelm Medicare gains in suburbs. Healthcare becomes 2026's #1 swing issue." },
-    sideC: { label: "Wildcard angle", text: "GENEROUS pilot fails empirically. Trump pivots mid-year to direct price caps. Alienates Pharma donors; defection on the right." },
-    sources: [
-      { name: "AARP", url: "https://www.aarp.org/" },
-      { name: "NEJM", url: "https://www.nejm.org/" }
+      { name: "KFF Health News (May 8)", url: "https://kffhealthnews.org/morning-briefing/friday-may-8-2026/" },
+      { name: "CNBC", url: "https://www.cnbc.com/2026/05/03/healthcare-costs-parental-paid-leave-employee-benefits-cuts.html" },
+      { name: "CMS", url: "https://www.cms.gov/training-education/medicare-learning-network/newsletter/mln-connects-newsletter-may-7-2026" }
     ]
   }
 ];
@@ -539,7 +521,7 @@ analytical.forEach(a => {
   html += '<div class="side side-c"><span class="side-label">' + escapeHtml(a.sideC.label) + '</span>' + escapeHtml(a.sideC.text) + '</div>';
   if (a.sources && a.sources.length) {
     html += '<div class="ana-sources">Sources: ';
-    html += a.sources.map(s => '<a href="' + escapeAttr(s.url) + '" target="_blank" rel="noopener">' + escapeHtml(s.name) + ' \u2197</a>').join(' \u00B7 ');
+    html += a.sources.map(s => '<a href="' + escapeAttr(s.url) + '" target="_blank" rel="noopener">' + escapeHtml(s.name) + ' ↗</a>').join(' · ');
     html += '</div>';
   }
   card.innerHTML = html;
