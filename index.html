@@ -100,9 +100,7 @@
   }
 
   .date-line,
-  .rail-note,
-  .compiled,
-  .intro { color: var(--muted); }
+  .compiled { color: var(--muted); }
   .rail-rule { border-top: 1px solid var(--rule); }
 
   .nav { display: grid; gap: 12px; }
@@ -136,13 +134,6 @@
     cursor: pointer;
   }
 
-  .rail-note {
-    margin-top: auto;
-    padding-top: 22px;
-    border-top: 1px solid var(--rule);
-    font-size: 0.88rem;
-  }
-
   .main { min-width: 0; background: var(--paper); }
 
   .topbar {
@@ -165,6 +156,7 @@
     color: var(--title);
   }
 
+  .edition-desc { margin: 10px 0 0; max-width: 680px; color: var(--muted); font-size: 0.92rem; line-height: 1.45; }
   .compiled { text-align: right; font-size: 0.92rem; }
   .main-inner { padding: 40px 44px 66px; }
   .main-section { max-width: 1180px; margin: 0 auto; }
@@ -206,7 +198,6 @@
   }
 
   .image-credit { margin-top: 7px; color: var(--faint); font-size: 0.78rem; }
-  .intro { max-width: 880px; margin: 0 0 22px; font-size: 0.96rem; }
   .content-wrap { max-width: 880px; }
 
   .topic { border-top: 1px solid var(--rule); }
@@ -400,7 +391,6 @@
 <div class="app">
   <aside class="rail">
     <div>
-      <div class="kicker">NSDA Extemp Briefing</div>
       <div class="brand-word">Dig</div>
       <div class="date-line">Sunday, May 24, 2026</div>
     </div>
@@ -415,7 +405,6 @@
       </nav>
     </div>
     <button class="theme-toggle" id="themeToggle" type="button">Theme: Light</button>
-    <p class="rail-note">Daily current events for quick comprehension, deeper context, and speech-ready argument maps.</p>
   </aside>
 
   <main class="main">
@@ -423,6 +412,7 @@
       <div>
         <div class="kicker">Morning Briefing</div>
         <h1 id="editionTitle">The Wire</h1>
+        <p class="edition-desc" id="editionDesc"></p>
       </div>
       <div class="compiled">Compiled May 24, 2026<br>America/New_York</div>
     </header>
@@ -430,7 +420,6 @@
     <div class="main-inner">
       <section class="main-section">
         <section class="headline-day" id="headlineDay"></section>
-        <p class="intro" id="editionIntro"></p>
         <div class="content-wrap" id="content"></div>
         <footer>Dig briefing compiled May 24, 2026. Source links point to the reporting, official releases, and essays used for this edition.</footer>
       </section>
@@ -565,7 +554,7 @@ function renderOpinion() {
 function renderTab(tab) {
   document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.toggle("active", btn.dataset.tab === tab));
   document.getElementById("editionTitle").textContent = titles[tab];
-  document.getElementById("editionIntro").textContent = briefing.intros[tab];
+  document.getElementById("editionDesc").textContent = briefing.intros[tab];
   const content = document.getElementById("content");
   if (tab === "wire") content.innerHTML = renderWireList(briefing.wire);
   if (tab === "weekly") content.innerHTML = renderWireList(briefing.weekly);
