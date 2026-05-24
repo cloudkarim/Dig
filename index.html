@@ -3,551 +3,649 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Dig — Daily Extemp Brief</title>
+<title>Dig - Daily Extemp Brief</title>
 <style>
   :root {
-    --bg: #faf9f6;
-    --surface: #ffffff;
-    --surface-2: #f3f1ec;
-    --text: #1a1a1a;
-    --text-2: #4a4a45;
-    --text-3: #8a8a85;
-    --border: rgba(0,0,0,0.08);
-    --accent: #1a1a1a;
-    --link: #2d4a6e;
-    --side-a: #2d4a6e;
-    --side-b: #6e2d3a;
-    --side-c: #4a5a3e;
-    --jargon: #6a6a60;
+    --bg: #fbf9f4;
+    --paper: #fffef9;
+    --rail: #eee8df;
+    --ink: #5a514a;
+    --muted: #625f58;
+    --faint: #938d84;
+    --rule: #e2dbd1;
+    --accent: #7a5b4a;
+    --surface: #f8f4ed;
+    --link: #7a5b4a;
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #1a1a1a;
-      --surface: #232323;
-      --surface-2: #2a2a2a;
-      --text: #f0f0ed;
-      --text-2: #c0c0b8;
-      --text-3: #80807a;
-      --border: rgba(255,255,255,0.1);
-      --accent: #f0f0ed;
-      --link: #8fb3dd;
-      --side-a: #6b9ad1;
-      --side-b: #d18b9a;
-      --side-c: #a8b88f;
-      --jargon: #9a9a92;
-    }
+
+  [data-theme="dark"] {
+    --bg: #151412;
+    --paper: #1d1c19;
+    --rail: #201f1c;
+    --ink: #f3eee7;
+    --muted: #d2c7b8;
+    --faint: #a99b8b;
+    --rule: #39342e;
+    --accent: #caa77d;
+    --surface: #191815;
+    --link: #caa77d;
   }
+
   * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.65; -webkit-font-smoothing: antialiased; }
-  .wrap { max-width: 800px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
-  .brand { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 0.25rem; flex-wrap: wrap; gap: 0.5rem; }
-  .brand h1 { margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.01em; }
-  .brand .date { font-size: 13px; color: var(--text-2); }
-  .tagline { margin: 0 0 1.5rem; font-size: 13px; color: var(--text-2); }
-  .tabs { display: flex; gap: 0; margin-bottom: 1.5rem; border-bottom: 0.5px solid var(--border); }
-  .tab { padding: 10px 18px 12px; font-size: 14px; cursor: pointer; background: transparent; color: var(--text-2); border: none; border-bottom: 2px solid transparent; font-family: inherit; font-weight: 500; margin-bottom: -1px; transition: all 0.15s ease; }
-  .tab:hover { color: var(--text); }
-  .tab.active { color: var(--text); border-bottom-color: var(--accent); }
-  .wire-intro, .ana-intro { margin: 0 0 1.75rem; font-size: 13px; color: var(--text-3); }
-  .topic-block { margin-bottom: 2rem; padding-bottom: 1.75rem; border-bottom: 0.5px solid var(--border); }
-  .topic-block:last-child { border-bottom: none; }
-  .topic-name { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-3); margin-bottom: 1rem; font-weight: 600; }
-  .wire-item { margin-bottom: 1.75rem; }
-  .wire-item:last-child { margin-bottom: 0; }
-  .wire-headline { font-size: 15.5px; font-weight: 600; color: var(--text); line-height: 1.4; margin-bottom: 8px; letter-spacing: -0.005em; }
-  .wire-prose { font-size: 14px; color: var(--text); line-height: 1.7; margin-bottom: 8px; }
-  .wire-prose .change { font-weight: 500; }
-  .jargon { color: var(--jargon); font-style: italic; font-size: 12.5px; }
-  .wire-sources { font-size: 11.5px; color: var(--text-3); display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: center; margin-bottom: 8px; }
-  .wire-sources a { color: var(--link); text-decoration: none; font-weight: 500; }
-  .wire-sources a:hover { text-decoration: underline; }
-  .wire-sources .sep { color: var(--text-3); }
-  details.learn-more { margin-top: 8px; }
-  details.learn-more > summary { cursor: pointer; list-style: none; font-size: 12px; color: var(--link); font-weight: 500; padding: 4px 0; display: inline-flex; align-items: center; gap: 4px; user-select: none; }
-  details.learn-more > summary::-webkit-details-marker { display: none; }
-  details.learn-more > summary::before { content: '\25B8'; font-size: 10px; transition: transform 0.15s ease; display: inline-block; }
-  details.learn-more[open] > summary::before { transform: rotate(90deg); }
-  details.learn-more > summary:hover { text-decoration: underline; }
-  .learn-more-content { margin-top: 10px; padding: 12px 14px; background: var(--surface-2); border-radius: 8px; border-left: 2px solid var(--side-a); }
-  .lm-section { margin-bottom: 12px; }
-  .lm-section:last-child { margin-bottom: 0; }
-  .lm-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-3); font-weight: 600; margin-bottom: 5px; }
-  .lm-section p { margin: 0; font-size: 13px; line-height: 1.6; color: var(--text); }
-  .lm-angles { display: flex; flex-direction: column; gap: 8px; }
-  .lm-angle { padding: 8px 11px; border-radius: 6px; font-size: 12.5px; line-height: 1.55; border: 0.5px solid var(--border); background: var(--surface); }
-  .lm-angle .ang-label { display: block; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; margin-bottom: 3px; }
-  .lm-angle.angle-a { border-left: 2px solid var(--side-a); }
-  .lm-angle.angle-b { border-left: 2px solid var(--side-b); }
-  .lm-angle.angle-c { border-left: 2px solid var(--side-c); }
-  .lm-angle.angle-a .ang-label { color: var(--side-a); }
-  .lm-angle.angle-b .ang-label { color: var(--side-b); }
-  .lm-angle.angle-c .ang-label { color: var(--side-c); }
-  .empty-topic { font-size: 13px; color: var(--text-3); font-style: italic; }
-  .ana-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: 12px; padding: 1.4rem; margin-bottom: 14px; }
-  .ana-tag { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 99px; margin-bottom: 8px; background: var(--surface-2); color: var(--text-2); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
-  .ana-headline { margin: 0 0 14px; font-size: 16.5px; font-weight: 600; line-height: 1.35; }
-  .ana-skeleton { font-size: 13.5px; line-height: 1.7; color: var(--text); margin-bottom: 14px; }
-  .ana-skeleton b { color: var(--text); font-weight: 600; }
-  .ana-skeleton .frag { color: var(--text-2); }
-  .ana-skeleton .stat { color: var(--text); font-weight: 500; }
-  .stats-block { background: var(--surface-2); border-radius: 8px; padding: 12px 14px; margin-bottom: 12px; }
-  .stats-block .stats-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-3); font-weight: 600; margin-bottom: 8px; }
-  .stat-line { font-size: 12.5px; line-height: 1.6; margin-bottom: 7px; color: var(--text-2); }
-  .stat-line:last-child { margin-bottom: 0; }
-  .stat-line .num { color: var(--text); font-weight: 500; }
-  .sides { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-  @media (max-width: 560px) { .sides { grid-template-columns: 1fr; } }
-  .side { padding: 10px 12px; border-radius: 8px; font-size: 12.5px; line-height: 1.6; border: 0.5px solid var(--border); }
-  .side-a { border-left: 2px solid var(--side-a); }
-  .side-b { border-left: 2px solid var(--side-b); }
-  .side-c { border-left: 2px solid var(--side-c); margin-top: 10px; padding: 10px 12px; border-radius: 8px; font-size: 12.5px; line-height: 1.6; border-top: 0.5px solid var(--border); border-right: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); }
-  .side-label { display: block; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; margin-bottom: 4px; color: var(--text-3); }
-  .side-a .side-label { color: var(--side-a); }
-  .side-b .side-label { color: var(--side-b); }
-  .side-c .side-label { color: var(--side-c); }
-  .ana-sources { margin-top: 12px; font-size: 11px; color: var(--text-3); display: flex; flex-wrap: wrap; gap: 4px 10px; }
-  .ana-sources a { color: var(--link); text-decoration: none; font-weight: 500; }
-  .ana-sources a:hover { text-decoration: underline; }
-  .site-footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 0.5px solid var(--border); font-size: 12px; color: var(--text-3); text-align: center; line-height: 1.6; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  a { color: inherit; }
+
+  .app {
+    width: 100%;
+    max-width: none;
+    min-height: 100vh;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 238px minmax(0, 1fr);
+    background: var(--paper);
+  }
+
+  .rail {
+    min-height: 100vh;
+    position: sticky;
+    top: 0;
+    align-self: start;
+    background: var(--rail);
+    border-right: 1px solid var(--rule);
+    padding: 36px 32px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .kicker,
+  .section-label,
+  .topic-label,
+  .featured-label,
+  .opinion-label,
+  .analytical-tag {
+    color: var(--faint);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .brand-word {
+    margin: 4px 0 8px;
+    font-family: Georgia, Charter, "Times New Roman", serif;
+    font-size: 4.2rem;
+    line-height: 0.9;
+    letter-spacing: 0;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .date-line,
+  .rail-note,
+  .compiled,
+  .intro {
+    color: var(--muted);
+  }
+
+  .rail-rule { border-top: 1px solid var(--rule); }
+
+  .nav {
+    display: grid;
+    gap: 13px;
+  }
+
+  .tab-btn {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    font: inherit;
+    text-align: left;
+    padding: 9px 0 9px 16px;
+    border-left: 2px solid transparent;
+    cursor: pointer;
+  }
+
+  .tab-btn.active {
+    color: var(--ink);
+    border-left-color: var(--accent);
+    font-weight: 700;
+  }
+
+  .theme-toggle {
+    border: 1px solid var(--rule);
+    background: var(--surface);
+    color: var(--muted);
+    padding: 9px 11px;
+    width: fit-content;
+    font: inherit;
+    font-size: 0.88rem;
+    cursor: pointer;
+  }
+
+  .rail-note {
+    margin-top: auto;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    font-size: 0.9rem;
+  }
+
+  .main {
+    min-width: 0;
+    background: var(--paper);
+  }
+
+  .topbar {
+    min-height: 184px;
+    padding: 50px 64px 38px;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 32px;
+  }
+
+  h1 {
+    margin: 4px 0 0;
+    font-family: Georgia, Charter, "Times New Roman", serif;
+    font-size: clamp(2.4rem, 5vw, 3.5rem);
+    line-height: 1;
+    font-weight: 500;
+    letter-spacing: 0;
+    color: var(--ink);
+  }
+
+  .compiled { text-align: right; font-size: 0.98rem; }
+
+  .main-inner {
+    padding: 48px 64px 72px;
+  }
+
+  .main-section {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .featured-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 34px;
+    margin-top: 18px;
+  }
+
+  .featured-card {
+    padding: 0 22px;
+    border-left: 1px solid var(--rule);
+  }
+
+  .featured-card:first-child { padding-left: 22px; border-left-color: var(--accent); }
+
+  .featured-card h2 {
+    font-family: Georgia, Charter, "Times New Roman", serif;
+    font-size: clamp(1.45rem, 2vw, 1.95rem);
+    line-height: 1.12;
+    font-weight: 500;
+    margin: 10px 0 10px;
+    color: var(--ink);
+  }
+
+  .featured-card p { margin: 0; color: var(--muted); font-size: 0.98rem; }
+
+  .brief-strip {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 42px;
+    border-bottom: 1px solid var(--rule);
+    padding: 28px 0 32px;
+    margin-bottom: 36px;
+  }
+
+  .brief-strip p { margin: 0 0 9px; color: var(--muted); }
+  .brief-strip strong { color: var(--ink); }
+
+  .intro {
+    max-width: 880px;
+    margin: 0 0 28px;
+    font-size: 1.02rem;
+  }
+
+  .content-wrap {
+    max-width: 880px;
+  }
+
+  .topic {
+    border-top: 1px solid var(--rule);
+  }
+
+  .topic summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 21px 0;
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    align-items: center;
+  }
+
+  .topic summary::-webkit-details-marker,
+  .learn summary::-webkit-details-marker { display: none; }
+
+  .topic .topic-count {
+    color: var(--accent);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+
+  .topic summary::after {
+    content: "+";
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .topic[open] summary::after { content: "-"; }
+
+  .topic-body { padding: 0 0 8px 0; }
+
+  .wire-item {
+    padding: 26px 0 30px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .wire-headline {
+    margin: 0 0 12px;
+    color: var(--ink);
+    font-family: Georgia, Charter, "Times New Roman", serif;
+    font-size: 1.55rem;
+    line-height: 1.2;
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+
+  .wire-prose {
+    margin: 0;
+    color: var(--ink);
+    font-size: 1.03rem;
+    line-height: 1.68;
+  }
+
+  .change { font-weight: 700; color: var(--ink); }
+  .jargon { color: var(--muted); font-style: italic; }
+
+  .wire-sources {
+    margin-top: 15px;
+    color: var(--faint);
+    font-size: 0.9rem;
+  }
+
+  .source-link {
+    color: var(--link);
+    font-weight: 700;
+    text-decoration: none;
+    margin: 0 7px;
+  }
+
+  .source-link:first-of-type { margin-left: 8px; }
+  .source-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .source-link::after { content: " ↗"; font-size: 0.8em; }
+
+  .learn {
+    margin-top: 16px;
+    color: var(--muted);
+  }
+
+  .learn summary {
+    cursor: pointer;
+    list-style: none;
+    color: var(--link);
+    font-weight: 700;
+    display: inline-block;
+  }
+
+  .learn summary::before { content: "▸ "; }
+  .learn[open] summary::before { content: "▾ "; }
+
+  .learn-body {
+    margin-top: 13px;
+    padding: 16px 18px;
+    border-left: 2px solid var(--rule);
+    background: var(--surface);
+  }
+
+  .learn-body h4 {
+    margin: 14px 0 5px;
+    color: var(--ink);
+    font-size: 0.83rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  .learn-body h4:first-child { margin-top: 0; }
+  .learn-body p { margin: 0; }
+  .learn-body ul { margin: 7px 0 0 18px; padding: 0; }
+
+  .analytical-card,
+  .opinion-card {
+    border-top: 1px solid var(--rule);
+    padding: 32px 0;
+  }
+
+  .analytical-card h2,
+  .opinion-card h2 {
+    font-family: Georgia, Charter, "Times New Roman", serif;
+    font-weight: 500;
+    line-height: 1.14;
+    letter-spacing: 0;
+    color: var(--ink);
+    margin: 8px 0 14px;
+  }
+
+  .skeleton {
+    color: var(--ink);
+    line-height: 1.68;
+    margin: 0 0 18px;
+  }
+
+  .stats-grid,
+  .angles-grid,
+  .opinion-boxes {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .stat,
+  .angle,
+  .opinion-box {
+    border: 1px solid var(--rule);
+    background: var(--surface);
+    padding: 14px;
+  }
+
+  .stat strong,
+  .angle strong,
+  .opinion-box strong { display: block; color: var(--ink); margin-bottom: 5px; }
+
+  .opinion-meta,
+  .opinion-subtitle { color: var(--muted); margin: 0 0 10px; }
+  .opinion-prose { margin: 0; line-height: 1.68; }
+
+  footer {
+    border-top: 1px solid var(--rule);
+    color: var(--faint);
+    padding-top: 32px;
+    margin-top: 42px;
+    font-size: 0.88rem;
+  }
+
+  .hidden { display: none; }
+
+  @media (max-width: 900px) {
+    .app { grid-template-columns: 1fr; }
+    .rail { position: relative; min-height: auto; }
+    .topbar { padding: 32px 24px; display: block; }
+    .compiled { text-align: left; margin-top: 20px; }
+    .main-inner { padding: 34px 24px 56px; }
+    .featured-grid,
+    .brief-strip,
+    .stats-grid,
+    .angles-grid,
+    .opinion-boxes { grid-template-columns: 1fr; }
+    .featured-card { border-left: 1px solid var(--rule); padding: 20px 0 20px 16px; }
+    .featured-card:first-child { padding-left: 16px; }
+  }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="brand">
-    <h1>Dig</h1>
-    <span class="date" id="datestamp"></span>
-  </div>
-  <p class="tagline">Current events, briefed for extemp.</p>
-  <div class="tabs">
-    <button class="tab active" data-tab="wire">The Wire</button>
-    <button class="tab" data-tab="analytical">The Analytical</button>
-  </div>
-  <section id="page-wire">
-    <p class="wire-intro">Last 24 hours, by topic. Briefs with everything defined inline. Tap "Learn more" for angles, predictions, and what to watch.</p>
-    <div id="wire-content"></div>
-  </section>
-  <section id="page-analytical" style="display: none;">
-    <p class="ana-intro">Selected for extemp value, not headline weight. Skeleton format. Key stats. Three angles per story.</p>
-    <div id="ana-content"></div>
-  </section>
-  <div class="site-footer">
-    Briefing compiled May 8, 2026 &middot; Refreshes daily 4 PM EST.<br/>
-    Source URLs verified at compile time.
-  </div>
+<div class="app">
+  <aside class="rail">
+    <div>
+      <div class="kicker">NSDA Extemp Briefing</div>
+      <div class="brand-word">Dig</div>
+      <div class="date-line">Sunday, May 24, 2026</div>
+    </div>
+    <div class="rail-rule"></div>
+    <div>
+      <div class="section-label">Editions</div>
+      <nav class="nav" aria-label="Dig editions">
+        <button class="tab-btn active" data-tab="wire">The Wire</button>
+        <button class="tab-btn" data-tab="weekly">The Weekly</button>
+        <button class="tab-btn" data-tab="analytical">The Analytical</button>
+        <button class="tab-btn" data-tab="opinion">The Opinion</button>
+      </nav>
+    </div>
+    <button class="theme-toggle" id="themeToggle" type="button">Theme</button>
+    <p class="rail-note">Daily current events for quick comprehension, deeper context, and speech-ready argument maps.</p>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <div class="kicker">Morning Briefing</div>
+        <h1 id="editionTitle">The Wire</h1>
+      </div>
+      <div class="compiled">Compiled May 24, 2026<br>America/New_York</div>
+    </header>
+
+    <div class="main-inner">
+      <section class="main-section">
+        <div class="section-label">Featured Stories</div>
+        <div class="featured-grid" id="featuredGrid"></div>
+        <div class="brief-strip">
+          <div>
+            <div class="section-label">On The Radar</div>
+            <div id="radarList"></div>
+          </div>
+          <div>
+            <div class="section-label">Key Numbers</div>
+            <div id="numbersList"></div>
+          </div>
+        </div>
+        <p class="intro" id="editionIntro"></p>
+        <div class="content-wrap" id="content"></div>
+        <footer>Dig briefing compiled May 24, 2026. Source links point to the underlying reporting, official releases, or opinion essays used for this edition.</footer>
+      </section>
+    </div>
+  </main>
 </div>
+
 <script>
-const wire = {
-  "US Economy": [
-    {
-      h: "April jobs beat at 115,000 — but participation falls for fifth straight month",
-      proseHTML: 'The BLS <span class="jargon">(Bureau of Labor Statistics — the federal agency that produces monthly employment data, releases the jobs report on the first Friday of each month)</span> reported today that the US economy added 115,000 jobs in April, more than double the 65,000 economists had forecast, while the unemployment rate held at 4.3%. <span class="change">But the labor force participation rate — the share of adults either working or actively looking for work — fell for the fifth consecutive month to 61.8%, down from 62.6% in November 2025, signaling that the low unemployment headline is partly an artifact of workers giving up on the job search entirely rather than finding employment.</span> Gains were concentrated in health care, transportation, and retail; manufacturing shed jobs for the 32nd consecutive month. CNN described the labor market as "stronger than expected but frozen."',
-      sources: [
-        { name: "BLS Employment Situation (May 8)", url: "https://www.bls.gov/news.release/empsit.nr0.htm" },
-        { name: "CNN Business", url: "https://www.cnn.com/2026/05/08/economy/us-jobs-report-april" },
-        { name: "TheStreet", url: "https://www.thestreet.com/latest-news/stock-market-today-may-8-2026-updates" }
-      ],
-      learn: {
-        deeper: 'The participation rate decline is the shadow number policymakers watch but rarely explain in soundbites. A falling participation rate means people are dropping out of the labor force entirely — not getting jobs, not looking for work — which mechanically keeps the unemployment rate low even as the real job picture weakens. Kevin Warsh takes over the Fed on May 15 with a hawkish (rate-holding) bias. A "frozen" labor market complicates his options: holding rates too long risks tipping inactivity into contraction; cutting too soon risks re-igniting services inflation that is still running at 2.6% core CPI, well above the Fed\'s 2% target.',
-        angles: [
-          { label: "Green shoots headline", text: "115K beats 65K expectation; markets up 0.4-0.7%; Q1 business investment rose 10%. The US economy is absorbing the Iran shock better than feared — soft landing narrative survives." },
-          { label: "Frozen labor market", text: "Participation 61.8% = five months of workers exiting entirely. Low unemployment is statistical withdrawal, not real hiring. Warsh inherits a structural trap with no clean rate-path response." },
-          { label: "Manufacturing canary", text: "32nd consecutive month of factory job losses — the constituency tariffs were supposed to revive is still bleeding. Rural coalition pressure on the White House intensifies before November midterms." }
-        ],
-        watch: 'May CPI release (mid-May) — if core CPI ticks back up despite weak participation, the stagflation thesis hardens. June 3 next jobs report. Warsh\'s first public remarks on the labor market after his May 15 swearing-in at the Fed.'
-      }
-    }
+const briefing = {
+  featured: [
+    {topic: "Iran / Energy", h: "Deal outlines emerge around Hormuz", deck: "A ceasefire framework is now being judged through shipping access, uranium terms, sanctions relief, and oil-market confidence."},
+    {topic: "Health Security", h: "Ebola response turns on trust", deck: "The Bundibugyo outbreak has no approved vaccine, so containment depends on tracing, safe burials, travel rules, and treatment-site security."},
+    {topic: "Ukraine", h: "Russia escalates missile pressure on Kyiv", deck: "New Oreshnik deployments and long-range attacks keep air-defense shortages in focus as Ukraine strikes deeper into Russian oil infrastructure."}
   ],
-  "US Politics": [
-    {
-      h: "Trump proclaims May 8 'Victory Day for WWII' — the first formal US observance",
-      proseHTML: 'May 8, 1945 is VE Day <span class="jargon">(Victory in Europe Day — the date Nazi Germany signed its unconditional surrender, ending World War II in Europe; widely observed as a national holiday in France and much of the EU, but never formally marked in the US)</span>. <span class="change">Trump signed a proclamation today declaring May 8, 2026 "Victory Day for World War II," honoring America\'s "monumental triumph over tyranny and evil in Europe" and the more than 250,000 American soldiers who died in the European theater — making it the first formal US national observance of the date.</span> The symbolic move lands in complicated context: Trump simultaneously redeployed 5,000 US troops from German soil this week and launched the February Iran strikes without informing NATO <span class="jargon">(North Atlantic Treaty Organization — the 32-member Western collective defense alliance)</span> allies in advance, making Allied solidarity symbolism resonate differently across the Atlantic than intended.',
-      sources: [
-        { name: "White House", url: "https://www.whitehouse.gov/presidential-actions/2026/05/victory-day-for-world-war-ii-2026/" },
-        { name: "Newsmax", url: "https://www.newsmax.com/us/trump-proclamation-wwii-victory/2026/05/08/id/1255639/" },
-        { name: "NPR", url: "https://www.npr.org/2026/05/08/nx-s1-5810515/us-war-trump-nato-iran-europe-canada-germany" }
-      ],
-      learn: {
-        deeper: 'In Europe, May 8 is already "Liberation Day" in France and several other countries. Russia celebrates May 9 as Victory Day. Trump\'s framing — emphasizing American rather than Allied triumph — arrives in a week when NATO allies are demanding more transparency on Iran war decisions and Germany is accelerating autonomous European defense planning. The proclamation delivers patriotic symbolism for the midterms but reinforces European concerns about the alliance\'s reliability.',
-        angles: [
-          { label: "Clean domestic win", text: "Symbolic patriotism with no downside at home. Republican base energized; WWII veterans\' families honored. No political cost and a durable midterm talking point." },
-          { label: "NATO optics problem", text: "Celebrating Allied victory the same week the US sidelined its allies before the Iran strikes sends a contradictory message that further erodes alliance trust in European capitals." },
-          { label: "Historical rebranding", text: "Precursor to a broader American exceptionalism narrative project — May 8 Victory Day joins the 250th anniversary as a template for reshaping US patriotic identity around singular American power, not collective security." }
-        ],
-        watch: 'Allied capitals\' public responses this weekend. Whether Merz or Macron issue statements about NATO\'s future direction. German Bundestag vote on military hub funding for postwar Ukraine, expected next week.'
-      }
-    },
-    {
-      h: "Roberts warns Court seen as 'political actors' — Trump attacks his own appointees",
-      proseHTML: 'Chief Justice John Roberts <span class="jargon">(appointed by George W. Bush in 2005; the Court\'s institutional moderate; longest-serving current justice)</span> publicly lamented that Americans increasingly view the Supreme Court as politically driven rather than legally principled — a rare break from the Court\'s traditional silence on its own public image. <span class="change">Trump responded by calling out two of the three justices he personally appointed — Neil Gorsuch and Amy Coney Barrett — labeling their ruling on an undisclosed case "an embarrassment to their families," a level of public attack on sitting justices that is virtually unprecedented from a sitting president.</span> Federal courts across the country are simultaneously reviewing Trump\'s Iran war authorities, tariff executive orders, and immigration enforcement — making judicial-executive friction the defining institutional conflict of the second term.',
-      sources: [
-        { name: "The Daily Record", url: "https://thedailyrecord.com/2026/05/08/roberts-supreme-court-political-perception/" },
-        { name: "Just Security", url: "https://www.justsecurity.org/138358/early-edition-may-8-2026/" }
-      ],
-      learn: {
-        deeper: 'Roberts spent years carefully managing the Court\'s public image — occasionally siding with liberals on major cases to avoid appearing purely partisan. Trump\'s willingness to attack his own appointees publicly signals he has concluded the Court is no longer reliable for his agenda. This raises the question of whether a sustained pattern of adverse rulings on executive power could trigger a White House push for court expansion or jurisdiction-stripping legislation.',
-        angles: [
-          { label: "Court holds the line", text: "Roberts\' statement reinforces institutional independence. Conservative majority remains intact but less predictable. Rule-of-law norm survives the confrontation and the Court\'s legitimacy is preserved." },
-          { label: "Court packing on the table", text: "If the conservative bloc rules against Trump on Iran powers or immigration, the White House formalizes a court expansion push. The 2021 Democratic playbook, inverted." },
-          { label: "Roberts\' legacy play", text: "Roberts is positioning the Court for 2027-28 by distancing it from Trump now. He wants to be the Chief Justice who preserved the institution\'s legitimacy during the most politically volatile term in a generation." }
-        ],
-        watch: 'Upcoming SCOTUS rulings on Iran war authorization and tariff executive authority. Any White House signals about court restructuring legislation. Whether Trump nominates additional lower-court judges this summer.'
-      }
-    }
+  radar: [
+    "Whether any US-Iran agreement actually keeps the Strait of Hormuz open and creates an inspection mechanism strong enough to reassure oil markets.",
+    "WHO and CDC updates after attacks on Congo Ebola treatment centers and new border-routing rules for travelers.",
+    "Kyiv air-defense requests after Russia said it would deploy additional Oreshnik intermediate-range missiles to Belarus."
   ],
-  "Healthcare": [
-    {
-      h: "ACA enrollment crashes 20%; Nebraska first state to enforce Medicaid work requirements",
-      proseHTML: 'The ACA <span class="jargon">(Affordable Care Act — the 2010 law creating federal health insurance marketplaces; Biden-era enhanced subsidies had kept average premiums at historic lows for millions)</span> marketplace enrolled 24 million people in early 2026, a record high. <span class="change">That number has fallen to roughly 19 million — a drop of approximately 5 million people, or 20%, after Congress failed to extend the enhanced subsidies that expired January 1 — the fastest single-year collapse since ACA marketplaces opened in 2014; simultaneously, Nebraska became the first state to enforce Medicaid work requirements under the Big Beautiful Bill Act <span class="jargon">(the sweeping Republican reconciliation bill passed earlier this year, requiring able-bodied Medicaid recipients to work, volunteer, or complete job training to maintain coverage)</span>, without waiting for federal implementation guidance due in June.</span> With ACA premiums spiking and Medicaid eligibility tightening at the same time, millions of working-age Americans are falling out of coverage from both directions at once.',
-      sources: [
-        { name: "KFF Health News (May 8)", url: "https://kffhealthnews.org/morning-briefing/friday-may-8-2026/" },
-        { name: "CMS MLN (May 7)", url: "https://www.cms.gov/training-education/medicare-learning-network/newsletter/mln-connects-newsletter-may-7-2026" },
-        { name: "CNBC", url: "https://www.cnbc.com/2026/05/03/healthcare-costs-parental-paid-leave-employee-benefits-cuts.html" }
-      ],
-      learn: {
-        deeper: 'The 20% ACA enrollment drop is the fastest on record. The US uninsured rate hit an all-time low of 7.9% in early 2025 and is projected to rise sharply by mid-year surveys. The squeeze is also hitting insured workers: CNBC reported this week that employers are cutting parental leave and supplemental benefits to offset healthcare cost increases. Nebraska\'s early implementation is already being challenged in federal court — but if it survives, 20 states have similar requirements ready to activate immediately after federal guidance drops in June.',
-        angles: [
-          { label: "Political time bomb", text: "Every uninsured family in a swing district is a midterm story. ACA plus Medicaid losses in suburban and working-class geographies compound housing and inflation pain. Healthcare becomes the 2026 defining issue." },
-          { label: "Market self-corrects", text: "Higher premiums push employers to expand workplace coverage. The uninsured spike is temporary and resolves as workplace plans absorb dropped marketplace members. Effect diffuses by November." },
-          { label: "Nebraska is the test case", text: "If work requirements survive court challenge, 20 states activate by Q3. If struck down, the Big Beautiful Bill\'s Medicaid provisions face a constitutional challenge that reaches SCOTUS in 2027." }
-        ],
-        watch: 'Federal court ruling on Nebraska\'s work requirements (expected within 60 days). Federal implementation guidance in June. July uninsured rate estimates from Census Bureau and KFF.'
-      }
-    }
+  numbers: [
+    "60 days: the War Powers Resolution clock lawmakers cite when challenging sustained US involvement in hostilities.",
+    "746 suspected cases: WHO count for the Democratic Republic of Congo Ebola outbreak as of May 21.",
+    "11 facilities: Russian oil sites Ukraine says it hit in May as Kyiv tries to degrade Moscow's fuel logistics."
   ],
-  "Climate": [
-    {
-      h: "2026 forecast to be fourth straight year above 1.4°C; Paris breach locked in for 2029",
-      proseHTML: 'The Paris Agreement <span class="jargon">(2015 UN climate treaty signed by 196 parties, pledging to keep long-term average warming below 2°C, ideally below 1.5°C above the 1850-1900 pre-industrial baseline)</span> uses a long-term average rather than a single year to define the 1.5°C threshold — meaning one hot year alone doesn\'t trigger the formal breach. <span class="change">The Met Office <span class="jargon">(UK\'s national weather service, one of the world\'s most authoritative climate forecast bodies)</span> projects 2026 will reach a central temperature of 1.46°C above pre-industrial levels — making it the fourth consecutive year above 1.4°C — while both Copernicus <span class="jargon">(the EU\'s official real-time climate monitoring program)</span> and Berkeley Earth now project the long-term 1.5°C breach will occur in 2029, roughly 16 years sooner than 2015 estimates predicted.</span> COP31 <span class="jargon">(the 31st annual UN climate conference, scheduled for Antalya, Turkey this November)</span> is now negotiating fossil fuel and deforestation phase-out roadmaps against a timeline scientists say has already effectively run out.',
-      sources: [
-        { name: "Met Office", url: "https://www.metoffice.gov.uk/about-us/news-and-media/media-centre/weather-and-climate-news/2025/2026-outlook-likely-another-year-above-1.4c" },
-        { name: "PBS NewsHour", url: "https://www.pbs.org/newshour/science/scientists-say-another-hot-year-is-a-warning-shot-of-a-shifting-dangerous-climate" }
-      ],
-      learn: {
-        deeper: 'The 2029 breach matters because the Paris Agreement\'s 1.5°C limit was specifically chosen to protect low-lying island nations from sea-level rise crossing an irreversible threshold. Once the long-term average breaches 1.5°C, the IPCC projects permanent coral die-off for 70-90% of reefs (versus 99% at 2°C) and ice sheet dynamics that lock in several meters of sea-level rise over centuries. COP31 must produce a fossil fuel phase-out roadmap — but the US is absent at senior level and India and China are resisting mandatory targets.',
-        angles: [
-          { label: "COP31 as last chance", text: "The Iran war energy shock creates a political opening for accelerated renewables investment among petrostates. Turkey-Australia draft text on phase-out survives watering-down. 2029 breach remains avoidable if NDCs strengthen." },
-          { label: "1.5°C now locked in", text: "US absent, OPEC resistant, China NDC weak. Antalya produces an aspirational roadmap nobody enforces. 1.5°C becomes a historical footnote by 2030." },
-          { label: "Parallel framework emerges", text: "Small island states and Brazil walk out of Antalya and declare a mandatory-target framework. Paris fractures but something with real enforcement teeth forms alongside it." }
-        ],
-        watch: 'June climate ministerial in Bonn — the first formal pre-COP31 meeting. Whether the US sends any senior officials. COP31 opens November 9 in Antalya.'
-      }
-    }
+  intros: {
+    wire: "Last 24 hours, grouped by topic. Open a topic for the story stack; each story keeps its own nested Learn more drawer.",
+    weekly: "The week in consequential developments, grouped like The Wire but selected for events still shaping the map today.",
+    analytical: "Strategy-desk files for extemp prep: deeper causality, key numbers, competing arguments, and concrete watch points.",
+    opinion: "Fresh argument-driven essays and columns: what serious writers are claiming, why the argument is live, and where it can be challenged."
+  },
+  wire: [
+    {topic: "US Economy", stories: [
+      {h: "Hormuz risk turns energy prices into a Fed problem", proseHTML: `The Federal Reserve entered May with inflation still above its 2% target while investors expected rate cuts once price growth cooled. <span class="change">A US-Iran ceasefire framework tied to Hormuz access has moved oil-market risk into the center of the inflation outlook</span>, because the strait carries a large share of global seaborne crude and liquefied natural gas. That matters for the Federal Open Market Committee <span class="jargon">(the Fed panel that sets US interest-rate policy)</span> because a central bank can restrain demand with higher borrowing costs, but it cannot reopen shipping lanes or lower imported energy costs. The next market test is whether the agreement produces verifiable inspections and stable tanker insurance rates rather than only a short diplomatic pause.`, sources: [{name:"AP",url:"https://apnews.com/article/e603a7759d6cbd70ce5ed01f439a29dc"},{name:"Axios",url:"https://www.axios.com/2026/05/24/iran-deal-strait-hormuz-sanctions-nuclear"}], learn: {context:"Oil shocks are politically powerful because they reach consumers through gasoline, freight, food, plastics, airlines, and inflation expectations rather than through one visible tariff line.", angles:["Inflation angle: energy can keep headline prices elevated even if core services cool.","Diplomacy angle: sanctions relief is easier to announce than to make credible for insurers and shippers.","Equity angle: poorer importing countries face higher food, fertilizer, and fuel bills with less fiscal room."], watch:"Watch Brent crude, tanker insurance premiums, and whether the International Atomic Energy Agency receives usable inspection access."}},
+      {h: "Fiscal politics returns to bond-market attention", proseHTML: `The United States already faces higher interest costs than during the low-rate 2010s, so deficit debates now feed directly into Treasury borrowing costs. <span class="change">House movement on a tax-and-spending package has revived questions about how much debt the government will issue just as markets price war risk and stubborn inflation</span>. The economic link is not abstract: when investors demand higher yields to absorb more Treasury supply, mortgage rates, business credit, and bank balance sheets can tighten even without a new Fed hike. For extemp purposes, the story matters because fiscal policy is no longer background noise; it is part of the same inflation, rates, and credibility debate as the Middle East energy shock.`, sources: [{name:"Federal Reserve",url:"https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"},{name:"Reuters",url:"https://www.reuters.com/markets/"}], learn: {context:"Treasury yields are the price the US government pays to borrow; they also become the benchmark for mortgages, corporate bonds, and municipal finance.", angles:["Hawkish argument: bigger deficits make inflation and bond-market volatility harder to control.","Dovish argument: fiscal choices should be judged by growth, investment, and distribution, not only headline debt.","Political angle: voters feel the issue through mortgage rates and prices more than through budget tables."], watch:"Watch Treasury auctions, long-term yields, and whether deficit estimates shift as the bill changes."}}
+    ]},
+    {topic: "US Politics", stories: [
+      {h: "Congress tests the legal clock on Iran war powers", proseHTML: `The War Powers Resolution <span class="jargon">(a 1973 law requiring the president to notify Congress and generally end unauthorized hostilities after 60 days unless Congress approves them)</span> is built for exactly the gray zone between deterrence and war. <span class="change">Lawmakers are now weighing whether the Iran confrontation has crossed that line after US involvement in protecting shipping and shaping ceasefire terms</span>. The legal fight matters because even a failed vote can force members to state whether they treat the operation as diplomacy, collective defense, or unauthorized war. The next pressure point is procedural: House leadership can delay or narrow votes, but the margin of dissent will show whether Iran is becoming a constitutional fight rather than only a foreign-policy fight.`, sources: [{name:"Congress.gov",url:"https://www.congress.gov/"},{name:"AP",url:"https://apnews.com/"}], learn: {context:"War-powers fights rarely end with clean legal answers, but they can change political permission for presidents to continue operations.", angles:["Executive-power side: presidents need flexibility to protect US forces and trade routes.","Congressional side: sustained hostilities require democratic authorization.","Strategic side: adversaries watch whether Washington looks unified or legally divided."], watch:"Watch for privileged resolutions, Republican defections, and whether any authorization language gets attached to defense legislation."}},
+      {h: "Redistricting becomes a second-front midterm fight", proseHTML: `House control often turns on a handful of districts, so redistricting cases can matter as much as candidate quality or national polling. <span class="change">New litigation and state-level map fights are keeping congressional boundaries unsettled deep into the cycle</span>, especially where courts must decide whether race, party advantage, or community representation drove the lines. The impact is practical: campaigns cannot spend efficiently when district boundaries may shift, and voters can see their representatives change without moving. The next thing to watch is whether courts order maps early enough for normal primaries or push states into compressed election calendars.`, sources: [{name:"AP",url:"https://apnews.com/hub/us-supreme-court"},{name:"Brennan Center",url:"https://www.brennancenter.org/our-work/research-reports/redistricting-litigation-roundup-0"}], learn: {context:"Redistricting is the process of redrawing legislative districts after population changes or court rulings; in closely divided chambers, one map can alter national policy outcomes.", angles:["Representation angle: map design affects which communities can elect preferred candidates.","Partisan angle: both parties use litigation and state power where they can.","Institutional angle: late map changes make election administration harder."], watch:"Watch state supreme courts, federal voting-rights claims, and candidate filing deadlines."}}
+    ]},
+    {topic: "Healthcare", stories: [
+      {h: "Congo Ebola response shifts to containment basics", proseHTML: `The Democratic Republic of Congo has managed repeated Ebola outbreaks, but the Bundibugyo strain is harder because there is no approved vaccine matched to it. <span class="change">WHO situation updates now put the outbreak at 746 suspected cases as of May 21, while treatment-center attacks and funeral restrictions are complicating contact tracing</span>. That means the public-health strategy depends on old containment tools: isolating cases, monitoring contacts, making burials safer, and keeping border screening trusted enough that people do not hide symptoms. The risk is not only medical; if communities view responders as coercive or unsafe, the outbreak becomes harder to measure and harder to stop.`, sources: [{name:"WHO",url:"https://www.who.int/emergencies/disease-outbreak-news"},{name:"CDC",url:"https://www.cdc.gov/ebola/outbreaks/drc/2026.html"},{name:"AP",url:"https://apnews.com/"}], learn: {context:"Bundibugyo is one of several Ebola virus species; vaccine and treatment evidence is stronger for Zaire Ebola than for Bundibugyo, which raises the value of surveillance and trust.", angles:["Health-security angle: weak trust can defeat technically correct response plans.","Travel angle: routing rules can slow spread but may also drive informal crossings.","Equity angle: outbreak control depends on local health workers who are themselves exposed to violence."], watch:"Watch WHO case definitions, border alerts, treatment-center security, and whether cases appear outside the known transmission chain."}},
+      {h: "US travel rules become part of outbreak diplomacy", proseHTML: `US outbreak policy usually tries to avoid blanket travel bans because they can discourage disclosure and damage cooperation. <span class="change">CDC guidance on Congo-related travel is now being watched for whether screening, routing, and reporting rules tighten as case counts rise</span>. The political significance is that public-health rules become diplomacy when they affect airlines, border agencies, and governments trying to avoid stigma. The next test is whether US and WHO guidance stay aligned; disagreement would make the response harder for schools, hospitals, and local health departments to interpret.`, sources: [{name:"CDC Travel Health",url:"https://wwwnc.cdc.gov/travel/notices"},{name:"WHO",url:"https://www.who.int/emergencies/disease-outbreak-news"}], learn: {context:"Travel health notices are risk communications, not simply bans; they tell travelers and institutions what precautions are expected.", angles:["Public-health angle: targeted screening preserves cooperation better than broad bans.","Political angle: visible restrictions can reassure voters even when they add little epidemiological value.","Operational angle: hospitals need clear triage rules before a suspected case appears."], watch:"Watch CDC notice levels, airport routing guidance, and state health-department advisories."}}
+    ]},
+    {topic: "Climate", stories: [
+      {h: "India heatwave turns electricity demand into a climate-stability test", proseHTML: `India's hottest months already strain a power system that must serve fast-growing cooling demand while still relying heavily on coal. <span class="change">Heat alerts and power-demand reports near 270 gigawatts show how extreme temperatures are becoming a grid-management problem as well as a public-health problem</span>. The number matters because peak demand forces utilities to keep backup fossil generation ready even while India expands solar and storage. The next risk is compound: if heat, weak monsoon timing, and high nighttime temperatures overlap, water stress and labor productivity losses can become the bigger story than record daytime highs.`, sources: [{name:"Reuters",url:"https://www.reuters.com/world/india/"},{name:"India Meteorological Department",url:"https://mausam.imd.gov.in/"}], learn: {context:"Peak demand is the maximum electricity load at one time; grids must be built for that peak, not for the average day.", angles:["Climate angle: adaptation now means power planning, not only disaster relief.","Economic angle: heat cuts outdoor labor and raises business cooling costs.","Energy angle: solar helps daytime peaks but storage and transmission decide evening reliability."], watch:"Watch monsoon onset, state power cuts, and whether coal inventories are drawn down faster than usual."}},
+      {h: "Hurricane outlook keeps insurance pressure on the US coast", proseHTML: `Atlantic hurricane forecasts matter before landfall because insurers, local governments, and emergency managers price risk months in advance. <span class="change">NOAA's 2026 outlook is being treated as another test of whether warmer seas keep storm risk elevated even when seasonal forecasts are not at the extreme end of recent ranges</span>. The policy impact is clearest in insurance markets, where repeated disasters have already pushed premiums higher and driven some carriers out of high-risk states. The next concrete signal is whether early-season storms form near unusually warm water or whether wind shear keeps the basin quieter than feared.`, sources: [{name:"NOAA",url:"https://www.noaa.gov/news-release/noaa-predicts-above-normal-2026-atlantic-hurricane-season"},{name:"AP",url:"https://apnews.com/hub/hurricanes"}], learn: {context:"Seasonal hurricane outlooks estimate activity, not landfalls; a quiet season can still be costly if one major storm hits a populated coast.", angles:["Insurance angle: risk models shape premiums before disasters happen.","Climate angle: warmer water adds energy, but atmospheric wind shear can suppress storms.","Equity angle: renters and low-income homeowners have the least room to absorb premium spikes."], watch:"Watch June sea-surface temperatures, Gulf storm tracks, and state-backed insurer exposure."}}
+    ]},
+    {topic: "Tech / AI", stories: [
+      {h: "AI-chip enforcement moves through Taiwan", proseHTML: `US export controls on advanced chips depend on paperwork, end-use checks, and partner enforcement rather than only customs seizures. <span class="change">Taiwanese prosecutors' reported action on alleged Nvidia server smuggling shows that AI infrastructure has become a law-enforcement issue as well as a trade issue</span>. The strategic stakes are high because AI systems depend on clustered chips, and a small number of diverted servers can create meaningful compute capacity for restricted buyers. The next thing to watch is whether Washington asks Taiwan and other partners for tighter audits on resellers, cloud providers, and re-export routes.`, sources: [{name:"Reuters",url:"https://www.reuters.com/technology/"},{name:"Taiwan News",url:"https://www.taiwannews.com.tw/news/6126962"}], learn: {context:"End-use checks are inspections or documentation designed to prove that sensitive goods reach approved buyers rather than sanctioned users.", angles:["Security angle: compute access is now treated as strategic capacity.","Business angle: chip firms face compliance risk even when demand is legitimate.","China angle: Beijing can exploit gray-market routes if partner enforcement is uneven."], watch:"Watch indictments, Commerce Department entity-list updates, and Nvidia sales guidance."}},
+      {h: "Rare-earth licensing remains a pressure point after talks", proseHTML: `Rare earths are not rare in geology, but processing capacity is concentrated enough that export licenses can become a geopolitical lever. <span class="change">Reports that licensing problems remain after high-level US-China talks mean manufacturers are still exposed to administrative delays in magnets and other critical inputs</span>. The issue matters because rare-earth magnets sit inside electric vehicles, wind turbines, drones, missiles, and industrial motors, so a paperwork bottleneck can become a production bottleneck. The next test is whether licenses are issued predictably or only used as a bargaining chip in broader tariff and technology negotiations.`, sources: [{name:"Reuters",url:"https://www.reuters.com/world/china/"},{name:"SCMP",url:"https://www.scmp.com/economy/china-economy"}], learn: {context:"Rare-earth supply chains combine mining, separation, refining, and magnet production; China dominates several of the higher-value processing steps.", angles:["Industrial angle: firms need reliable inputs more than dramatic announcements.","Trade angle: licensing gives Beijing pressure without a full embargo.","Security angle: defense contractors cannot easily substitute magnet supply."], watch:"Watch export-license approvals, US stockpiling moves, and whether allies accelerate non-China processing."}}
+    ]},
+    {topic: "Latin America", stories: [
+      {h: "Mexico security talks become a trade and sovereignty test", proseHTML: `Mexico's security relationship with Washington has tightened as cartel violence, migration, fentanyl trafficking, and tariff threats overlap. <span class="change">Fresh US-Mexico talks are now being judged by whether cooperation can increase without making President Claudia Sheinbaum look as if she is surrendering sovereignty</span>. The policy tension is that Washington wants measurable enforcement results, while Mexico has to manage domestic anger over foreign pressure and military-style operations. The next thing to watch is whether cooperation appears in border seizures and prosecutions or mainly in press statements.`, sources: [{name:"Reuters",url:"https://www.reuters.com/world/americas/"},{name:"AP",url:"https://apnews.com/hub/mexico"}], learn: {context:"Security cooperation can include intelligence sharing, extraditions, financial tracking, ports inspections, and coordinated policing; each tool carries different political costs.", angles:["US angle: fentanyl and migration make Mexico central to domestic politics.","Mexico angle: sovereignty is a governing constraint, not just rhetoric.","Trade angle: border disruption can damage integrated auto and food supply chains."], watch:"Watch extradition decisions, cartel-finance cases, and whether tariff threats return."}},
+      {h: "Argentina's IMF path keeps austerity in the spotlight", proseHTML: `Argentina entered 2026 still trying to stabilize inflation, rebuild reserves, and convince markets that fiscal adjustment can last. <span class="change">New IMF engagement keeps President Javier Milei's program tied to reserve targets and spending discipline</span>, even as households feel the social cost of cuts and price adjustments. The number to watch is not only inflation, but whether reserves rise enough to make currency policy credible without another disruptive devaluation. The political risk is that external confidence can improve before domestic living standards do, leaving the program vulnerable if wages and employment lag.`, sources: [{name:"IMF",url:"https://www.imf.org/en/Countries/ARG"},{name:"Reuters",url:"https://www.reuters.com/world/americas/argentina/"}], learn: {context:"Foreign reserves are the hard-currency assets a central bank can use to defend a currency and pay external obligations.", angles:["Market angle: investors care whether the adjustment survives politics.","Social angle: austerity tests public tolerance before growth is visible.","Regional angle: Argentina's stabilization affects South American trade and energy investment."], watch:"Watch monthly inflation, reserve accumulation, and Congress's response to further reforms."}}
+    ]},
+    {topic: "Africa / Middle East", stories: [
+      {h: "US-Iran ceasefire terms put shipping at the center of diplomacy", proseHTML: `The Iran crisis has never been only a nuclear dispute because every escalation near the Strait of Hormuz can move global energy prices. <span class="change">A reported ceasefire framework would trade constraints on uranium work and sanctions relief against guarantees around shipping access and inspections</span>. The diplomatic problem is sequencing: Tehran wants relief before it gives up leverage, while Washington and Gulf states want verifiable steps before markets believe the corridor is safe. The immediate impact reaches beyond the region because insurers, refiners, and import-dependent governments will price the deal by behavior at sea, not by the communique.`, sources: [{name:"AP",url:"https://apnews.com/article/e603a7759d6cbd70ce5ed01f439a29dc"},{name:"Axios",url:"https://www.axios.com/2026/05/24/iran-deal-strait-hormuz-sanctions-nuclear"}], learn: {context:"The Strait of Hormuz is a narrow waterway between Iran and Oman through which a major share of global oil and liquefied natural gas moves.", angles:["Diplomacy angle: sequencing can make or break a deal.","Energy angle: even a temporary disruption can raise prices before supply is physically lost.","Regional angle: Gulf states need a deal that reduces risk without rewarding coercion."], watch:"Watch inspection language, tanker movements, and statements from Saudi Arabia, the UAE, and Qatar."}},
+      {h: "Gaza strike fallout keeps humanitarian access in focus", proseHTML: `Gaza's war has created a cycle in which military operations, aid access, and displacement reinforce one another. <span class="change">Reports of new strikes and rising civilian casualties are again pushing attention toward whether aid agencies can move food, fuel, and medical supplies safely</span>. The humanitarian impact is cumulative: each new displacement makes disease control, water access, and hospital triage harder because the same infrastructure is serving more people with fewer supplies. The diplomatic test is whether pressure from the United States, Arab governments, and European states changes battlefield behavior or only produces temporary aid windows.`, sources: [{name:"AP",url:"https://apnews.com/hub/israel-hamas-war"},{name:"Reuters",url:"https://www.reuters.com/world/middle-east/"}], learn: {context:"Humanitarian access depends on crossing approvals, convoy security, fuel availability, and the ability of aid groups to communicate with parties to the conflict.", angles:["Humanitarian angle: access is not meaningful if convoys cannot distribute supplies safely.","Security angle: Israel argues operations target militants embedded in civilian areas.","Diplomacy angle: allies can demand changes but have limited control over battlefield choices."], watch:"Watch crossing openings, UN convoy reports, hospital capacity, and ceasefire talks."}}
+    ]},
+    {topic: "Europe / EU", stories: [
+      {h: "Turkey's opposition pressure widens beyond elections", proseHTML: `Turkey's opposition Republican People's Party <span class="jargon">(CHP, the main secular opposition party founded by Mustafa Kemal Ataturk's movement)</span> has been central to challenging President Recep Tayyip Erdogan's dominance in major cities. <span class="change">Police and court pressure around CHP-linked institutions is keeping the opposition's organizational capacity under strain</span>. That matters because democratic competition depends not only on election day but on whether parties can fundraise, organize, and defend local governments between elections. The next question is whether the crackdown produces fragmentation or instead turns legal pressure into a rallying point for opposition voters.`, sources: [{name:"Reuters",url:"https://www.reuters.com/world/middle-east/"},{name:"AP",url:"https://apnews.com/hub/turkey"}], learn: {context:"Turkey is a NATO member with a hybrid political system where elections are competitive but courts, media pressure, and state power can tilt the playing field.", angles:["Democracy angle: party capacity matters before ballots are cast.","NATO angle: domestic instability complicates alliance bargaining.","Opposition angle: legal pressure can either demoralize or unify rivals."], watch:"Watch court rulings, municipal budgets, and whether protests stay local or nationalize."}},
+      {h: "Europe debates how to anchor Ukraine before membership", proseHTML: `Full European Union membership for Ukraine remains politically and technically difficult because accession requires legal alignment, budget decisions, and unanimous approval. <span class="change">New proposals for associate membership or staged integration show Europe looking for ways to lock Ukraine closer to the bloc before formal accession is ready</span>. The impact is strategic: interim access to markets, funding, and institutions can signal permanence to Russia while giving Kyiv reforms to implement. The next test is whether the idea becomes a real negotiating track or remains a way for governments to avoid a harder membership fight.`, sources: [{name:"Carnegie Europe",url:"https://carnegieeurope.eu/"},{name:"European Commission",url:"https://neighbourhood-enlargement.ec.europa.eu/enlargement-policy/ukraine_en"}], learn: {context:"EU accession is slow because candidates must adopt the bloc's legal standards, known as the acquis, and existing members must accept budget and voting changes.", angles:["Ukraine angle: staged integration creates benefits before final membership.","EU angle: associate status may manage enlargement fatigue.","Russia angle: the more irreversible Ukraine's westward path looks, the more Moscow may try to disrupt it."], watch:"Watch European Council language, budget proposals, and Ukrainian reform milestones."}}
+    ]},
+    {topic: "China", stories: [
+      {h: "China's migrant-worker policy becomes a domestic-demand story", proseHTML: `China's growth model has long relied on migrant workers who live in cities but lack full urban public-service rights under the hukou system <span class="jargon">(China's household-registration system that links social benefits to registered residence)</span>. <span class="change">New attention to migrant access to schools, health care, and housing points to Beijing's effort to turn urbanization into consumption rather than only labor supply</span>. The economic logic is straightforward: families spend more when they can settle, educate children, and trust local services. The political challenge is that cities must fund those benefits while already managing property-sector stress and local-government debt.`, sources: [{name:"Reuters",url:"https://www.reuters.com/world/china/"},{name:"China Daily",url:"https://www.chinadaily.com.cn/"}], learn: {context:"Hukou reform is partly social policy and partly macroeconomic policy, because secure urban residence can raise household consumption.", angles:["Growth angle: domestic demand needs confident consumers.","Fiscal angle: cities may resist reforms if they pay the bill.","Inequality angle: migrant children and health access are the human stakes behind the growth debate."], watch:"Watch local pilot programs, school enrollment rules, and central transfers to cities."}},
+      {h: "Taiwan arms and AI controls converge", proseHTML: `Taiwan is now central to two US-China contests at once: deterrence in the Taiwan Strait and control over advanced AI hardware. <span class="change">Debates over arms packages, export enforcement, and re-export routes are converging because the same island that makes critical chips is also the military flashpoint Beijing claims</span>. The strategic implication is that technology policy cannot be separated from defense planning; sanctions, semiconductor supply, and military aid all shape Beijing's calculations. The next watch point is whether Washington can reassure Taipei without giving Beijing a pretext to escalate around the island.`, sources: [{name:"Reuters",url:"https://www.reuters.com/world/asia-pacific/"},{name:"Taiwan News",url:"https://www.taiwannews.com.tw/news/6126962"}], learn: {context:"Taiwan Semiconductor Manufacturing Company is the dominant producer of the most advanced chips, making Taiwan both an economic chokepoint and a security concern.", angles:["Deterrence angle: arms deliveries affect the cost of coercion.","Technology angle: chip enforcement relies on Taiwan's cooperation.","Diplomacy angle: reassurance and provocation can look similar from different capitals."], watch:"Watch US arms notifications, Chinese military drills, and export-control enforcement cases."}}
+    ]},
+    {topic: "War / Active Conflicts", stories: [
+      {h: "Russia's Oreshnik move widens Ukraine's air-defense problem", proseHTML: `Ukraine's defense against Russian strikes depends on a limited stock of interceptors, radars, and Western-supplied systems that cannot cover every city and energy asset. <span class="change">Russia says it plans to deploy Oreshnik intermediate-range missiles in Belarus, adding a new pressure point north of Ukraine</span>. The military significance is range and warning time: launch locations closer to NATO's eastern edge complicate Ukrainian planning and raise the political stakes for Poland and the Baltic states. The next test is whether Ukraine receives enough additional air-defense ammunition to protect both cities and the infrastructure needed to sustain its war economy.`, sources: [{name:"AP",url:"https://apnews.com/article/998aeaab5833ca397290d9ee2737b0e5"},{name:"Reuters",url:"https://www.reuters.com/world/europe/"}], learn: {context:"Intermediate-range missiles can strike from hundreds to several thousand kilometers away, making basing location and warning time central to defense.", angles:["Military angle: Ukraine must choose which targets to defend.","NATO angle: Belarus deployments bring escalation risk closer to alliance territory.","Industrial angle: interceptor production is now as important as weapons donations."], watch:"Watch Patriot and SAMP/T deliveries, Belarus basing evidence, and Russian strike patterns."}},
+      {h: "Pakistan bombing shows militancy pressure beyond border politics", proseHTML: `Pakistan's internal security problem is often discussed through Afghanistan, but militant violence also reflects local networks, sectarian targets, and provincial grievances. <span class="change">A suicide bombing in Quetta that killed several people highlights how Balochistan remains vulnerable despite repeated security operations</span>. The policy impact is wider than casualty counts because attacks can disrupt Chinese-linked infrastructure, border trade, and the federal government's claim that it can stabilize peripheral provinces. The next question is whether Islamabad treats the attack as a policing problem, an Afghan-border problem, or a governance failure in Balochistan.`, sources: [{name:"AP",url:"https://apnews.com/hub/pakistan"},{name:"Reuters",url:"https://www.reuters.com/world/asia-pacific/"}], learn: {context:"Balochistan is Pakistan's largest province by area and has long-running separatist, sectarian, and militant violence layered over resource and governance disputes.", angles:["Security angle: repeated attacks stretch police and paramilitary capacity.","China angle: violence threatens projects tied to the China-Pakistan Economic Corridor.","Governance angle: force alone does not resolve local alienation."], watch:"Watch claimed responsibility, provincial security measures, and whether cross-border accusations increase."}}
+    ]}
   ],
-  "Tech / AI": [
-    {
-      h: "Snap cuts 1,000 jobs explicitly citing AI; states move as federal regulation stalls",
-      proseHTML: 'Snap <span class="jargon">(the company behind Snapchat — roughly 432 million daily active users globally, primarily Gen Z; known for augmented reality filters and disappearing-content formats)</span> CEO Evan Spiegel announced approximately 1,000 layoffs and the closure of over 300 open roles today, attributing the cuts explicitly to "rapid advancements in artificial intelligence" that allow smaller engineering teams to produce the same output as larger ones. <span class="change">The announcement arrives the same week Connecticut approved one of the nation\'s most comprehensive AI governance bills and Iowa Governor Kim Reynolds signed a chatbot safety law — both passing through state legislatures while federal AI regulation remains stalled in Congress — and a new Microsoft report estimated AI adoption has reached 17.8% of the world\'s working-age population, up from 16.3% last quarter, with generative AI now valued at $172 billion annually to US consumers alone.</span>',
-      sources: [
-        { name: "AI Legislative Update (May 8)", url: "https://www.transparencycoalition.ai/news/ai-legislative-update-may8-2026" },
-        { name: "Microsoft On the Issues", url: "https://blogs.microsoft.com/on-the-issues/2026/05/07/the-state-of-global-ai-diffusion-in-2026/" },
-        { name: "Bloomberg", url: "https://www.bloomberg.com/news/articles/2026-05-08/tencent-alibaba-face-slowing-growth-as-ai-costs-mount" }
-      ],
-      learn: {
-        deeper: 'The Snap cuts are significant not for their scale but for the stated rationale. Spiegel did not cite a revenue miss or a strategic pivot — he attributed reductions specifically to AI replacing team capacity. That framing is unusual in corporate communication and may signal a wave of similar disclosures as Q2 earnings season approaches. Connecticut\'s AI bill is expected to function as a national template in the same way California\'s CCPA (California Consumer Privacy Act) did — creating de facto national standards through state regulation when Congress cannot act.',
-        angles: [
-          { label: "Creative destruction normalizes", text: "AI displacement is offset by new job categories. Snap-type cuts release talent into AI-adjacent roles; labor reallocates over 12-18 months. Markets absorb the transition as a routine productivity upgrade." },
-          { label: "State patchwork creates chaos", text: "Without a federal framework, 50 different AI rules create compliance chaos for national companies and drive innovation offshore. Worst outcome for long-term US AI competitiveness." },
-          { label: "Congress forced to act", text: "Visible AI layoffs in consumer tech — a category voters understand personally — generate the political pressure to break the congressional logjam on federal AI regulation by year-end." }
-        ],
-        watch: 'Q2 tech earnings (July-August) for AI-related headcount language across the sector. Whether Connecticut\'s bill survives industry legal challenge. Senate Commerce Committee markup on any federal AI framework.'
-      }
-    }
+  weekly: [
+    {topic: "US Economy", stories: [
+      {h: "Energy risk reentered the inflation story", proseHTML: `Before this week, US inflation debate centered on whether services and shelter prices were cooling enough for rate cuts. <span class="change">Iran-related oil volatility pulled energy costs back into the macroeconomic outlook</span>, forcing markets to ask whether the Fed can ease if gasoline, freight, and import costs rise again. The week matters because energy shocks can hurt consumers while keeping headline inflation elevated, an awkward mix for both markets and campaigns.`, sources: [{name:"AP",url:"https://apnews.com/article/e603a7759d6cbd70ce5ed01f439a29dc"},{name:"Federal Reserve",url:"https://www.federalreserve.gov/"}], learn: {context:"Headline inflation includes volatile food and energy prices, while core inflation strips them out to show underlying pressure.", angles:["Fed angle: officials can look through temporary energy spikes, but not if expectations move.","Consumer angle: gasoline prices are visible and politically potent.","Global angle: poorer importers absorb a larger shock."], watch:"Watch oil futures, inflation expectations, and Fed speeches."}},
+      {h: "Budget fights moved back into markets", proseHTML: `The week also showed how fiscal policy is being repriced in a higher-rate world. <span class="change">Tax and spending debates revived questions about deficits and Treasury borrowing</span> at the same time investors were watching oil and war risk. For a weekly catch-up, the significance is that the US bond market is now a political arena: every major bill has an interest-rate shadow.`, sources: [{name:"Reuters Markets",url:"https://www.reuters.com/markets/"},{name:"CBO",url:"https://www.cbo.gov/"}], learn: {context:"When the government borrows more, investors may demand higher yields unless demand for Treasuries stays strong.", angles:["Deficit angle: higher rates make debt service more expensive.","Growth angle: some spending can raise future productivity.","Election angle: voters feel bond markets through mortgage and loan rates."], watch:"Watch Treasury auctions and updated fiscal estimates."}}
+    ]},
+    {topic: "US Politics", stories: [
+      {h: "War powers became the week's constitutional test", proseHTML: `The Iran crisis gave Congress a live test of whether post-9/11 habits of executive flexibility still hold. <span class="change">Lawmakers invoked war-powers deadlines and demanded clearer authorization for sustained US involvement</span>. The story belongs in the weekly tab because it links foreign policy to separation of powers, party discipline, and the politics of another Middle East conflict.`, sources: [{name:"Congress.gov",url:"https://www.congress.gov/"},{name:"AP",url:"https://apnews.com/"}], learn: {context:"War-powers debates can reshape political permission even when they do not force immediate withdrawal.", angles:["Constitutional angle: Congress controls authorization and funding.","Security angle: presidents argue speed matters in crises.","Political angle: intraparty defections show whether the issue is becoming toxic."], watch:"Watch privileged resolutions and amendment votes."}},
+      {h: "Map fights stayed central to the House majority", proseHTML: `This week reinforced that the midterms are being fought in courts and state capitals as much as on television. <span class="change">Redistricting litigation and state map disputes kept several House paths uncertain</span>. The impact is durable because candidate recruitment, fundraising, and voter outreach all depend on knowing what district exists.`, sources: [{name:"Brennan Center",url:"https://www.brennancenter.org/our-work/research-reports/redistricting-litigation-roundup-0"},{name:"AP",url:"https://apnews.com/hub/elections"}], learn: {context:"A few district-line changes can matter more than small national polling movements in a closely divided House.", angles:["Legal angle: courts must separate racial and partisan claims.","Campaign angle: uncertainty slows spending and organizing.","Democratic angle: voters experience representation through boundaries they did not choose."], watch:"Watch filing deadlines and emergency court orders."}}
+    ]},
+    {topic: "Healthcare", stories: [
+      {h: "Ebola became the week's health-security anchor", proseHTML: `The most important health story of the week was not a new drug or hospital rule, but the return of a high-consequence outbreak response. <span class="change">The Bundibugyo Ebola outbreak pushed officials back toward containment basics because vaccine options are limited</span>. It still matters today because every delay in tracing or safe burial expands the number of contacts who must be monitored.`, sources: [{name:"WHO",url:"https://www.who.int/emergencies/disease-outbreak-news"},{name:"CDC",url:"https://www.cdc.gov/ebola/"}], learn: {context:"Ebola control is labor-intensive because responders must find contacts before symptoms appear and isolate cases quickly.", angles:["Science angle: strain-specific vaccine gaps matter.","Trust angle: communities must believe responders are safer than hiding.","Travel angle: routing rules are only as good as compliance."], watch:"Watch weekly WHO case counts and security around treatment centers."}},
+      {h: "Travel guidance became a public-health communication test", proseHTML: `The week showed how outbreak rules are also messages. <span class="change">CDC and WHO guidance around Congo travel became a signal to airlines, hospitals, schools, and border agencies</span>. The continuing relevance is that confusing guidance can either overreact and stigmatize travelers or underprepare health systems for a suspected case.`, sources: [{name:"CDC Travel Health",url:"https://wwwnc.cdc.gov/travel/notices"},{name:"WHO",url:"https://www.who.int/"}], learn: {context:"Public-health communication tries to change behavior without causing panic or concealment.", angles:["Preparedness angle: hospitals need triage instructions.","Diplomacy angle: restrictions can anger affected governments.","Epidemiology angle: targeted screening usually beats blanket bans."], watch:"Watch whether guidance levels change."}}
+    ]},
+    {topic: "Climate", stories: [
+      {h: "Heat exposed the electricity side of climate risk", proseHTML: `The week's heat story was also an infrastructure story. <span class="change">India's high power demand showed how extreme heat now tests grids, labor, health systems, and household budgets at once</span>. The story still matters because early monsoon timing will determine whether relief arrives or whether water and electricity stress compound.`, sources: [{name:"India Meteorological Department",url:"https://mausam.imd.gov.in/"},{name:"Reuters",url:"https://www.reuters.com/world/india/"}], learn: {context:"Cooling demand can create evening peaks after solar output falls, which makes storage and transmission crucial.", angles:["Adaptation angle: heat policy must include electricity planning.","Labor angle: outdoor work slows or becomes dangerous.","Political angle: blackouts during heatwaves can quickly become governance crises."], watch:"Watch heat warnings and monsoon progress."}},
+      {h: "Storm forecasts kept insurance risk in view", proseHTML: `The US climate story this week also moved through risk pricing. <span class="change">Seasonal hurricane forecasts reminded coastal states that disaster risk affects insurance and public finance before storms form</span>. The weekly impact is that homeowners, state-backed insurers, and local budgets are already responding to modelled risk rather than waiting for landfall.`, sources: [{name:"NOAA",url:"https://www.noaa.gov/"},{name:"AP",url:"https://apnews.com/hub/hurricanes"}], learn: {context:"Insurance markets turn climate risk into household costs through premiums, deductibles, and coverage withdrawals.", angles:["Household angle: higher premiums can price people out of homes.","State angle: public insurers become exposed when private firms retreat.","Climate angle: warmer water changes the risk baseline."], watch:"Watch early tropical activity and insurance filings."}}
+    ]},
+    {topic: "Tech / AI", stories: [
+      {h: "AI controls moved from rules to prosecutions", proseHTML: `Export controls can look abstract until investigators start naming shipments and servers. <span class="change">Taiwan-linked AI server enforcement showed that the real fight is now over compliance chains, resellers, and end users</span>. It matters beyond one case because advanced chips are useful only when they reach dense clusters, which means small diversion routes can matter strategically.`, sources: [{name:"Reuters Technology",url:"https://www.reuters.com/technology/"},{name:"Taiwan News",url:"https://www.taiwannews.com.tw/news/6126962"}], learn: {context:"AI compute is both a commercial asset and a military-relevant capability.", angles:["Compliance angle: companies must police distributors.","Security angle: enforcement tries to slow restricted buyers.","Diplomacy angle: US controls depend on partner governments."], watch:"Watch new export-control guidance and reseller investigations."}},
+      {h: "Critical minerals stayed a quiet trade weapon", proseHTML: `Rare-earth licensing remained one of the week's quieter but consequential trade stories. <span class="change">China's control over processing and licensing continued to worry manufacturers even after high-level talks</span>. The significance is that supply chains can be disrupted without a formal embargo, simply through slow approvals and uncertain paperwork.`, sources: [{name:"Reuters China",url:"https://www.reuters.com/world/china/"},{name:"SCMP",url:"https://www.scmp.com/"}], learn: {context:"Critical-mineral leverage is often administrative, not dramatic.", angles:["Trade angle: uncertainty changes inventory behavior.","Defense angle: magnets are hard to substitute quickly.","Industrial angle: firms may pay to diversify even if China remains cheaper."], watch:"Watch license approvals and alternative processing investments."}}
+    ]},
+    {topic: "Latin America", stories: [
+      {h: "Mexico balanced cooperation and sovereignty", proseHTML: `The week showed why US-Mexico security cooperation is never only operational. <span class="change">Talks over cartels, migration, and border enforcement forced Mexico to cooperate while publicly defending sovereignty</span>. It still matters because tariff threats, fentanyl politics, and border security now sit inside one bilateral bargaining system.`, sources: [{name:"Reuters Americas",url:"https://www.reuters.com/world/americas/"},{name:"AP Mexico",url:"https://apnews.com/hub/mexico"}], learn: {context:"Sovereignty concerns shape how far Mexico can go with US-backed security operations.", angles:["US angle: fentanyl keeps pressure high.","Mexico angle: visible US influence can backfire domestically.","Trade angle: border politics can interrupt supply chains."], watch:"Watch seizures, extraditions, and tariff language."}},
+      {h: "Argentina's stabilization remained politically exposed", proseHTML: `Argentina's week was a reminder that macroeconomic stabilization is not the same as political durability. <span class="change">IMF-linked reserve and fiscal targets kept the Milei program under outside scrutiny</span>. The issue remains live because market confidence can return faster than household purchasing power, creating a dangerous gap between investors and voters.`, sources: [{name:"IMF",url:"https://www.imf.org/en/Countries/ARG"},{name:"Reuters",url:"https://www.reuters.com/world/americas/argentina/"}], learn: {context:"Stabilization programs often ask voters to accept short-term pain for longer-term credibility.", angles:["Market angle: reserves signal credibility.","Social angle: real wages decide tolerance.","Regional angle: Argentina affects trade, energy, and migration patterns."], watch:"Watch inflation, reserves, and street protests."}}
+    ]},
+    {topic: "Africa / Middle East", stories: [
+      {h: "Iran talks put sanctions and shipping into one bargain", proseHTML: `The week made clear that a nuclear arrangement cannot be separated from maritime security. <span class="change">Ceasefire discussions tied uranium limits, sanctions relief, and Hormuz access into one package</span>. The story remains relevant because a deal that lowers enrichment risk but leaves shipping vulnerable will not calm oil markets for long.`, sources: [{name:"AP",url:"https://apnews.com/article/e603a7759d6cbd70ce5ed01f439a29dc"},{name:"Axios",url:"https://www.axios.com/2026/05/24/iran-deal-strait-hormuz-sanctions-nuclear"}], learn: {context:"Diplomatic sequencing decides whether both sides trust that concessions will be reciprocated.", angles:["Nuclear angle: inspections must be credible.","Energy angle: Hormuz access is market-critical.","Regional angle: Gulf states want de-escalation without Iranian coercion."], watch:"Watch inspection details and sanctions waivers."}},
+      {h: "Sudan and Gaza kept humanitarian systems overloaded", proseHTML: `The week's conflict coverage again showed that aid systems are operating with too many crises at once. <span class="change">Sudan's famine risk and Gaza's displacement pressures kept humanitarian access at the center of diplomacy</span>. The continuing significance is that aid agencies are now managing security restrictions, funding shortfalls, and disease risk simultaneously.`, sources: [{name:"UN OCHA",url:"https://www.unocha.org/"},{name:"AP",url:"https://apnews.com/hub/israel-hamas-war"}], learn: {context:"Humanitarian systems fail gradually: insecurity, blocked roads, funding gaps, and disease all compound.", angles:["Humanitarian angle: access determines survival.","Diplomatic angle: pressure rarely produces immediate safe delivery.","Security angle: armed groups can use aid access as leverage."], watch:"Watch convoy access, famine classifications, and ceasefire talks."}}
+    ]},
+    {topic: "Europe / EU", stories: [
+      {h: "Europe searched for a Ukraine bridge before membership", proseHTML: `Ukraine's EU future remains politically central but procedurally slow. <span class="change">This week, proposals for staged or associate integration gave Europe a way to deepen ties before formal membership</span>. The importance is that interim steps can help Ukraine reform and signal permanence without forcing every budget and voting fight immediately.`, sources: [{name:"European Commission",url:"https://neighbourhood-enlargement.ec.europa.eu/enlargement-policy/ukraine_en"},{name:"Carnegie Europe",url:"https://carnegieeurope.eu/"}], learn: {context:"EU enlargement requires institutional, legal, and budget changes, so partial integration can be politically useful.", angles:["Ukraine angle: benefits before membership matter.","EU angle: staged accession can reduce enlargement fatigue.","Russia angle: irreversible integration changes Moscow's assumptions."], watch:"Watch Council language and funding proposals."}},
+      {h: "Turkey's opposition faced pressure between elections", proseHTML: `Turkey's week showed how political competition can be squeezed outside formal voting. <span class="change">Pressure on CHP-linked institutions kept the opposition's organizing environment unstable</span>. The relevance continues because Erdogan's challengers need functioning local governments and institutions to convert city wins into national power.`, sources: [{name:"Reuters",url:"https://www.reuters.com/world/middle-east/"},{name:"AP Turkey",url:"https://apnews.com/hub/turkey"}], learn: {context:"Democratic backsliding often works through legal and administrative pressure rather than canceled elections.", angles:["Institutional angle: party capacity matters.","NATO angle: domestic politics affects alliance behavior.","Opposition angle: pressure can divide or consolidate voters."], watch:"Watch court calendars and protest turnout."}}
+    ]},
+    {topic: "China", stories: [
+      {h: "Hukou reform returned as a growth tool", proseHTML: `China's week underlined that social policy and macroeconomics are now linked. <span class="change">Migrant-worker access to urban benefits became part of the demand story</span>, because families spend more when they can plan around schools, health care, and housing. It still matters because local governments must fund the services while already carrying debt and property-market stress.`, sources: [{name:"Reuters China",url:"https://www.reuters.com/world/china/"},{name:"China Daily",url:"https://www.chinadaily.com.cn/"}], learn: {context:"Hukou rules shape who can access city services, which affects consumption and inequality.", angles:["Growth angle: household confidence matters.","Fiscal angle: cities need money to expand services.","Social angle: migrant children are central to the reform stakes."], watch:"Watch local pilots and fiscal transfers."}},
+      {h: "Taiwan stayed the hinge of chips and deterrence", proseHTML: `Taiwan was again the place where technology and military policy met. <span class="change">AI export enforcement, arms debates, and Chinese pressure all reinforced Taiwan's centrality</span>. The story remains live because the same geography that produces advanced chips is also the geography most exposed to military coercion.`, sources: [{name:"Reuters Asia",url:"https://www.reuters.com/world/asia-pacific/"},{name:"Taiwan News",url:"https://www.taiwannews.com.tw/news/6126962"}], learn: {context:"Taiwan's chip role makes disruption costly for the global economy as well as regional security.", angles:["Tech angle: export controls require Taiwanese enforcement.","Defense angle: arms packages shape deterrence.","Diplomatic angle: reassurance can be read as provocation."], watch:"Watch Chinese exercises and US arms notifications."}}
+    ]},
+    {topic: "War / Active Conflicts", stories: [
+      {h: "Russia's missile strategy kept pressure on civilians and grids", proseHTML: `Russia's week of missile signaling and strikes reinforced a familiar strategy: make Ukraine spend scarce defenses protecting cities and infrastructure. <span class="change">The Oreshnik deployment plan in Belarus widened the geography of the threat</span>. The importance is that Ukraine's biggest need is not only more weapons but a sustained interceptor pipeline.`, sources: [{name:"AP",url:"https://apnews.com/article/998aeaab5833ca397290d9ee2737b0e5"},{name:"Reuters",url:"https://www.reuters.com/world/europe/"}], learn: {context:"Air defense is a consumption war: each incoming missile forces expensive choices about what to intercept.", angles:["Military angle: Ukraine cannot protect everything.","Industrial angle: NATO production rates matter.","Escalation angle: Belarus basing adds regional risk."], watch:"Watch air-defense pledges and strike targets."}},
+      {h: "Pakistan's Quetta attack highlighted internal security fragility", proseHTML: `The week also showed how Pakistan's militant threat remains layered and local. <span class="change">A suicide bombing in Quetta put Balochistan's insecurity back into the national frame</span>. It matters because the province is tied to ports, minerals, and China-linked infrastructure, so attacks there carry economic and diplomatic costs.`, sources: [{name:"AP Pakistan",url:"https://apnews.com/hub/pakistan"},{name:"Reuters Asia",url:"https://www.reuters.com/world/asia-pacific/"}], learn: {context:"Balochistan combines separatist grievances, sectarian violence, and strategic infrastructure.", angles:["Security angle: attacks strain local forces.","Economic angle: investors watch project safety.","Governance angle: policing cannot solve political alienation alone."], watch:"Watch responsibility claims and provincial security changes."}}
+    ]}
   ],
-  "Latin America": [
-    {
-      h: "Venezuela debt hits 173% of GDP as US-backed transition stalls four months in",
-      proseHTML: 'The United States captured Venezuelan President Nicolás Maduro <span class="jargon">(authoritarian ruler since 2013 who oversaw Venezuela\'s economic collapse from a $350B peak GDP to under $100B, triggering the emigration of over 8 million Venezuelans)</span> in a special forces operation on January 3, with Trump publicly pledging the US would "run" Venezuela until a democratic transition was complete. <span class="change">Four months later, Citi <span class="jargon">(Citigroup — a major US bank that publishes sovereign debt analyses for emerging markets)</span> has marked Venezuela\'s total external obligations at $169 billion against a 2026 GDP of $98 billion — a debt-to-GDP ratio of 173%, among the world\'s highest — while opposition leaders María Corina Machado (still in Miami) and Edmundo González (still in Spain) have not returned to Caracas, and acting President Delcy Rodríguez remains in office.</span> Trump met with Brazil\'s Lula da Silva at the White House today, his most vocal regional critic of the operation.',
-      sources: [
-        { name: "Rio Times Online", url: "https://www.riotimesonline.com/latin-american-pulse-for-wednesday-may-6-2026/" },
-        { name: "WOLA Venezuela", url: "https://www.wola.org/program/venezuela/" }
-      ],
-      learn: {
-        deeper: 'The 173% debt-to-GDP ratio means any future Venezuelan government inherits a debt load requiring years of IMF-style restructuring before normal government services resume. US energy companies have reportedly negotiated access to Venezuela\'s remaining ~800,000 barrels-per-day oil output. If US corporate interests are embedded in Venezuelan oil before a legitimate government is installed, Washington has a structural incentive to delay rather than accelerate a genuine democratic transition — exactly the framing Lula and Colombia\'s Petro are now advancing publicly.',
-        angles: [
-          { label: "Transition succeeds", text: "Machado returns to Caracas in June; González sworn in; debt restructuring begins under IMF support; oil revenue rebuilds over 3-5 years. Monroe Doctrine precedent consolidated cleanly." },
-          { label: "Occupation turns quagmire", text: "Transition stalls; insurgency forms from Maduro loyalists and Cuban-trained forces; oil infrastructure sabotaged; Iraq 2003 parallels deepen in the six months before midterms." },
-          { label: "Resource capture narrative dominates", text: "Evidence of US companies locking in oil deals before transition surfaces publicly. Brazil, Colombia, Mexico condemn the operation explicitly. Hemispheric consensus against the US hardens." }
-        ],
-        watch: 'Whether Machado announces a return date to Venezuela. Congressional War Powers votes. What Lula says publicly after today\'s White House meeting. Venezuelan oil production numbers as a proxy for US operational control.'
-      }
-    }
+  analytical: [
+    {tag:"Iran / Energy", headline:"The Iran deal is now an oil-price, sanctions, and war-powers test at once", skeletonHTML:`<strong>Baseline:</strong> Iran diplomacy usually gets framed around uranium enrichment and sanctions, while oil markets separately price Gulf security risk. <strong>Move:</strong> The current framework joins those issues by tying ceasefire durability to Hormuz access, inspections, and sanctions relief. <strong>Shift:</strong> That means the deal's credibility will be measured by tanker traffic, insurance costs, and congressional reaction as much as by nuclear text. <strong>Why it matters:</strong> If the agreement calms shipping, it can ease inflation pressure and reduce the case for extended US military involvement; if it fails, the same crisis feeds energy prices, constitutional fights, and alliance pressure at once.`, stats:["Hormuz carries a large share of globally traded oil and liquefied natural gas, so even limited disruption can affect prices before barrels disappear.","The War Powers Resolution's 60-day clock gives Congress a concrete timeline for challenging sustained operations.","Oil-price pass-through is uneven: import-dependent poorer economies face the fastest fiscal and food-price strain."], sideA:{label:"Deal can de-escalate", text:"A verifiable framework lowers nuclear and shipping risk together, giving markets and Gulf partners a reason to step back."}, sideB:{label:"Deal may reward coercion", text:"If sanctions relief arrives before inspections and maritime restraint are proven, Iran gains leverage while preserving escalation tools."}, sideC:{label:"Markets are the referee", text:"Even if diplomats declare success, insurers and refiners will expose whether the corridor is actually trusted."}, sources:[{name:"AP",url:"https://apnews.com/article/e603a7759d6cbd70ce5ed01f439a29dc"},{name:"Axios",url:"https://www.axios.com/2026/05/24/iran-deal-strait-hormuz-sanctions-nuclear"}]},
+    {tag:"Public Health", headline:"Bundibugyo Ebola turns outbreak response into a trust and logistics contest", skeletonHTML:`<strong>Baseline:</strong> Ebola response works when cases are isolated early, contacts are traced, burials are made safer, and communities cooperate. <strong>Move:</strong> The Bundibugyo strain has limited vaccine tools, while reported treatment-center attacks and travel restrictions make routine containment harder. <strong>Shift:</strong> The main constraint is no longer only medical knowledge; it is whether responders can operate safely and whether families trust the response enough to report symptoms. <strong>Why it matters:</strong> A contained outbreak remains a regional emergency, but a response that loses community cooperation can create hidden transmission chains and export risk.`, stats:["WHO listed 746 suspected cases as of May 21, a scale large enough to make contact tracing labor-intensive.","Bundibugyo Ebola lacks the same approved vaccine base associated with Zaire Ebola, increasing reliance on non-pharmaceutical containment.","Travel-routing and hospital triage rules matter most before international spread, not after."], sideA:{label:"Containment is still possible", text:"Classic outbreak tools can work if tracing, isolation, and burial teams regain trust and security."}, sideB:{label:"Trust is the weak link", text:"If communities fear responders or treatment centers, cases hide and the official curve understates risk."}, sideC:{label:"Global systems angle", text:"The outbreak tests whether post-COVID surveillance networks can respond without triggering blunt travel politics."}, sources:[{name:"WHO",url:"https://www.who.int/emergencies/disease-outbreak-news"},{name:"CDC",url:"https://www.cdc.gov/ebola/"},{name:"AP",url:"https://apnews.com/"}]},
+    {tag:"Ukraine / Europe", headline:"Russia's missile pressure is becoming an industrial-capacity test for Ukraine's backers", skeletonHTML:`<strong>Baseline:</strong> Ukraine's air defense depends on Western systems whose interceptors are expensive and limited. <strong>Move:</strong> Russia's Oreshnik deployment plan in Belarus and continued long-range strikes force Ukraine to protect cities, power systems, and military targets with finite ammunition. <strong>Shift:</strong> The decisive question is no longer only what systems allies donate, but whether production can replace interceptors as fast as Russia launches missiles and drones. <strong>Why it matters:</strong> If the pipeline fails, Russia can impose civilian costs and economic disruption without needing a battlefield breakthrough.`, stats:["Ukraine says it hit 11 Russian oil facilities in May, showing Kyiv is also trying to strain Moscow's logistics.","Intermediate-range basing in Belarus would shorten warning times for some Ukrainian and regional targets.","Air-defense support must include launchers, radars, trained crews, and missiles, not one equipment category."], sideA:{label:"Support can blunt Russia", text:"Sustained allied production and layered defenses can reduce the strategic value of missile coercion."}, sideB:{label:"Russia can outlast stocks", text:"If Russia launches cheaper drones and missiles faster than allies produce interceptors, Ukraine faces impossible allocation choices."}, sideC:{label:"Europe's own test", text:"The crisis exposes whether Europe can scale defense industry fast enough for a long war."}, sources:[{name:"AP",url:"https://apnews.com/article/998aeaab5833ca397290d9ee2737b0e5"},{name:"Reuters",url:"https://www.reuters.com/world/europe/"}]},
+    {tag:"China / Technology", headline:"AI-chip controls now depend on partner enforcement, not just US rules", skeletonHTML:`<strong>Baseline:</strong> Washington restricts high-end AI chips to slow access by strategic competitors, but chips move through global distributors, servers, cloud contracts, and re-export routes. <strong>Move:</strong> Taiwan-linked enforcement around alleged server smuggling shows that the control regime has entered a prosecutorial phase. <strong>Shift:</strong> The weak point is no longer the text of US rules; it is whether partners can audit supply chains without paralyzing legitimate business. <strong>Why it matters:</strong> AI compute is becoming a strategic resource, so a few successful diversion routes can undermine years of policy.`, stats:["Advanced AI models require dense chip clusters, which makes server-level diversion strategically relevant.","Taiwan is both a chip-manufacturing hub and a security flashpoint, linking export controls to deterrence.","Rare-earth licensing shows China has its own administrative levers in technology supply chains."], sideA:{label:"Controls can work", text:"Partner prosecutions raise the cost of gray-market diversion and signal that rules have teeth."}, sideB:{label:"Leakage is inevitable", text:"High demand and global resale channels make full enforcement unrealistic without damaging legitimate trade."}, sideC:{label:"Supply-chain bargaining", text:"The chip fight and rare-earth fight increasingly mirror each other as administrative choke points."}, sources:[{name:"Reuters Technology",url:"https://www.reuters.com/technology/"},{name:"Taiwan News",url:"https://www.taiwannews.com.tw/news/6126962"}]},
+    {tag:"US Politics", headline:"War powers could turn the Iran crisis into a separation-of-powers fight", skeletonHTML:`<strong>Baseline:</strong> Presidents have often used force or protected maritime routes without new congressional authorization, while Congress has rarely forced a decisive confrontation. <strong>Move:</strong> The Iran crisis gives lawmakers a concrete 60-day frame and a visible policy target in Hormuz operations. <strong>Shift:</strong> The key question is whether opposition remains symbolic or becomes a coalition large enough to affect funding, authorizations, and campaign messaging. <strong>Why it matters:</strong> Constitutional process can alter strategy because allies, adversaries, and markets all watch whether the United States can sustain a policy politically.`, stats:["The 1973 War Powers Resolution is designed to force consultation and limit unauthorized hostilities after a set period.","A narrow House majority means a small number of defections can change the political meaning of a vote.","Defense authorization and appropriations bills give Congress leverage even when direct withdrawal votes fail."], sideA:{label:"Executive flexibility", text:"The president must protect US forces, allies, and shipping routes quickly in a crisis."}, sideB:{label:"Congressional authorization", text:"Sustained hostilities require explicit democratic consent, especially after decades of elastic war powers."}, sideC:{label:"Credibility risk", text:"A public legal fight can either strengthen legitimacy or signal division to Tehran and allies."}, sources:[{name:"Congress.gov",url:"https://www.congress.gov/"},{name:"AP",url:"https://apnews.com/"}]}
   ],
-  "Africa / Middle East": [
-    {
-      h: "Famine confirmed in El Fasher — the last army-held city in Sudan's Darfur region",
-      proseHTML: 'Sudan has been in civil war since April 2023, pitting the national army against the RSF <span class="jargon">(Rapid Support Forces — a paramilitary descended from the Janjaweed militias responsible for the 2003 Darfur genocide, led by warlord Mohamed "Hemedti" Dagalo)</span>, now producing the world\'s largest and most complex humanitarian crisis with over 12 million displaced. <span class="change">OCHA <span class="jargon">(UN Office for the Coordination of Humanitarian Affairs — coordinates international emergency aid response)</span> confirmed this week that famine has been formally reached in El Fasher — the last city in Darfur still held by the national army — and in Kadugli in the Kordofan region, with nearly 20 additional areas at imminent risk as RSF forces block humanitarian access corridors.</span> If El Fasher falls militarily, the RSF would effectively partition Sudan along ethnic lines, having systematically depopulated a predominantly non-Arab western region.',
-      sources: [
-        { name: "OCHA Sudan", url: "https://www.unocha.org/news/todays-top-news-middle-east-iran-lebanon-occupied-palestinian-territory-sudan-afghanistan" },
-        { name: "Middle East Eye", url: "https://www.middleeasteye.net/news/israel-palestine-syria-yemen-and-sudan-among-conflicts-watch-2026-report-says" }
-      ],
-      learn: {
-        deeper: 'Sudan\'s crisis has now produced more displacement than Ukraine and Gaza combined but receives a fraction of the international media attention. The UAE has been documented in UN Security Council panel reports as supplying the RSF with weapons and logistical support (officially denied). Egypt and Saudi Arabia back the national army. The result is a Gulf proxy war playing out inside a famine zone the international community cannot reach. Congress has held no hearings specifically on Sudan in 2026.',
-        angles: [
-          { label: "Partition becomes permanent", text: "RSF takes El Fasher; de facto border hardens; international community accepts facts on the ground. Mass starvation in a sealed western enclave. 2026 becomes Sudan\'s defining catastrophe." },
-          { label: "Gulf states broker a deal", text: "Saudi Arabia pressures UAE to halt RSF weapons flow under international scrutiny. Back-channel ceasefire enables aid corridors. Fragile peace, but the starvation curve begins to bend." },
-          { label: "Ignored war grinds on", text: "Status quo continues; neither side achieves decisive victory; international community chronically underfunds the response; famine spreads across eastern Darfur without resolution." }
-        ],
-        watch: 'Weekly OCHA humanitarian access reports from El Fasher. UN Security Council emergency session (requested by the African Union). UAE arms documentation in the next Sudan Panel report.'
-      }
-    }
-  ],
-  "Europe / EU": [
-    {
-      h: "Ukraine net-recaptured 116 sq km in April; Russia declares Victory Day ceasefire",
-      proseHTML: 'After years of primarily defensive fighting following Russia\'s February 2022 full-scale invasion, Ukraine showed a potential momentum shift in April. <span class="change">The ISW <span class="jargon">(Institute for the Study of War — a Washington DC-based conflict research organization that publishes daily battlefield assessments)</span> observed Ukraine net-recaptured approximately 116 square kilometers in April — more territory than it lost for the first time in over a year — apparently aided by degraded Russian logistics from Ukrainian long-range strikes.</span> Russia simultaneously declared a unilateral ceasefire from May 8–9 to mark Victory Day <span class="jargon">(Russia\'s May 9 commemoration of the Soviet defeat of Nazi Germany in 1945)</span>, while Ukraine declared its own competing ceasefire window May 5–6; neither side fully observed the other\'s terms, and Russia cancelled its military parade equipment display in Moscow, reportedly out of concern for Ukrainian drone strikes.',
-      sources: [
-        { name: "Al Jazeera — ISW analysis (May 8)", url: "https://www.aljazeera.com/news/2026/5/8/ukraine-may-have-turned-tide-of-russian-territorial-gains-says-think-tank" },
-        { name: "Al Jazeera — competing ceasefires", url: "https://www.aljazeera.com/news/2026/5/4/russia-and-ukraine-declare-competing-ceasefires" },
-        { name: "Al Jazeera — US-Germany rift", url: "https://www.aljazeera.com/news/2026/5/6/a-stress-test-us-germany-rift-widens-as-iran-war-drags-on" }
-      ],
-      learn: {
-        deeper: 'Russia still controls roughly 20% of Ukrainian territory — 116 sq km is meaningful as a trend break but modest in absolute terms. The EU\'s €90 billion loan to Ukraine (€60 billion earmarked for military use) is funding this shift. The competing ceasefires reflect both sides positioning for the "peace narrative" ahead of Trump\'s June deadline for negotiations — without actually stopping the war. Germany\'s defense spending rose from 47 billion euros in 2021 to 108 billion euros today, driven by Russia\'s war and now accelerating doubt about US NATO reliability.',
-        angles: [
-          { label: "Turning point confirmed", text: "April recapture establishes a trend; EU funding plus long-range weapon authorization create conditions for sustained Ukrainian advances through summer. Negotiating position strengthens materially." },
-          { label: "Seasonal anomaly", text: "Russian spring offensive preparation paused in April for logistics regeneration; resumes in May-June. April Ukrainian gains are temporary; Russian manpower attrition still favors Moscow long-term." },
-          { label: "Ceasefire politics dominate", text: "Both sides are positioning for a Trump-brokered peace framework. The ceasefires are diplomatic theater, not military reality. The negotiating endgame begins by Q3 regardless of battlefield outcomes." }
-        ],
-        watch: 'ISW daily maps through May — do Ukrainian gains continue or reverse? Trump\'s June peace deadline and whether formal talks begin. German Bundestag vote on military hub funding for postwar Ukraine, expected next week.'
-      }
-    }
-  ],
-  "China": [
-    {
-      h: "Iran war expected to crowd out tariffs and rare earths at Trump-Xi summit, 6 days out",
-      proseHTML: 'Trump and Xi Jinping meet in Beijing on May 14–15 — the first US presidential visit to China in nine years — in a summit originally designed to address the trade war that pushed effective US tariff rates on Chinese goods as high as 147.6% before a partial rollback to an overall average of 11.8% in April. <span class="change">CNBC reported today that the Iran war is now expected to dominate the agenda, leaving "little room" to advance on tariffs, rare-earth export controls <span class="jargon">(China controls roughly 92% of global rare earth processing capacity — a chokepoint for US defense and tech supply chains)</span>, or chip rules; separately, The Wire China published analysis this week arguing that Trump\'s proposed "Board of Trade" framework <span class="jargon">(a proposed US-China bilateral commission to jointly manage trade flows)</span> signals Washington has given up on structurally changing China\'s trade behavior and is instead institutionalizing managed rivalry.</span> A 90-day tariff truce struck in Geneva in February collapsed after three weeks, with Trump accusing Beijing of violation.',
-      sources: [
-        { name: "CNBC (May 8)", url: "https://www.cnbc.com/2026/05/08/iran-focus-at-trump-xi-summit-may-delay-progress-on-tariffs-rare-earths.html" },
-        { name: "The Wire China (May 7)", url: "https://www.thewirechina.com/2026/05/07/trumps-board-of-trade-move-signals-the-u-s-has-given-up-on-changing-china/" },
-        { name: "US News", url: "https://www.usnews.com/news/world/articles/2026-05-06/u-s-president-trumps-renewed-trade-war-with-china" }
-      ],
-      learn: {
-        deeper: 'Xi enters this summit in a structurally stronger position than any prior Trump-Xi meeting. China\'s rare earth processing dominance is a live weapon: the US cannot build certain F-35 components or EV batteries without Chinese-processed materials. A CSIS survey of 79 former officials and China experts found only 3% expected both sides to keep all summit commitments; 34% expected neither to honor any. The "Board of Trade" concept — if formalized — would be historically significant: the first US acknowledgment that structural change in China\'s trade behavior is off the table.',
-        angles: [
-          { label: "Iran breakthrough anchors the summit", text: "Xi publicly commits to pressuring Tehran on Hormuz in exchange for US easing on chip export controls. Oil stabilizes, markets rally, Trump claims a foreign policy win before midterms." },
-          { label: "Board of Trade institutionalizes managed rivalry", text: "Framework locks in current US-China competition without resolving it. Decoupling slows but continues under a bureaucratic wrapper. China-hawk GOP coalition begins fracturing." },
-          { label: "Taiwan wildcard", text: "Xi privately tests Trump on a Taiwan arms sale or commitment; Trump softens rhetoric in exchange for Hormuz de-escalation help. Blows up the GOP defense hawk coalition overnight." }
-        ],
-        watch: 'May 14-15 summit communiqué — specifically whether it mentions rare earths, tariff timelines, or Iran. USTR announcements before or after the summit. Any Chinese statement on Hormuz tied to the meeting.'
-      }
-    }
-  ],
-  "War": [
-    {
-      h: "US and Iran exchange fire in Hormuz on day 70; Trump insists ceasefire 'still holding'",
-      proseHTML: 'The US-Iran war, which began February 28 when US-Israeli forces struck Iranian nuclear and military sites, has had a fragile ceasefire nominally in place since April 8, brokered by Pakistani PM Shehbaz Sharif — but the Strait of Hormuz <span class="jargon">(the narrow waterway between Iran and the UAE through which roughly 20% of global oil flows daily)</span> remains severely disrupted. <span class="change">On May 7 — day 70 of the conflict — US Navy destroyers and Iranian forces exchanged fire in the Strait; US Central Command said its forces "intercepted unprovoked Iranian attacks and responded with self-defense strikes," while Iran accused the US of striking civilian coastal areas along Iran\'s southern coast in violation of the ceasefire.</span> Trump said today the ceasefire is "still holding" but warned Iran of a "harsher response" if a deal is not reached "fast"; he separately paused Operation Project Freedom <span class="jargon">(the US Navy tanker escort mission through Hormuz, launched May 4)</span> on May 6, citing "great progress" toward a deal.',
-      sources: [
-        { name: "Al Jazeera (May 8)", url: "https://www.aljazeera.com/news/2026/5/8/iran-war-day-70-us-iran-trade-fire-in-hormuz-amid-ceasefire-tensions" },
-        { name: "PBS NewsHour", url: "https://www.pbs.org/newshour/show/u-s-destroyers-and-iran-trade-fire-in-strait-of-hormuz-in-serious-test-of-ceasefire" },
-        { name: "CNBC", url: "https://www.cnbc.com/2026/05/07/iran-war-hormuz-strait-ceasefire-trump.html" }
-      ],
-      learn: {
-        deeper: 'The contradiction between "ceasefire still holding" and "destroyers exchanging fire" reflects the chaotic information environment around the conflict. Iran\'s claim that the US struck civilian areas — if substantiated — would significantly complicate the US legal posture under international humanitarian law. CNN published analysis today arguing Trump has "abandoned many of his initial maximalist demands" on Iran, signaling the White House is searching for an exit. The Project Freedom pause, announced one day before the exchange of fire, may have unintentionally removed the protective cover that had been keeping Iranian forces in check.',
-        angles: [
-          { label: "Ceasefire still viable", text: "May 7 exchange is a controlled incident — each side signaling limits, not intent to escalate. Omani backchannel is active. Hormuz reopens by end of May, oil falls $10-15/barrel." },
-          { label: "Ceasefire effectively dead", text: "Competing narratives (each side says the other fired first) make verification impossible. Any deal collapses on implementation. Conflict re-escalates toward Iran\'s nuclear sites by June." },
-          { label: "IRGC acting independently", text: "Iran\'s IRGC hardliner faction is ordering strikes that Tehran\'s civilian leadership did not authorize — a state-within-a-state problem that makes any ceasefire unenforceable from the Iranian side regardless of negotiations." }
-        ],
-        watch: 'Whether tanker traffic through Hormuz increases in the next 72 hours. Any formal statement from the Omani backchannel that mediated the April 8 deal. Trump-Xi May 14 summit — whether Xi publicly calls on Iran to de-escalate as part of any joint framework.'
-      }
-    }
-  ],
-  "Flex": [
-    {
-      h: "NATO fracture widens: US sidelined allies before Iran strikes, troops leave Germany",
-      proseHTML: 'NATO <span class="jargon">(North Atlantic Treaty Organization — the 32-member Western collective defense alliance whose Article 5 treats an attack on one member as an attack on all; founded in 1949 explicitly to coordinate military decisions among allies)</span> has long operated on the principle that major military operations are discussed with allies in advance. <span class="change">NPR reported today that the US launched its February Iran strikes without consulting European allies and that Germany, France, and Canada learned of the operation only after it began — a breach that is now accelerating a fundamental European rethink of the alliance\'s future.</span> The US is simultaneously redeploying 5,000 troops from German soil and has not stationed the promised Tomahawk cruise missiles <span class="jargon">(long-range US cruise missiles with 1,600+ km range — Europe currently produces no equivalent in sufficient quantities)</span> in Germany, leaving a capability gap Berlin is trying to address by building the continent\'s strongest conventional army by 2039, backed by a defense budget that has grown from 47 billion euros in 2021 to 108 billion euros today.',
-      sources: [
-        { name: "NPR (May 8)", url: "https://www.npr.org/2026/05/08/nx-s1-5810515/us-war-trump-nato-iran-europe-canada-germany" },
-        { name: "Al Jazeera (May 6)", url: "https://www.aljazeera.com/news/2026/5/6/a-stress-test-us-germany-rift-widens-as-iran-war-drags-on" }
-      ],
-      learn: {
-        deeper: 'The Tomahawk gap matters militarily: European cruise missiles (UK Storm Shadow, French SCALP) have shorter ranges and are not produced in sufficient quantities. If the US drawdown from Germany becomes a long-term posture, Europe faces a decade-long capability shortfall it cannot close through spending alone — the industrial base to manufacture enough long-range missiles simply does not exist yet on the continent. Germany\'s defense budget doubling (47B to 108B euros) is necessary but not sufficient.',
-        angles: [
-          { label: "NATO adapts and survives", text: "Europe accelerates autonomous defense capacity; NATO restructures with a European command tier; US remains in the alliance but as senior, not sole, guarantor. The alliance emerges stronger long-term." },
-          { label: "Alliance fractures on Iran fault line", text: "Europe and Canada form a sub-coalition explicitly excluding the US from operational planning. Two-track NATO: political membership plus an autonomous European defense pole that the US is not part of." },
-          { label: "US uses troops as leverage", text: "The Germany redeployment is a bargaining chip for increased European defense spending, not a genuine drawdown. US returns forces if allies hit 3% GDP defense target by 2027." }
-        ],
-        watch: 'NATO foreign ministers meeting (expected late May or June). German Bundestag defense budget vote. Whether Canada\'s new government formalizes any bilateral defense arrangement with EU members that excludes US operational participation.'
-      }
-    }
+  opinion: [
+    {label:"National Review Column", title:"The Wrong Way to Talk About the War in Iran", author:"Noah Rothman", publication:"National Review", date:"May 2026", subtitle:"Rothman argues that US leaders weaken their position when they describe Iran policy as theater rather than as a strategic contest over coercion and deterrence.", proseHTML:`The column responds to a live argument over whether the Iran crisis should be framed as another avoidable Middle East entanglement or as a necessary defense of navigation, allies, and nonproliferation. Rothman argues that careless rhetoric makes it harder to explain why force, sanctions, and diplomacy may all be required at different points. The value for extemp is that it highlights the communication problem: even a defensible policy can lose support if leaders cannot separate deterrence from escalation. The pushback is that rhetoric discipline does not solve the underlying risk of sliding into a broader war.`, claim:"Strategic seriousness requires explaining interests, not performing outrage or anti-war branding.", matters:"It gives speakers a way to analyze presidential messaging as a policy tool, not just a media habit.", pushback:"The argument can understate public exhaustion with open-ended Middle East commitments.", sources:[{name:"National Review",url:"https://www.nationalreview.com/2026/05/the-wrong-way-to-talk-about-the-war-in-iran/"}]},
+    {label:"Project Syndicate Essay", title:"The World After the Iran War", author:"Shlomo Ben-Ami", publication:"Project Syndicate", date:"May 2026", subtitle:"Ben-Ami frames the Iran conflict as a regional-order question whose consequences will outlast the immediate ceasefire debate.", proseHTML:`The essay treats the Iran crisis as more than a military exchange: it is a test of whether regional security can be rebuilt around deterrence, diplomacy, and Gulf energy stability. Ben-Ami's argument is live because a ceasefire framework may end one phase without resolving nuclear suspicion, proxy networks, or maritime leverage. For extemp, the piece helps connect immediate oil and sanctions questions to the larger issue of what order replaces repeated crisis management. The limitation is that regional-order arguments can become too abstract if they do not specify enforcement mechanisms.`, claim:"The aftermath matters as much as the battlefield because institutions and incentives decide whether the crisis repeats.", matters:"It widens the topic from ceasefire details to regional architecture, Gulf security, and great-power diplomacy.", pushback:"A durable order may be impossible while domestic politics in Iran, Israel, and the United States keep rewarding hard lines.", sources:[{name:"Project Syndicate",url:"https://www.project-syndicate.org/commentary/world-after-iran-war-middle-east-transformation-by-shlomo-ben-ami-2026-05"}]},
+    {label:"Foreign Policy Analysis", title:"The Trump Administration Is Talking Taiwan Into a War", author:"John Haltiwanger and Rishi Iyengar", publication:"Foreign Policy", date:"May 2026", subtitle:"The authors argue that US messaging around Taiwan can become dangerous if it increases symbolic confrontation without improving actual deterrence.", proseHTML:`The piece enters a debate where Taiwan needs reassurance but also depends on avoiding moves that let Beijing claim Washington has abandoned restraint. The argument is newly relevant because arms decisions, chip enforcement, and China policy are now moving together. Its extemp value is that it distinguishes deterrence from provocation: the strongest Taiwan policy may be the one that quietly increases costs for China rather than loudly signaling confrontation. The strongest pushback is that ambiguity can also invite pressure if Beijing doubts US resolve.`, claim:"Washington should prioritize practical deterrence over rhetoric that makes Taiwan a symbolic test of toughness.", matters:"It helps speakers evaluate Taiwan policy through outcomes rather than slogans.", pushback:"Too much caution may convince Beijing that the United States lacks commitment.", sources:[{name:"Foreign Policy",url:"https://foreignpolicy.com/2026/05/06/trump-taiwan-war-china-strategy/"}]},
+    {label:"Project Syndicate Essay", title:"America's Superpower Suicide", author:"Timothy Snyder", publication:"Project Syndicate", date:"May 2026", subtitle:"Snyder argues that the United States is weakening itself by confusing power with domination and by undermining the alliances and institutions that magnified US influence.", proseHTML:`The essay speaks to a broader debate over whether US power is best measured by unilateral freedom or by the network of allies, institutions, and norms that make American preferences easier to realize. It is relevant this week because Iran, Ukraine, Taiwan, and trade fights all require coalition management rather than pure unilateral pressure. For extemp, the piece gives a clean thesis about why institutional credibility is not idealism but capacity. The pushback is that some institutions can also constrain necessary action or distribute costs unfairly.`, claim:"US strength declines when Washington treats alliances and institutions as burdens rather than force multipliers.", matters:"It gives a usable framework for linking separate stories - Ukraine, Iran, Taiwan, trade - into one argument about American power.", pushback:"The argument may underweight the real frustrations that make voters skeptical of alliances and international institutions.", sources:[{name:"Project Syndicate",url:"https://www.project-syndicate.org/commentary/trump-destroying-superpower-america-by-timothy-snyder-2026-05"}]}
   ]
 };
 
-const wireContent = document.getElementById('wire-content');
-Object.keys(wire).forEach(topic => {
-  const block = document.createElement('div');
-  block.className = 'topic-block';
-  let inner = '<div class="topic-name">' + topic + '</div>';
-  wire[topic].forEach(item => {
-    if (item.empty) {
-      inner += '<div class="empty-topic">' + escapeHtml(item.h) + '</div>';
-    } else {
-      inner += '<div class="wire-item">';
-      inner += '<div class="wire-headline">' + escapeHtml(item.h) + '</div>';
-      inner += '<div class="wire-prose">' + item.proseHTML + '</div>';
-      inner += '<div class="wire-sources">Sources: ';
-      const links = item.sources.map(s => '<a href="' + escapeAttr(s.url) + '" target="_blank" rel="noopener">' + escapeHtml(s.name) + ' ↗</a>').join(' <span class="sep">·</span> ');
-      inner += links;
-      inner += '</div>';
-      if (item.learn) {
-        inner += '<details class="learn-more"><summary>Learn more</summary>';
-        inner += '<div class="learn-more-content">';
-        inner += '<div class="lm-section"><div class="lm-label">Deeper context</div><p>' + escapeHtml(item.learn.deeper) + '</p></div>';
-        inner += '<div class="lm-section"><div class="lm-label">Three angles</div><div class="lm-angles">';
-        const angleClasses = ['angle-a', 'angle-b', 'angle-c'];
-        item.learn.angles.forEach((ang, i) => {
-          inner += '<div class="lm-angle ' + angleClasses[i] + '"><span class="ang-label">' + escapeHtml(ang.label) + '</span>' + escapeHtml(ang.text) + '</div>';
-        });
-        inner += '</div></div>';
-        inner += '<div class="lm-section"><div class="lm-label">What to watch</div><p>' + escapeHtml(item.learn.watch) + '</p></div>';
-        inner += '</div></details>';
-      }
-      inner += '</div>';
-    }
-  });
-  block.innerHTML = inner;
-  wireContent.appendChild(block);
-});
+const titles = {wire: "The Wire", weekly: "The Weekly", analytical: "The Analytical", opinion: "The Opinion"};
+let activeTab = "wire";
 
-const analytical = [
-  {
-    tag: "Energy / war",
-    headline: "Hormuz ceasefire on day 70: fire exchanged, deal claimed, nobody convinced",
-    skeletonHTML: '<b>Baseline</b> — ceasefire took effect April 8 (Pakistan-mediated 10-point proposal); Strait still partially blocked; Project Freedom launched May 4 to escort tankers through. <span class="frag">Disruption = global oil premium of ~$15/barrel above pre-war levels persisting since March.</span> <b>Change</b> — May 7 (day 70): US destroyers and Iranian forces exchange fire in Hormuz; each side says the other fired first. Trump: "ceasefire still holding." Project Freedom paused May 6 citing "great progress." <b>Fragility indicators</b> — Iran accused US of striking civilian coastal areas (if verified, serious legal exposure); CNN reports Trump has abandoned many initial maximalist demands on Iran, signaling an exit search. IRGC <span class="jargon">(Islamic Revolutionary Guard Corps — Iran\'s ideologically loyal parallel military, known to operate semi-independently of civilian leadership)</span> factions may be acting without central Tehran authorization. <b>Stakes</b> — Hormuz near-zero traffic → US inflation stays elevated → Warsh inherits Iran-driven price pressure on May 15; Trump\'s May 14 Beijing summit is partly a Hormuz-pressure trip.',
-    stats: [
-      { setup: "Pre-war, the Strait of Hormuz handled roughly 20% of global oil supply daily.", num: "By March 10, only 15 ships had transited — a near-total collapse from the pre-war average of 30-40 daily tankers." },
-      { setup: "When Iran briefly opened the strait on April 17,", num: "global oil prices dropped approximately 11% in the immediate aftermath — marking the scale of the risk premium the disruption has built in." },
-      { setup: "UAE air defense has intercepted since February 28:", num: "549 ballistic missiles, 29 cruise missiles, and 2,260 drones — one of the most intense interception campaigns in modern warfare history." }
-    ],
-    sideA: { label: "Deal is close", text: "Trump paused Project Freedom as a de-escalatory signal; the May 7 exchange was a contained incident, not a breakdown. The Omani backchannel is active. Hormuz opens by end of May; oil falls $10-15/barrel and inflation relief arrives before midterms." },
-    sideB: { label: "Ceasefire is functionally dead", text: "Each side claiming the other fired first makes verification impossible. IRGC hardliners are operating independently of Tehran's civilian leadership. Any deal signed now collapses on implementation within days of signature." },
-    sideC: { label: "Wildcard", text: "Xi uses the May 14 summit to publicly call on Iran to de-escalate Hormuz in exchange for US easing chip export controls — the first real trilateral linkage of the Iran conflict, US-China trade, and the Beijing meeting in a single diplomatic moment." },
-    sources: [
-      { name: "Al Jazeera (May 8)", url: "https://www.aljazeera.com/news/2026/5/8/iran-war-day-70-us-iran-trade-fire-in-hormuz-amid-ceasefire-tensions" },
-      { name: "PBS NewsHour", url: "https://www.pbs.org/newshour/show/u-s-destroyers-and-iran-trade-fire-in-strait-of-hormuz-in-serious-test-of-ceasefire" },
-      { name: "CNBC", url: "https://www.cnbc.com/2026/05/07/iran-war-hormuz-strait-ceasefire-trump.html" }
-    ]
-  },
-  {
-    tag: "US economy",
-    headline: "115K jobs, five-month participation slide: the 'frozen' labor market paradox",
-    skeletonHTML: '<b>Baseline</b> — unemployment held near 4.3% since late 2025; labor force participation peaked at 62.6% November 2025; core CPI at 2.6% (above Fed\'s 2% target). <b>Change today</b> — April jobs: 115,000 added vs. 65,000 expected → headline beats by 77%. Participation fell to 61.8% — fifth consecutive monthly decline. Manufacturing shed jobs for 32nd straight month. <span class="frag">CNN: "stronger than expected but frozen."</span> <b>The paradox</b> — unemployment "stable" because workers are exiting the labor force, not because they are being hired. Low headline masks structural withdrawal. <b>Fed complication</b> — Warsh takes over May 15 with hawkish (rate-holding) preference; if participation keeps falling while Iran-driven energy costs keep prices sticky → textbook stagflation with no clean policy exit. Q1 business investment rose 10% — the one unambiguous bright spot.',
-    stats: [
-      { setup: "Labor force participation peaked at 62.6% in November 2025.", num: "It has fallen each of the last five months to 61.8% in April 2026 — the longest consecutive monthly decline since the 2020 pandemic shock." },
-      { setup: "April payrolls came in at 115,000, well above the 65,000 economist forecast,", num: "but manufacturing shed jobs for the 32nd consecutive month — the sector tariffs were specifically designed to revive." },
-      { setup: "Core CPI (excluding food and energy) was 2.6% annually through March —", num: "down from 2.8% a year earlier but still 30% above the Federal Reserve's 2% target, with little sign of further decline." }
-    ],
-    sideA: { label: "Headline holds, Warsh stays hawkish", text: "115K beat gives political cover for Warsh to hold rates at the June FOMC meeting. Core CPI at 2.6% justifies the hold. Soft landing narrative survives another month; markets continue their modest recovery." },
-    sideB: { label: "Participation collapse is the leading indicator", text: "Five months of participation decline historically precede a recession by 6-9 months. Warsh inherits a trap: hold rates and hasten the slide; cut rates and re-ignite Iran-driven inflation. There is no clean path." },
-    sideC: { label: "Wildcard", text: "Warsh surprises markets with a hawkish June dot plot while simultaneously launching a public Fed review of data reliability after the 2025 shutdown distortions — triggering a public clash with Trump within his first 30 days as chair." },
-    sources: [
-      { name: "BLS Employment Situation (May 8)", url: "https://www.bls.gov/news.release/empsit.nr0.htm" },
-      { name: "CNN Business", url: "https://www.cnn.com/2026/05/08/economy/us-jobs-report-april" },
-      { name: "BEA Q1 GDP advance estimate", url: "https://www.bea.gov/news/2026/gdp-advance-estimate-1st-quarter-2026" }
-    ]
-  },
-  {
-    tag: "China / trade",
-    headline: "Trump-Xi Beijing summit, 6 days out: Iran is eating the agenda",
-    skeletonHTML: '<b>Baseline</b> — US tariffs on Chinese goods peaked at 147.6% on key items; fell to effective average of 11.8% in April after partial rollback and court challenges; China controls ~92% of rare earth processing and ~69% of mining — a live chokepoint for US tech and defense. Geneva 90-day truce (February) collapsed after 3 weeks; Trump accused Beijing of violation. <b>New signal</b> — CNBC: Iran focus expected to dominate May 14-15 summit, leaving "little room" for tariff or rare earth progress. Board of Trade framework floated. <b>Wire China analysis</b> — Trump\'s proposed bilateral trade management commission signals US has "given up on changing China" and is institutionalizing managed rivalry rather than seeking structural reform. <b>Stakes</b> — if summit produces no trade movement, 11.8% effective tariff rate becomes the new floor indefinitely; US tech sector remains cut off from Chinese rare earth pipeline; Nvidia H20 successor still in regulatory limbo.',
-    stats: [
-      { setup: "US tariffs on Chinese goods peaked at 147.6% on key categories.", num: "After the Geneva truce and SCOTUS challenges, the overall effective rate fell to 11.8% in April 2026 — still more than triple the 10.7% rate from January 2025." },
-      { setup: "China controls an estimated 69% of global rare earth mine production and", num: "approximately 92% of global rare earth processing capacity — the chokepoint for US F-35 production, EV batteries, and consumer electronics supply chains." },
-      { setup: "A CSIS survey of 79 former officials and China experts found:", num: "only 3% expected both sides to keep all summit commitments; 34% expected neither side to honor any." }
-    ],
-    sideA: { label: "Iran breakthrough anchors the summit", text: "Xi publicly commits to pressuring Tehran on Hormuz in exchange for US easing chip export controls. Oil stabilizes, US tech stocks rally, Trump claims a foreign policy win. Summit declared a success by both sides." },
-    sideB: { label: "Managed rivalry institutionalized", text: "Board of Trade framework signals US acceptance that structural change in China's behavior is off the table. Decoupling slows but continues under a new bureaucratic name. China-hawk GOP coalition begins a slow fracture." },
-    sideC: { label: "Wildcard", text: "Taiwan dominates the private session — Xi tests Trump on a specific arms sale or defense commitment; Trump softens Taiwan rhetoric in exchange for Hormuz de-escalation help. Blows up the GOP defense hawk coalition overnight." },
-    sources: [
-      { name: "CNBC (May 8)", url: "https://www.cnbc.com/2026/05/08/iran-focus-at-trump-xi-summit-may-delay-progress-on-tariffs-rare-earths.html" },
-      { name: "Wire China (May 7)", url: "https://www.thewirechina.com/2026/05/07/trumps-board-of-trade-move-signals-the-u-s-has-given-up-on-changing-china/" },
-      { name: "PIIE", url: "https://www.piie.com/blogs/realtime-economics/2026/trump-china-trade-wars-five-takeaways-us-imports-2025" }
-    ]
-  },
-  {
-    tag: "Europe / war",
-    headline: "Ukraine turns the April tide: net 116 sq km recaptured, Russia declares competing ceasefire",
-    skeletonHTML: '<b>Baseline</b> — Russia controls ~20% of Ukrainian territory; had been making incremental gains monthly through early 2026. EU committed €90B loan (€60B military). US approved long-range strike packages. <b>April shift</b> — ISW <span class="jargon">(Institute for the Study of War — DC-based conflict monitor tracking daily battlefield changes)</span> observed Ukraine net-recaptured ~116 sq km in April → first month of net Ukrainian territorial gain in over a year. Russian spring logistics apparently degraded by Ukrainian long-range strikes. <b>Political theater</b> — Russia declared unilateral May 8-9 ceasefire (Victory Day); Ukraine declared competing ceasefire May 5-6; neither side observed the other\'s. Russia cancelled military parade equipment display citing Ukrainian drone threat. <b>Alliance context</b> — US redeploying 5,000 troops from Germany; German defense spending now 108B euros (up from 47B in 2021); NATO rethinking structure after Iran war consultation failure.',
-    stats: [
-      { setup: "ISW tracked Russian net territorial gains averaging dozens of sq km monthly in early 2026.", num: "April 2026: Ukraine net-recaptured approximately 116 square kilometers — the first month of net Ukrainian territorial gain in over a year." },
-      { setup: "The EU allocated a €90 billion loan to Ukraine,", num: "with €60 billion earmarked specifically for military needs — the largest single foreign military funding commitment in the conflict's history." },
-      { setup: "Germany's defense budget was 47 billion euros in 2021.", num: "It has risen to 108 billion euros today — more than doubled in five years, driven by Russia's war and now accelerating US reliability concerns within NATO." }
-    ],
-    sideA: { label: "Momentum shift is real", text: "EU funding plus long-range strike capability plus degraded Russian logistics establish a new battlefield equilibrium. Gains continue through summer; Ukraine's negotiating position at any peace table strengthens materially." },
-    sideB: { label: "Seasonal anomaly, not structural shift", text: "Russia paused the spring offensive for logistics regeneration; resumes May-June with fresh forces. April Ukrainian gains are temporary; Russian manpower attrition still favors Moscow over a multi-year horizon." },
-    sideC: { label: "Wildcard", text: "Trump uses Ukraine's April gains as leverage to force a deal: Ukraine's position is finally strong enough to accept a defensible ceasefire line. Trump pressures Zelenskyy to accept a June framework before the momentum reverses — Kyiv has little choice." },
-    sources: [
-      { name: "Al Jazeera — ISW analysis (May 8)", url: "https://www.aljazeera.com/news/2026/5/8/ukraine-may-have-turned-tide-of-russian-territorial-gains-says-think-tank" },
-      { name: "Al Jazeera — competing ceasefires", url: "https://www.aljazeera.com/news/2026/5/4/russia-and-ukraine-declare-competing-ceasefires" },
-      { name: "Al Jazeera — US-Germany rift", url: "https://www.aljazeera.com/news/2026/5/6/a-stress-test-us-germany-rift-widens-as-iran-war-drags-on" }
-    ]
-  },
-  {
-    tag: "Healthcare / politics",
-    headline: "ACA loses 5 million enrollees; Nebraska's Medicaid work requirements are the first domino",
-    skeletonHTML: '<b>Baseline</b> — ACA marketplace enrollment peaked at 24 million early 2026 under Biden-era enhanced subsidies; US uninsured rate hit all-time low of 7.9% in early 2025; subsidies expired January 1. <b>Change</b> — enrollment now ~19 million, a drop of ~5 million (~20%) → fastest single-year collapse since ACA marketplaces opened in 2014. Nebraska first state to enforce Medicaid work requirements under the Big Beautiful Bill Act <span class="jargon">(sweeping Republican reconciliation bill requiring able-bodied Medicaid recipients to work, volunteer, or train to maintain coverage)</span> without waiting for federal guidance (due June). 20 states have similar requirements on standby. <b>Compounding squeeze</b> — ACA premium spike + Medicaid tightening simultaneously; drugmakers raised prices on 350+ branded drugs on January 1. <b>Political map</b> — ACA losses concentrated in suburban and working-class districts → exactly the November midterm battleground geography.',
-    stats: [
-      { setup: "ACA marketplace enrollment peaked at 24 million under Biden's enhanced subsidies.", num: "It has fallen to approximately 19 million — a drop of roughly 5 million people, or 20%, after the subsidies expired January 1, 2026." },
-      { setup: "The US uninsured rate hit an all-time low of 7.9% in early 2025.", num: "KFF and Urban Institute analysts project it will rise significantly in mid-year surveys as ACA and Medicaid coverage simultaneously narrows." },
-      { setup: "Drugmakers raised prices on 350+ branded drugs on January 1, 2026,", num: "up from 250+ a year earlier — stacking pharmaceutical cost increases directly on top of the ACA premium spike from subsidy expiration." }
-    ],
-    sideA: { label: "Politically survivable for GOP", text: "Medicare drug pricing wins are concrete for seniors; ACA losses are diffuse and abstract to many voters. Republican base prioritizes immigration and the economy. The effect diffuses before November." },
-    sideB: { label: "Healthcare defines the midterms", text: "Working-class voters losing coverage in battleground districts — combined with Medicaid work requirements — represents the biggest healthcare rollback in a decade. Democrats nationalize the issue and it moves suburban voters." },
-    sideC: { label: "Wildcard", text: "Nebraska's work requirements struck down in federal court before federal guidance is released. 20 states forced to stand down. The Big Beautiful Bill's Medicaid provisions face a constitutional challenge that reaches SCOTUS in 2027 — healthcare becomes a multi-year legal saga, not a midterm issue." },
-    sources: [
-      { name: "KFF Health News (May 8)", url: "https://kffhealthnews.org/morning-briefing/friday-may-8-2026/" },
-      { name: "CNBC", url: "https://www.cnbc.com/2026/05/03/healthcare-costs-parental-paid-leave-employee-benefits-cuts.html" },
-      { name: "CMS", url: "https://www.cms.gov/training-education/medicare-learning-network/newsletter/mln-connects-newsletter-may-7-2026" }
-    ]
-  }
-];
-
-const anaContent = document.getElementById('ana-content');
-analytical.forEach(a => {
-  const card = document.createElement('article');
-  card.className = 'ana-card';
-  let html = '';
-  html += '<span class="ana-tag">' + escapeHtml(a.tag) + '</span>';
-  html += '<h3 class="ana-headline">' + escapeHtml(a.headline) + '</h3>';
-  html += '<div class="ana-skeleton">' + a.skeletonHTML + '</div>';
-  html += '<div class="stats-block"><div class="stats-label">Key stats with setup</div>';
-  a.stats.forEach(st => {
-    html += '<div class="stat-line"><span>' + escapeHtml(st.setup) + '</span> <span class="num">' + escapeHtml(st.num) + '</span></div>';
-  });
-  html += '</div>';
-  html += '<div class="sides">';
-  html += '<div class="side side-a"><span class="side-label">' + escapeHtml(a.sideA.label) + '</span>' + escapeHtml(a.sideA.text) + '</div>';
-  html += '<div class="side side-b"><span class="side-label">' + escapeHtml(a.sideB.label) + '</span>' + escapeHtml(a.sideB.text) + '</div>';
-  html += '</div>';
-  html += '<div class="side side-c"><span class="side-label">' + escapeHtml(a.sideC.label) + '</span>' + escapeHtml(a.sideC.text) + '</div>';
-  if (a.sources && a.sources.length) {
-    html += '<div class="ana-sources">Sources: ';
-    html += a.sources.map(s => '<a href="' + escapeAttr(s.url) + '" target="_blank" rel="noopener">' + escapeHtml(s.name) + ' ↗</a>').join(' · ');
-    html += '</div>';
-  }
-  card.innerHTML = html;
-  anaContent.appendChild(card);
-});
-
-document.getElementById('datestamp').textContent = new Date().toLocaleDateString('en-US', {
-  weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'
-});
-
-document.querySelectorAll('.tab').forEach(t => {
-  t.addEventListener('click', () => {
-    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
-    t.classList.add('active');
-    const which = t.dataset.tab;
-    document.getElementById('page-wire').style.display = which === 'wire' ? 'block' : 'none';
-    document.getElementById('page-analytical').style.display = which === 'analytical' ? 'block' : 'none';
-  });
-});
-
-function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[c]);
+function sourceHTML(sources) {
+  return `<div class="wire-sources">Sources:${sources.map(s => `<a class="source-link" href="${s.url}" target="_blank" rel="noopener noreferrer">${s.name}</a>`).join(" /")}</div>`;
 }
-function escapeAttr(s) {
-  return escapeHtml(s);
+
+function learnHTML(learn) {
+  if (!learn) return "";
+  return `<details class="learn"><summary>Learn more</summary><div class="learn-body"><h4>Deeper context</h4><p>${learn.context}</p><h4>Three angles</h4><ul>${learn.angles.map(a => `<li>${a}</li>`).join("")}</ul><h4>What to watch</h4><p>${learn.watch}</p></div></details>`;
 }
+
+function renderWireList(list) {
+  return list.map(group => `<details class="topic"><summary><span class="topic-label">${group.topic}</span><span class="topic-count">${group.stories.length} stories</span></summary><div class="topic-body">${group.stories.map(story => `<article class="wire-item"><h2 class="wire-headline">${story.h}</h2><p class="wire-prose">${story.proseHTML}</p>${sourceHTML(story.sources)}${learnHTML(story.learn)}</article>`).join("")}</div></details>`).join("");
+}
+
+function renderAnalytical() {
+  return briefing.analytical.map(item => `<article class="analytical-card"><div class="analytical-tag">${item.tag}</div><h2>${item.headline}</h2><p class="skeleton">${item.skeletonHTML}</p><div class="stats-grid">${item.stats.map(s => `<div class="stat"><strong>Key number</strong>${s}</div>`).join("")}</div><div class="angles-grid"><div class="angle"><strong>${item.sideA.label}</strong>${item.sideA.text}</div><div class="angle"><strong>${item.sideB.label}</strong>${item.sideB.text}</div><div class="angle"><strong>${item.sideC.label}</strong>${item.sideC.text}</div></div>${sourceHTML(item.sources)}</article>`).join("");
+}
+
+function renderOpinion() {
+  return briefing.opinion.map(item => `<article class="opinion-card"><div class="opinion-label">${item.label}</div><h2>${item.title}</h2><p class="opinion-meta">${item.author} - ${item.publication}, ${item.date}</p><p class="opinion-subtitle"><strong>${item.subtitle}</strong></p><p class="opinion-prose">${item.proseHTML}</p><div class="opinion-boxes"><div class="opinion-box"><strong>The Claim</strong>${item.claim}</div><div class="opinion-box"><strong>Why It Matters</strong>${item.matters}</div><div class="opinion-box"><strong>Pushback</strong>${item.pushback}</div></div>${sourceHTML(item.sources)}</article>`).join("");
+}
+
+function renderShell() {
+  document.getElementById("featuredGrid").innerHTML = briefing.featured.map(f => `<article class="featured-card"><div class="featured-label">${f.topic}</div><h2>${f.h}</h2><p>${f.deck}</p></article>`).join("");
+  document.getElementById("radarList").innerHTML = briefing.radar.map(x => `<p>${x}</p>`).join("");
+  document.getElementById("numbersList").innerHTML = briefing.numbers.map(x => `<p><strong>${x.split(":")[0]}:</strong>${x.includes(":") ? x.substring(x.indexOf(":") + 1) : x}</p>`).join("");
+}
+
+function renderTab(tab) {
+  activeTab = tab;
+  document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.toggle("active", btn.dataset.tab === tab));
+  document.getElementById("editionTitle").textContent = titles[tab];
+  document.getElementById("editionIntro").textContent = briefing.intros[tab];
+  const content = document.getElementById("content");
+  if (tab === "wire") content.innerHTML = renderWireList(briefing.wire);
+  if (tab === "weekly") content.innerHTML = renderWireList(briefing.weekly);
+  if (tab === "analytical") content.innerHTML = renderAnalytical();
+  if (tab === "opinion") content.innerHTML = renderOpinion();
+}
+
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  localStorage.setItem("dig-theme", theme);
+  document.getElementById("themeToggle").textContent = `Theme: ${theme === "dark" ? "Dark" : "Light"}`;
+}
+
+function initTheme() {
+  const saved = localStorage.getItem("dig-theme");
+  const preferred = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  applyTheme(saved || preferred);
+}
+
+document.querySelectorAll(".tab-btn").forEach(btn => btn.addEventListener("click", () => renderTab(btn.dataset.tab)));
+document.getElementById("themeToggle").addEventListener("click", () => applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark"));
+
+renderShell();
+initTheme();
+renderTab("wire");
 </script>
 </body>
 </html>
