@@ -6,16 +6,20 @@
 <title>Dig - Daily Extemp Brief</title>
 <style>
   :root {
-    --bg: #fbf9f4;
-    --paper: #fffef9;
-    --rail: #eee8df;
-    --ink: #5a514a;
-    --muted: #625f58;
-    --faint: #938d84;
-    --rule: #e2dbd1;
-    --accent: #7a5b4a;
-    --surface: #f8f4ed;
-    --link: #7a5b4a;
+    --bg: #f8f4ed;
+    --paper: #fffdf7;
+    --rail: #eee6da;
+    --ink: #6b5a4a;
+    --title: #5d4b3d;
+    --muted: #655f56;
+    --faint: #91887d;
+    --rule: #ddd3c6;
+    --accent: #7b5843;
+    --surface: #f6f0e8;
+    --link: #7b5843;
+    --blue: #5f7f9f;
+    --rose: #a36a68;
+    --olive: #79875a;
   }
 
   [data-theme="dark"] {
@@ -23,16 +27,19 @@
     --paper: #1d1c19;
     --rail: #201f1c;
     --ink: #f3eee7;
+    --title: #f3eee7;
     --muted: #d2c7b8;
     --faint: #a99b8b;
     --rule: #39342e;
     --accent: #caa77d;
     --surface: #191815;
     --link: #caa77d;
+    --blue: #77a3c8;
+    --rose: #d08b8e;
+    --olive: #aabb77;
   }
 
   * { box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
 
   body {
@@ -40,7 +47,7 @@
     background: var(--bg);
     color: var(--ink);
     font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1.55;
   }
 
@@ -63,48 +70,42 @@
     align-self: start;
     background: var(--rail);
     border-right: 1px solid var(--rule);
-    padding: 36px 32px 28px;
+    padding: 32px 24px 24px;
     display: flex;
     flex-direction: column;
-    gap: 28px;
+    gap: 24px;
   }
 
   .kicker,
   .section-label,
   .topic-label,
-  .featured-label,
+  .headline-label,
   .opinion-label,
   .analytical-tag {
     color: var(--faint);
-    font-size: 0.74rem;
+    font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
   }
 
   .brand-word {
-    margin: 4px 0 8px;
+    margin: 6px 0 8px;
     font-family: Georgia, Charter, "Times New Roman", serif;
-    font-size: 4.2rem;
+    font-size: clamp(3rem, 4.2vw, 3.75rem);
     line-height: 0.9;
     letter-spacing: 0;
     font-weight: 500;
-    color: var(--ink);
+    color: var(--title);
   }
 
   .date-line,
   .rail-note,
   .compiled,
-  .intro {
-    color: var(--muted);
-  }
-
+  .intro { color: var(--muted); }
   .rail-rule { border-top: 1px solid var(--rule); }
 
-  .nav {
-    display: grid;
-    gap: 13px;
-  }
+  .nav { display: grid; gap: 12px; }
 
   .tab-btn {
     width: 100%;
@@ -113,43 +114,40 @@
     color: var(--muted);
     font: inherit;
     text-align: left;
-    padding: 9px 0 9px 16px;
+    padding: 8px 0 8px 14px;
     border-left: 2px solid transparent;
     cursor: pointer;
   }
 
   .tab-btn.active {
-    color: var(--ink);
+    color: var(--title);
     border-left-color: var(--accent);
     font-weight: 700;
   }
 
   .theme-toggle {
     border: 1px solid var(--rule);
-    background: var(--surface);
+    background: var(--paper);
     color: var(--muted);
-    padding: 9px 11px;
+    padding: 8px 10px;
     width: fit-content;
     font: inherit;
-    font-size: 0.88rem;
+    font-size: 0.86rem;
     cursor: pointer;
   }
 
   .rail-note {
     margin-top: auto;
-    padding-top: 24px;
+    padding-top: 22px;
     border-top: 1px solid var(--rule);
-    font-size: 0.9rem;
+    font-size: 0.88rem;
   }
 
-  .main {
-    min-width: 0;
-    background: var(--paper);
-  }
+  .main { min-width: 0; background: var(--paper); }
 
   .topbar {
-    min-height: 184px;
-    padding: 50px 64px 38px;
+    min-height: 132px;
+    padding: 36px 44px 30px;
     border-bottom: 1px solid var(--rule);
     display: flex;
     align-items: flex-start;
@@ -158,92 +156,77 @@
   }
 
   h1 {
-    margin: 4px 0 0;
+    margin: 5px 0 0;
     font-family: Georgia, Charter, "Times New Roman", serif;
-    font-size: clamp(2.4rem, 5vw, 3.5rem);
+    font-size: clamp(2.2rem, 3.8vw, 3rem);
     line-height: 1;
     font-weight: 500;
     letter-spacing: 0;
-    color: var(--ink);
+    color: var(--title);
   }
 
-  .compiled { text-align: right; font-size: 0.98rem; }
+  .compiled { text-align: right; font-size: 0.92rem; }
+  .main-inner { padding: 40px 44px 66px; }
+  .main-section { max-width: 1180px; margin: 0 auto; }
 
-  .main-inner {
-    padding: 48px 64px 72px;
-  }
-
-  .main-section {
-    max-width: 1280px;
-    margin: 0 auto;
-  }
-
-  .featured-grid {
+  .headline-day {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 0.95fr) minmax(280px, 0.75fr);
+    gap: 36px;
+    align-items: center;
     border-bottom: 1px solid var(--rule);
     padding-bottom: 34px;
-    margin-top: 18px;
+    margin-bottom: 30px;
   }
 
-  .featured-card {
-    padding: 0 22px;
-    border-left: 1px solid var(--rule);
+  .headline-copy {
+    border-left: 1px solid var(--accent);
+    padding-left: 20px;
   }
 
-  .featured-card:first-child { padding-left: 22px; border-left-color: var(--accent); }
-
-  .featured-card h2 {
+  .headline-copy h2 {
+    margin: 9px 0 10px;
     font-family: Georgia, Charter, "Times New Roman", serif;
-    font-size: clamp(1.45rem, 2vw, 1.95rem);
-    line-height: 1.12;
+    font-size: clamp(1.7rem, 3vw, 2.45rem);
+    line-height: 1.08;
+    color: var(--title);
     font-weight: 500;
-    margin: 10px 0 10px;
-    color: var(--ink);
   }
 
-  .featured-card p { margin: 0; color: var(--muted); font-size: 0.98rem; }
+  .headline-copy p { margin: 0; max-width: 520px; color: var(--muted); font-size: 0.98rem; }
+  .headline-media { margin: 0; }
 
-  .brief-strip {
-    display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-    gap: 42px;
-    border-bottom: 1px solid var(--rule);
-    padding: 28px 0 32px;
-    margin-bottom: 36px;
+  .headline-photo {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border: 1px solid var(--rule);
+    background: var(--surface);
   }
 
-  .brief-strip p { margin: 0 0 9px; color: var(--muted); }
-  .brief-strip strong { color: var(--ink); }
+  .image-credit { margin-top: 7px; color: var(--faint); font-size: 0.78rem; }
+  .intro { max-width: 880px; margin: 0 0 22px; font-size: 0.96rem; }
+  .content-wrap { max-width: 880px; }
 
-  .intro {
-    max-width: 880px;
-    margin: 0 0 28px;
-    font-size: 1.02rem;
-  }
-
-  .content-wrap {
-    max-width: 880px;
-  }
-
-  .topic {
-    border-top: 1px solid var(--rule);
-  }
+  .topic { border-top: 1px solid var(--rule); }
 
   .topic summary {
     list-style: none;
     cursor: pointer;
-    padding: 21px 0;
-    display: flex;
-    justify-content: space-between;
-    gap: 24px;
+    padding: 18px 0;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 22px;
     align-items: center;
   }
 
   .topic summary::-webkit-details-marker,
-  .learn summary::-webkit-details-marker { display: none; }
+  .learn summary::-webkit-details-marker,
+  .analytical-file summary::-webkit-details-marker { display: none; }
 
   .topic .topic-count {
+    justify-self: end;
     color: var(--accent);
     font-size: 0.78rem;
     font-weight: 700;
@@ -251,46 +234,39 @@
     text-transform: uppercase;
   }
 
-  .topic summary::after {
+  .topic summary::after,
+  .analytical-file summary::after {
     content: "+";
     color: var(--accent);
+    font-size: 1rem;
     font-weight: 700;
+    justify-self: end;
   }
 
-  .topic[open] summary::after { content: "-"; }
-
-  .topic-body { padding: 0 0 8px 0; }
+  .topic[open] summary::after,
+  .analytical-file[open] summary::after { content: "-"; }
+  .topic-body { padding: 0 0 8px; }
 
   .wire-item {
-    padding: 26px 0 30px;
+    padding: 24px 0 28px;
     border-top: 1px solid var(--rule);
   }
 
   .wire-headline {
-    margin: 0 0 12px;
-    color: var(--ink);
+    margin: 0 0 10px;
+    color: var(--title);
     font-family: Georgia, Charter, "Times New Roman", serif;
-    font-size: 1.55rem;
-    line-height: 1.2;
+    font-size: 1.32rem;
+    line-height: 1.22;
     font-weight: 500;
     letter-spacing: 0;
   }
 
-  .wire-prose {
-    margin: 0;
-    color: var(--ink);
-    font-size: 1.03rem;
-    line-height: 1.68;
-  }
-
-  .change { font-weight: 700; color: var(--ink); }
+  .wire-prose { margin: 0; color: var(--ink); font-size: 0.96rem; line-height: 1.68; }
+  .change { font-weight: 700; color: var(--title); }
   .jargon { color: var(--muted); font-style: italic; }
 
-  .wire-sources {
-    margin-top: 15px;
-    color: var(--faint);
-    font-size: 0.9rem;
-  }
+  .wire-sources { margin-top: 13px; color: var(--faint); font-size: 0.86rem; }
 
   .source-link {
     color: var(--link);
@@ -303,33 +279,31 @@
   .source-link:hover { text-decoration: underline; text-underline-offset: 3px; }
   .source-link::after { content: " ↗"; font-size: 0.8em; }
 
-  .learn {
-    margin-top: 16px;
-    color: var(--muted);
-  }
-
-  .learn summary {
-    cursor: pointer;
-    list-style: none;
-    color: var(--link);
-    font-weight: 700;
-    display: inline-block;
-  }
-
+  .learn { margin-top: 14px; color: var(--muted); }
+  .learn summary { cursor: pointer; list-style: none; color: var(--link); font-weight: 700; display: inline-block; }
   .learn summary::before { content: "▸ "; }
   .learn[open] summary::before { content: "▾ "; }
 
-  .learn-body {
-    margin-top: 13px;
-    padding: 16px 18px;
-    border-left: 2px solid var(--rule);
+  .learn-body,
+  .stats-block,
+  .opinion-box,
+  .angle {
     background: var(--surface);
+    border: 1px solid var(--rule);
   }
 
-  .learn-body h4 {
+  .learn-body {
+    margin-top: 12px;
+    padding: 15px 17px;
+    border-left: 2px solid var(--rule);
+  }
+
+  .learn-body h4,
+  .stats-block h3,
+  .angles-title {
     margin: 14px 0 5px;
-    color: var(--ink);
-    font-size: 0.83rem;
+    color: var(--title);
+    font-size: 0.78rem;
     text-transform: uppercase;
     letter-spacing: 0.12em;
   }
@@ -338,49 +312,66 @@
   .learn-body p { margin: 0; }
   .learn-body ul { margin: 7px 0 0 18px; padding: 0; }
 
-  .analytical-card,
-  .opinion-card {
-    border-top: 1px solid var(--rule);
-    padding: 32px 0;
+  .analytical-file,
+  .opinion-card { border-top: 1px solid var(--rule); }
+
+  .analytical-file summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 24px 0;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: center;
   }
 
-  .analytical-card h2,
+  .analytical-summary h2,
   .opinion-card h2 {
     font-family: Georgia, Charter, "Times New Roman", serif;
     font-weight: 500;
     line-height: 1.14;
     letter-spacing: 0;
-    color: var(--ink);
-    margin: 8px 0 14px;
+    color: var(--title);
+    margin: 7px 0 0;
   }
 
-  .skeleton {
-    color: var(--ink);
-    line-height: 1.68;
-    margin: 0 0 18px;
+  .analytical-deck { margin: 7px 0 0; color: var(--muted); max-width: 700px; }
+  .analytical-body { padding: 0 0 34px; }
+
+  .analytical-image {
+    margin: 0 0 22px;
   }
 
-  .stats-grid,
+  .analytical-image img {
+    width: 100%;
+    max-height: 320px;
+    object-fit: cover;
+    border: 1px solid var(--rule);
+    display: block;
+  }
+
+  .skeleton { color: var(--ink); line-height: 1.7; margin: 0 0 18px; }
+  .stats-block { padding: 16px 18px; margin: 18px 0; }
+  .stats-block h3 { margin-top: 0; }
+  .stats-block p { margin: 10px 0 0; }
+
   .angles-grid,
   .opinion-boxes {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 12px;
-    margin-top: 16px;
+    margin-top: 12px;
   }
 
-  .stat,
   .angle,
-  .opinion-box {
-    border: 1px solid var(--rule);
-    background: var(--surface);
-    padding: 14px;
-  }
-
-  .stat strong,
+  .opinion-box { padding: 14px; }
   .angle strong,
-  .opinion-box strong { display: block; color: var(--ink); margin-bottom: 5px; }
+  .opinion-box strong { display: block; color: var(--title); margin-bottom: 5px; }
+  .angle-a { border-left: 2px solid var(--blue); }
+  .angle-b { border-left: 2px solid var(--rose); }
+  .angle-c { border-left: 2px solid var(--olive); }
 
+  .opinion-card { padding: 30px 0; }
   .opinion-meta,
   .opinion-subtitle { color: var(--muted); margin: 0 0 10px; }
   .opinion-prose { margin: 0; line-height: 1.68; }
@@ -388,26 +379,20 @@
   footer {
     border-top: 1px solid var(--rule);
     color: var(--faint);
-    padding-top: 32px;
-    margin-top: 42px;
-    font-size: 0.88rem;
+    padding-top: 30px;
+    margin-top: 40px;
+    font-size: 0.84rem;
   }
-
-  .hidden { display: none; }
 
   @media (max-width: 900px) {
     .app { grid-template-columns: 1fr; }
     .rail { position: relative; min-height: auto; }
-    .topbar { padding: 32px 24px; display: block; }
-    .compiled { text-align: left; margin-top: 20px; }
-    .main-inner { padding: 34px 24px 56px; }
-    .featured-grid,
-    .brief-strip,
-    .stats-grid,
+    .topbar { padding: 30px 24px; display: block; }
+    .compiled { text-align: left; margin-top: 18px; }
+    .main-inner { padding: 32px 24px 54px; }
+    .headline-day,
     .angles-grid,
     .opinion-boxes { grid-template-columns: 1fr; }
-    .featured-card { border-left: 1px solid var(--rule); padding: 20px 0 20px 16px; }
-    .featured-card:first-child { padding-left: 16px; }
   }
 </style>
 </head>
@@ -429,7 +414,7 @@
         <button class="tab-btn" data-tab="opinion">The Opinion</button>
       </nav>
     </div>
-    <button class="theme-toggle" id="themeToggle" type="button">Theme</button>
+    <button class="theme-toggle" id="themeToggle" type="button">Theme: Light</button>
     <p class="rail-note">Daily current events for quick comprehension, deeper context, and speech-ready argument maps.</p>
   </aside>
 
@@ -444,21 +429,10 @@
 
     <div class="main-inner">
       <section class="main-section">
-        <div class="section-label">Featured Stories</div>
-        <div class="featured-grid" id="featuredGrid"></div>
-        <div class="brief-strip">
-          <div>
-            <div class="section-label">On The Radar</div>
-            <div id="radarList"></div>
-          </div>
-          <div>
-            <div class="section-label">Key Numbers</div>
-            <div id="numbersList"></div>
-          </div>
-        </div>
+        <section class="headline-day" id="headlineDay"></section>
         <p class="intro" id="editionIntro"></p>
         <div class="content-wrap" id="content"></div>
-        <footer>Dig briefing compiled May 24, 2026. Source links point to the underlying reporting, official releases, or opinion essays used for this edition.</footer>
+        <footer>Dig briefing compiled May 24, 2026. Source links point to the reporting, official releases, and essays used for this edition.</footer>
       </section>
     </div>
   </main>
@@ -466,21 +440,15 @@
 
 <script>
 const briefing = {
-  featured: [
-    {topic: "Iran / Energy", h: "Deal outlines emerge around Hormuz", deck: "A ceasefire framework is now being judged through shipping access, uranium terms, sanctions relief, and oil-market confidence."},
-    {topic: "Health Security", h: "Ebola response turns on trust", deck: "The Bundibugyo outbreak has no approved vaccine, so containment depends on tracing, safe burials, travel rules, and treatment-site security."},
-    {topic: "Ukraine", h: "Russia escalates missile pressure on Kyiv", deck: "New Oreshnik deployments and long-range attacks keep air-defense shortages in focus as Ukraine strikes deeper into Russian oil infrastructure."}
-  ],
-  radar: [
-    "Whether any US-Iran agreement actually keeps the Strait of Hormuz open and creates an inspection mechanism strong enough to reassure oil markets.",
-    "WHO and CDC updates after attacks on Congo Ebola treatment centers and new border-routing rules for travelers.",
-    "Kyiv air-defense requests after Russia said it would deploy additional Oreshnik intermediate-range missiles to Belarus."
-  ],
-  numbers: [
-    "60 days: the War Powers Resolution clock lawmakers cite when challenging sustained US involvement in hostilities.",
-    "746 suspected cases: WHO count for the Democratic Republic of Congo Ebola outbreak as of May 21.",
-    "11 facilities: Russian oil sites Ukraine says it hit in May as Kyiv tries to degrade Moscow's fuel logistics."
-  ],
+  headline: {
+    topic: "Iran / Energy",
+    h: "Hormuz deal terms put oil, Congress, and inspections on the same clock",
+    deck: "The day's central story is whether a ceasefire framework can calm shipping risk faster than energy prices, war-powers politics, and nuclear mistrust can pull it apart.",
+    image: "https://www.nasa.gov/wp-content/uploads/2023/03/iss064e046338.jpg?w=1041",
+    imageAlt: "Satellite view of the Strait of Hormuz separating Iran, Oman, and the United Arab Emirates",
+    imageCredit: "NASA",
+    imageCreditUrl: "https://www.nasa.gov/image-article/strait-of-hormuz/"
+  },
   intros: {
     wire: "Last 24 hours, grouped by topic. Open a topic for the story stack; each story keeps its own nested Learn more drawer.",
     weekly: "The week in consequential developments, grouped like The Wire but selected for events still shaping the map today.",
@@ -497,36 +465,29 @@ const briefing = {
       {h: "Redistricting becomes a second-front midterm fight", proseHTML: `House control often turns on a handful of districts, so redistricting cases can matter as much as candidate quality or national polling. <span class="change">New litigation and state-level map fights are keeping congressional boundaries unsettled deep into the cycle</span>, especially where courts must decide whether race, party advantage, or community representation drove the lines. The impact is practical: campaigns cannot spend efficiently when district boundaries may shift, and voters can see their representatives change without moving. The next thing to watch is whether courts order maps early enough for normal primaries or push states into compressed election calendars.`, sources: [{name:"AP",url:"https://apnews.com/hub/us-supreme-court"},{name:"Brennan Center",url:"https://www.brennancenter.org/our-work/research-reports/redistricting-litigation-roundup-0"}], learn: {context:"Redistricting is the process of redrawing legislative districts after population changes or court rulings; in closely divided chambers, one map can alter national policy outcomes.", angles:["Representation angle: map design affects which communities can elect preferred candidates.","Partisan angle: both parties use litigation and state power where they can.","Institutional angle: late map changes make election administration harder."], watch:"Watch state supreme courts, federal voting-rights claims, and candidate filing deadlines."}}
     ]},
     {topic: "Healthcare", stories: [
-      {h: "Congo Ebola response shifts to containment basics", proseHTML: `The Democratic Republic of Congo has managed repeated Ebola outbreaks, but the Bundibugyo strain is harder because there is no approved vaccine matched to it. <span class="change">WHO situation updates now put the outbreak at 746 suspected cases as of May 21, while treatment-center attacks and funeral restrictions are complicating contact tracing</span>. That means the public-health strategy depends on old containment tools: isolating cases, monitoring contacts, making burials safer, and keeping border screening trusted enough that people do not hide symptoms. The risk is not only medical; if communities view responders as coercive or unsafe, the outbreak becomes harder to measure and harder to stop.`, sources: [{name:"WHO",url:"https://www.who.int/emergencies/disease-outbreak-news"},{name:"CDC",url:"https://www.cdc.gov/ebola/outbreaks/drc/2026.html"},{name:"AP",url:"https://apnews.com/"}], learn: {context:"Bundibugyo is one of several Ebola virus species; vaccine and treatment evidence is stronger for Zaire Ebola than for Bundibugyo, which raises the value of surveillance and trust.", angles:["Health-security angle: weak trust can defeat technically correct response plans.","Travel angle: routing rules can slow spread but may also drive informal crossings.","Equity angle: outbreak control depends on local health workers who are themselves exposed to violence."], watch:"Watch WHO case definitions, border alerts, treatment-center security, and whether cases appear outside the known transmission chain."}},
+      {h: "Congo Ebola response shifts to containment basics", proseHTML: `The Democratic Republic of Congo has managed repeated Ebola outbreaks, but the Bundibugyo strain is harder because there is no approved vaccine matched to it. <span class="change">WHO situation updates now put the outbreak at 746 suspected cases as of May 21, while treatment-center attacks and funeral restrictions are complicating contact tracing</span>. That means the public-health strategy depends on old containment tools: isolating cases, monitoring contacts, making burials safer, and keeping border screening trusted enough that people do not hide symptoms. The risk is not only medical; if communities view responders as coercive or unsafe, the outbreak becomes harder to measure and harder to stop.`, sources: [{name:"WHO",url:"https://www.who.int/emergencies/disease-outbreak-news"},{name:"CDC",url:"https://www.cdc.gov/ebola/outbreaks/drc/2026.html"},{name:"CDC Basics",url:"https://www.cdc.gov/ebola/about/index.html"}], learn: {context:"Bundibugyo is one of several Ebola virus species; vaccine and treatment evidence is stronger for Zaire Ebola than for Bundibugyo, which raises the value of surveillance and trust.", angles:["Health-security angle: weak trust can defeat technically correct response plans.","Travel angle: routing rules can slow spread but may also drive informal crossings.","Equity angle: outbreak control depends on local health workers who are themselves exposed to violence."], watch:"Watch WHO case definitions, border alerts, treatment-center security, and whether cases appear outside the known transmission chain."}},
       {h: "US travel rules become part of outbreak diplomacy", proseHTML: `US outbreak policy usually tries to avoid blanket travel bans because they can discourage disclosure and damage cooperation. <span class="change">CDC guidance on Congo-related travel is now being watched for whether screening, routing, and reporting rules tighten as case counts rise</span>. The political significance is that public-health rules become diplomacy when they affect airlines, border agencies, and governments trying to avoid stigma. The next test is whether US and WHO guidance stay aligned; disagreement would make the response harder for schools, hospitals, and local health departments to interpret.`, sources: [{name:"CDC Travel Health",url:"https://wwwnc.cdc.gov/travel/notices"},{name:"WHO",url:"https://www.who.int/emergencies/disease-outbreak-news"}], learn: {context:"Travel health notices are risk communications, not simply bans; they tell travelers and institutions what precautions are expected.", angles:["Public-health angle: targeted screening preserves cooperation better than broad bans.","Political angle: visible restrictions can reassure voters even when they add little epidemiological value.","Operational angle: hospitals need clear triage rules before a suspected case appears."], watch:"Watch CDC notice levels, airport routing guidance, and state health-department advisories."}}
     ]},
     {topic: "Climate", stories: [
-      {h: "India heatwave turns electricity demand into a climate-stability test", proseHTML: `India's hottest months already strain a power system that must serve fast-growing cooling demand while still relying heavily on coal. <span class="change">Heat alerts and power-demand reports near 270 gigawatts show how extreme temperatures are becoming a grid-management problem as well as a public-health problem</span>. The number matters because peak demand forces utilities to keep backup fossil generation ready even while India expands solar and storage. The next risk is compound: if heat, weak monsoon timing, and high nighttime temperatures overlap, water stress and labor productivity losses can become the bigger story than record daytime highs.`, sources: [{name:"Reuters",url:"https://www.reuters.com/world/india/"},{name:"India Meteorological Department",url:"https://mausam.imd.gov.in/"}], learn: {context:"Peak demand is the maximum electricity load at one time; grids must be built for that peak, not for the average day.", angles:["Climate angle: adaptation now means power planning, not only disaster relief.","Economic angle: heat cuts outdoor labor and raises business cooling costs.","Energy angle: solar helps daytime peaks but storage and transmission decide evening reliability."], watch:"Watch monsoon onset, state power cuts, and whether coal inventories are drawn down faster than usual."}},
-      {h: "Hurricane outlook keeps insurance pressure on the US coast", proseHTML: `Atlantic hurricane forecasts matter before landfall because insurers, local governments, and emergency managers price risk months in advance. <span class="change">NOAA's 2026 outlook is being treated as another test of whether warmer seas keep storm risk elevated even when seasonal forecasts are not at the extreme end of recent ranges</span>. The policy impact is clearest in insurance markets, where repeated disasters have already pushed premiums higher and driven some carriers out of high-risk states. The next concrete signal is whether early-season storms form near unusually warm water or whether wind shear keeps the basin quieter than feared.`, sources: [{name:"NOAA",url:"https://www.noaa.gov/news-release/noaa-predicts-above-normal-2026-atlantic-hurricane-season"},{name:"AP",url:"https://apnews.com/hub/hurricanes"}], learn: {context:"Seasonal hurricane outlooks estimate activity, not landfalls; a quiet season can still be costly if one major storm hits a populated coast.", angles:["Insurance angle: risk models shape premiums before disasters happen.","Climate angle: warmer water adds energy, but atmospheric wind shear can suppress storms.","Equity angle: renters and low-income homeowners have the least room to absorb premium spikes."], watch:"Watch June sea-surface temperatures, Gulf storm tracks, and state-backed insurer exposure."}}
+      {h: "India heatwave turns electricity demand into a climate-stability test", proseHTML: `India's hottest months already strain a power system that must serve fast-growing cooling demand while still relying heavily on coal. <span class="change">Heat alerts and power-demand reports near 270 gigawatts show how extreme temperatures are becoming a grid-management problem as well as a public-health problem</span>. The number matters because peak demand forces utilities to keep backup fossil generation ready even while India expands solar and storage. The next risk is compound: if heat, weak monsoon timing, and high nighttime temperatures overlap, water stress and labor productivity losses can become the bigger story than record daytime highs.`, sources: [{name:"Reuters",url:"https://www.reuters.com/world/india/"},{name:"India Meteorological Department",url:"https://mausam.imd.gov.in/"}], learn: {context:"Peak demand is the maximum electricity load at one time; grids must be built for that peak, not for the average day.", angles:["Climate angle: adaptation now means power planning, not only disaster relief.","Economic angle: heat cuts outdoor labor and raises business cooling costs.","Energy angle: solar helps daytime peaks but storage and transmission decide evening reliability."], watch:"Watch monsoon onset, state power cuts, and whether coal inventories are drawn down faster than usual."}}
     ]},
     {topic: "Tech / AI", stories: [
-      {h: "AI-chip enforcement moves through Taiwan", proseHTML: `US export controls on advanced chips depend on paperwork, end-use checks, and partner enforcement rather than only customs seizures. <span class="change">Taiwanese prosecutors' reported action on alleged Nvidia server smuggling shows that AI infrastructure has become a law-enforcement issue as well as a trade issue</span>. The strategic stakes are high because AI systems depend on clustered chips, and a small number of diverted servers can create meaningful compute capacity for restricted buyers. The next thing to watch is whether Washington asks Taiwan and other partners for tighter audits on resellers, cloud providers, and re-export routes.`, sources: [{name:"Reuters",url:"https://www.reuters.com/technology/"},{name:"Taiwan News",url:"https://www.taiwannews.com.tw/news/6126962"}], learn: {context:"End-use checks are inspections or documentation designed to prove that sensitive goods reach approved buyers rather than sanctioned users.", angles:["Security angle: compute access is now treated as strategic capacity.","Business angle: chip firms face compliance risk even when demand is legitimate.","China angle: Beijing can exploit gray-market routes if partner enforcement is uneven."], watch:"Watch indictments, Commerce Department entity-list updates, and Nvidia sales guidance."}},
-      {h: "Rare-earth licensing remains a pressure point after talks", proseHTML: `Rare earths are not rare in geology, but processing capacity is concentrated enough that export licenses can become a geopolitical lever. <span class="change">Reports that licensing problems remain after high-level US-China talks mean manufacturers are still exposed to administrative delays in magnets and other critical inputs</span>. The issue matters because rare-earth magnets sit inside electric vehicles, wind turbines, drones, missiles, and industrial motors, so a paperwork bottleneck can become a production bottleneck. The next test is whether licenses are issued predictably or only used as a bargaining chip in broader tariff and technology negotiations.`, sources: [{name:"Reuters",url:"https://www.reuters.com/world/china/"},{name:"SCMP",url:"https://www.scmp.com/economy/china-economy"}], learn: {context:"Rare-earth supply chains combine mining, separation, refining, and magnet production; China dominates several of the higher-value processing steps.", angles:["Industrial angle: firms need reliable inputs more than dramatic announcements.","Trade angle: licensing gives Beijing pressure without a full embargo.","Security angle: defense contractors cannot easily substitute magnet supply."], watch:"Watch export-license approvals, US stockpiling moves, and whether allies accelerate non-China processing."}}
+      {h: "AI-chip enforcement moves through Taiwan", proseHTML: `US export controls on advanced chips depend on paperwork, end-use checks, and partner enforcement rather than only customs seizures. <span class="change">Taiwanese prosecutors' reported action on alleged Nvidia server smuggling shows that AI infrastructure has become a law-enforcement issue as well as a trade issue</span>. The strategic stakes are high because AI systems depend on clustered chips, and a small number of diverted servers can create meaningful compute capacity for restricted buyers. The next thing to watch is whether Washington asks Taiwan and other partners for tighter audits on resellers, cloud providers, and re-export routes.`, sources: [{name:"Reuters",url:"https://www.reuters.com/technology/"},{name:"Taiwan News",url:"https://www.taiwannews.com.tw/news/6126962"}], learn: {context:"End-use checks are inspections or documentation designed to prove that sensitive goods reach approved buyers rather than sanctioned users.", angles:["Security angle: compute access is now treated as strategic capacity.","Business angle: chip firms face compliance risk even when demand is legitimate.","China angle: Beijing can exploit gray-market routes if partner enforcement is uneven."], watch:"Watch indictments, Commerce Department entity-list updates, and Nvidia sales guidance."}}
     ]},
     {topic: "Latin America", stories: [
-      {h: "Mexico security talks become a trade and sovereignty test", proseHTML: `Mexico's security relationship with Washington has tightened as cartel violence, migration, fentanyl trafficking, and tariff threats overlap. <span class="change">Fresh US-Mexico talks are now being judged by whether cooperation can increase without making President Claudia Sheinbaum look as if she is surrendering sovereignty</span>. The policy tension is that Washington wants measurable enforcement results, while Mexico has to manage domestic anger over foreign pressure and military-style operations. The next thing to watch is whether cooperation appears in border seizures and prosecutions or mainly in press statements.`, sources: [{name:"Reuters",url:"https://www.reuters.com/world/americas/"},{name:"AP",url:"https://apnews.com/hub/mexico"}], learn: {context:"Security cooperation can include intelligence sharing, extraditions, financial tracking, ports inspections, and coordinated policing; each tool carries different political costs.", angles:["US angle: fentanyl and migration make Mexico central to domestic politics.","Mexico angle: sovereignty is a governing constraint, not just rhetoric.","Trade angle: border disruption can damage integrated auto and food supply chains."], watch:"Watch extradition decisions, cartel-finance cases, and whether tariff threats return."}},
-      {h: "Argentina's IMF path keeps austerity in the spotlight", proseHTML: `Argentina entered 2026 still trying to stabilize inflation, rebuild reserves, and convince markets that fiscal adjustment can last. <span class="change">New IMF engagement keeps President Javier Milei's program tied to reserve targets and spending discipline</span>, even as households feel the social cost of cuts and price adjustments. The number to watch is not only inflation, but whether reserves rise enough to make currency policy credible without another disruptive devaluation. The political risk is that external confidence can improve before domestic living standards do, leaving the program vulnerable if wages and employment lag.`, sources: [{name:"IMF",url:"https://www.imf.org/en/Countries/ARG"},{name:"Reuters",url:"https://www.reuters.com/world/americas/argentina/"}], learn: {context:"Foreign reserves are the hard-currency assets a central bank can use to defend a currency and pay external obligations.", angles:["Market angle: investors care whether the adjustment survives politics.","Social angle: austerity tests public tolerance before growth is visible.","Regional angle: Argentina's stabilization affects South American trade and energy investment."], watch:"Watch monthly inflation, reserve accumulation, and Congress's response to further reforms."}}
+      {h: "Mexico security talks become a trade and sovereignty test", proseHTML: `Mexico's security relationship with Washington has tightened as cartel violence, migration, fentanyl trafficking, and tariff threats overlap. <span class="change">Fresh US-Mexico talks are now being judged by whether cooperation can increase without making President Claudia Sheinbaum look as if she is surrendering sovereignty</span>. The policy tension is that Washington wants measurable enforcement results, while Mexico has to manage domestic anger over foreign pressure and military-style operations. The next thing to watch is whether cooperation appears in border seizures and prosecutions or mainly in press statements.`, sources: [{name:"Reuters",url:"https://www.reuters.com/world/americas/"},{name:"AP",url:"https://apnews.com/hub/mexico"}], learn: {context:"Security cooperation can include intelligence sharing, extraditions, financial tracking, ports inspections, and coordinated policing; each tool carries different political costs.", angles:["US angle: fentanyl and migration make Mexico central to domestic politics.","Mexico angle: sovereignty is a governing constraint, not just rhetoric.","Trade angle: border disruption can damage integrated auto and food supply chains."], watch:"Watch extradition decisions, cartel-finance cases, and whether tariff threats return."}}
     ]},
     {topic: "Africa / Middle East", stories: [
-      {h: "US-Iran ceasefire terms put shipping at the center of diplomacy", proseHTML: `The Iran crisis has never been only a nuclear dispute because every escalation near the Strait of Hormuz can move global energy prices. <span class="change">A reported ceasefire framework would trade constraints on uranium work and sanctions relief against guarantees around shipping access and inspections</span>. The diplomatic problem is sequencing: Tehran wants relief before it gives up leverage, while Washington and Gulf states want verifiable steps before markets believe the corridor is safe. The immediate impact reaches beyond the region because insurers, refiners, and import-dependent governments will price the deal by behavior at sea, not by the communique.`, sources: [{name:"AP",url:"https://apnews.com/article/e603a7759d6cbd70ce5ed01f439a29dc"},{name:"Axios",url:"https://www.axios.com/2026/05/24/iran-deal-strait-hormuz-sanctions-nuclear"}], learn: {context:"The Strait of Hormuz is a narrow waterway between Iran and Oman through which a major share of global oil and liquefied natural gas moves.", angles:["Diplomacy angle: sequencing can make or break a deal.","Energy angle: even a temporary disruption can raise prices before supply is physically lost.","Regional angle: Gulf states need a deal that reduces risk without rewarding coercion."], watch:"Watch inspection language, tanker movements, and statements from Saudi Arabia, the UAE, and Qatar."}},
-      {h: "Gaza strike fallout keeps humanitarian access in focus", proseHTML: `Gaza's war has created a cycle in which military operations, aid access, and displacement reinforce one another. <span class="change">Reports of new strikes and rising civilian casualties are again pushing attention toward whether aid agencies can move food, fuel, and medical supplies safely</span>. The humanitarian impact is cumulative: each new displacement makes disease control, water access, and hospital triage harder because the same infrastructure is serving more people with fewer supplies. The diplomatic test is whether pressure from the United States, Arab governments, and European states changes battlefield behavior or only produces temporary aid windows.`, sources: [{name:"AP",url:"https://apnews.com/hub/israel-hamas-war"},{name:"Reuters",url:"https://www.reuters.com/world/middle-east/"}], learn: {context:"Humanitarian access depends on crossing approvals, convoy security, fuel availability, and the ability of aid groups to communicate with parties to the conflict.", angles:["Humanitarian angle: access is not meaningful if convoys cannot distribute supplies safely.","Security angle: Israel argues operations target militants embedded in civilian areas.","Diplomacy angle: allies can demand changes but have limited control over battlefield choices."], watch:"Watch crossing openings, UN convoy reports, hospital capacity, and ceasefire talks."}}
+      {h: "US-Iran ceasefire terms put shipping at the center of diplomacy", proseHTML: `The Iran crisis has never been only a nuclear dispute because every escalation near the Strait of Hormuz can move global energy prices. <span class="change">A reported ceasefire framework would trade constraints on uranium work and sanctions relief against guarantees around shipping access and inspections</span>. The diplomatic problem is sequencing: Tehran wants relief before it gives up leverage, while Washington and Gulf states want verifiable steps before markets believe the corridor is safe. The immediate impact reaches beyond the region because insurers, refiners, and import-dependent governments will price the deal by behavior at sea, not by the communique.`, sources: [{name:"AP",url:"https://apnews.com/article/e603a7759d6cbd70ce5ed01f439a29dc"},{name:"Axios",url:"https://www.axios.com/2026/05/24/iran-deal-strait-hormuz-sanctions-nuclear"}], learn: {context:"The Strait of Hormuz is a narrow waterway between Iran and Oman through which a major share of global oil and liquefied natural gas moves.", angles:["Diplomacy angle: sequencing can make or break a deal.","Energy angle: even a temporary disruption can raise prices before supply is physically lost.","Regional angle: Gulf states need a deal that reduces risk without rewarding coercion."], watch:"Watch inspection language, tanker movements, and statements from Saudi Arabia, the UAE, and Qatar."}}
     ]},
     {topic: "Europe / EU", stories: [
-      {h: "Turkey's opposition pressure widens beyond elections", proseHTML: `Turkey's opposition Republican People's Party <span class="jargon">(CHP, the main secular opposition party founded by Mustafa Kemal Ataturk's movement)</span> has been central to challenging President Recep Tayyip Erdogan's dominance in major cities. <span class="change">Police and court pressure around CHP-linked institutions is keeping the opposition's organizational capacity under strain</span>. That matters because democratic competition depends not only on election day but on whether parties can fundraise, organize, and defend local governments between elections. The next question is whether the crackdown produces fragmentation or instead turns legal pressure into a rallying point for opposition voters.`, sources: [{name:"Reuters",url:"https://www.reuters.com/world/middle-east/"},{name:"AP",url:"https://apnews.com/hub/turkey"}], learn: {context:"Turkey is a NATO member with a hybrid political system where elections are competitive but courts, media pressure, and state power can tilt the playing field.", angles:["Democracy angle: party capacity matters before ballots are cast.","NATO angle: domestic instability complicates alliance bargaining.","Opposition angle: legal pressure can either demoralize or unify rivals."], watch:"Watch court rulings, municipal budgets, and whether protests stay local or nationalize."}},
       {h: "Europe debates how to anchor Ukraine before membership", proseHTML: `Full European Union membership for Ukraine remains politically and technically difficult because accession requires legal alignment, budget decisions, and unanimous approval. <span class="change">New proposals for associate membership or staged integration show Europe looking for ways to lock Ukraine closer to the bloc before formal accession is ready</span>. The impact is strategic: interim access to markets, funding, and institutions can signal permanence to Russia while giving Kyiv reforms to implement. The next test is whether the idea becomes a real negotiating track or remains a way for governments to avoid a harder membership fight.`, sources: [{name:"Carnegie Europe",url:"https://carnegieeurope.eu/"},{name:"European Commission",url:"https://neighbourhood-enlargement.ec.europa.eu/enlargement-policy/ukraine_en"}], learn: {context:"EU accession is slow because candidates must adopt the bloc's legal standards, known as the acquis, and existing members must accept budget and voting changes.", angles:["Ukraine angle: staged integration creates benefits before final membership.","EU angle: associate status may manage enlargement fatigue.","Russia angle: the more irreversible Ukraine's westward path looks, the more Moscow may try to disrupt it."], watch:"Watch European Council language, budget proposals, and Ukrainian reform milestones."}}
     ]},
     {topic: "China", stories: [
-      {h: "China's migrant-worker policy becomes a domestic-demand story", proseHTML: `China's growth model has long relied on migrant workers who live in cities but lack full urban public-service rights under the hukou system <span class="jargon">(China's household-registration system that links social benefits to registered residence)</span>. <span class="change">New attention to migrant access to schools, health care, and housing points to Beijing's effort to turn urbanization into consumption rather than only labor supply</span>. The economic logic is straightforward: families spend more when they can settle, educate children, and trust local services. The political challenge is that cities must fund those benefits while already managing property-sector stress and local-government debt.`, sources: [{name:"Reuters",url:"https://www.reuters.com/world/china/"},{name:"China Daily",url:"https://www.chinadaily.com.cn/"}], learn: {context:"Hukou reform is partly social policy and partly macroeconomic policy, because secure urban residence can raise household consumption.", angles:["Growth angle: domestic demand needs confident consumers.","Fiscal angle: cities may resist reforms if they pay the bill.","Inequality angle: migrant children and health access are the human stakes behind the growth debate."], watch:"Watch local pilot programs, school enrollment rules, and central transfers to cities."}},
       {h: "Taiwan arms and AI controls converge", proseHTML: `Taiwan is now central to two US-China contests at once: deterrence in the Taiwan Strait and control over advanced AI hardware. <span class="change">Debates over arms packages, export enforcement, and re-export routes are converging because the same island that makes critical chips is also the military flashpoint Beijing claims</span>. The strategic implication is that technology policy cannot be separated from defense planning; sanctions, semiconductor supply, and military aid all shape Beijing's calculations. The next watch point is whether Washington can reassure Taipei without giving Beijing a pretext to escalate around the island.`, sources: [{name:"Reuters",url:"https://www.reuters.com/world/asia-pacific/"},{name:"Taiwan News",url:"https://www.taiwannews.com.tw/news/6126962"}], learn: {context:"Taiwan Semiconductor Manufacturing Company is the dominant producer of the most advanced chips, making Taiwan both an economic chokepoint and a security concern.", angles:["Deterrence angle: arms deliveries affect the cost of coercion.","Technology angle: chip enforcement relies on Taiwan's cooperation.","Diplomacy angle: reassurance and provocation can look similar from different capitals."], watch:"Watch US arms notifications, Chinese military drills, and export-control enforcement cases."}}
     ]},
     {topic: "War / Active Conflicts", stories: [
-      {h: "Russia's Oreshnik move widens Ukraine's air-defense problem", proseHTML: `Ukraine's defense against Russian strikes depends on a limited stock of interceptors, radars, and Western-supplied systems that cannot cover every city and energy asset. <span class="change">Russia says it plans to deploy Oreshnik intermediate-range missiles in Belarus, adding a new pressure point north of Ukraine</span>. The military significance is range and warning time: launch locations closer to NATO's eastern edge complicate Ukrainian planning and raise the political stakes for Poland and the Baltic states. The next test is whether Ukraine receives enough additional air-defense ammunition to protect both cities and the infrastructure needed to sustain its war economy.`, sources: [{name:"AP",url:"https://apnews.com/article/998aeaab5833ca397290d9ee2737b0e5"},{name:"Reuters",url:"https://www.reuters.com/world/europe/"}], learn: {context:"Intermediate-range missiles can strike from hundreds to several thousand kilometers away, making basing location and warning time central to defense.", angles:["Military angle: Ukraine must choose which targets to defend.","NATO angle: Belarus deployments bring escalation risk closer to alliance territory.","Industrial angle: interceptor production is now as important as weapons donations."], watch:"Watch Patriot and SAMP/T deliveries, Belarus basing evidence, and Russian strike patterns."}},
-      {h: "Pakistan bombing shows militancy pressure beyond border politics", proseHTML: `Pakistan's internal security problem is often discussed through Afghanistan, but militant violence also reflects local networks, sectarian targets, and provincial grievances. <span class="change">A suicide bombing in Quetta that killed several people highlights how Balochistan remains vulnerable despite repeated security operations</span>. The policy impact is wider than casualty counts because attacks can disrupt Chinese-linked infrastructure, border trade, and the federal government's claim that it can stabilize peripheral provinces. The next question is whether Islamabad treats the attack as a policing problem, an Afghan-border problem, or a governance failure in Balochistan.`, sources: [{name:"AP",url:"https://apnews.com/hub/pakistan"},{name:"Reuters",url:"https://www.reuters.com/world/asia-pacific/"}], learn: {context:"Balochistan is Pakistan's largest province by area and has long-running separatist, sectarian, and militant violence layered over resource and governance disputes.", angles:["Security angle: repeated attacks stretch police and paramilitary capacity.","China angle: violence threatens projects tied to the China-Pakistan Economic Corridor.","Governance angle: force alone does not resolve local alienation."], watch:"Watch claimed responsibility, provincial security measures, and whether cross-border accusations increase."}}
+      {h: "Russia's Oreshnik move widens Ukraine's air-defense problem", proseHTML: `Ukraine's defense against Russian strikes depends on a limited stock of interceptors, radars, and Western-supplied systems that cannot cover every city and energy asset. <span class="change">Russia used the Oreshnik ballistic missile during a mass drone and missile attack on Kyiv, according to Ukrainian officials, adding a new pressure point to Ukraine's air-defense map</span>. The military significance is range and warning time: each launch forces Kyiv to decide which cities, power assets, and military facilities receive scarce interceptors. The next test is whether Ukraine receives enough additional air-defense ammunition to protect both civilians and the infrastructure needed to sustain its war economy.`, sources: [{name:"AP",url:"https://apnews.com/article/998aeaab5833ca397290d9ee2737b0e5"},{name:"Reuters",url:"https://www.reuters.com/world/europe/"}], learn: {context:"Intermediate-range missiles can strike from hundreds to several thousand kilometers away, making basing location and warning time central to defense.", angles:["Military angle: Ukraine must choose which targets to defend.","NATO angle: Belarus deployments bring escalation risk closer to alliance territory.","Industrial angle: interceptor production is now as important as weapons donations."], watch:"Watch Patriot and SAMP/T deliveries, Belarus basing evidence, and Russian strike patterns."}}
     ]}
   ],
   weekly: [
@@ -535,48 +496,30 @@ const briefing = {
       {h: "Budget fights moved back into markets", proseHTML: `The week also showed how fiscal policy is being repriced in a higher-rate world. <span class="change">Tax and spending debates revived questions about deficits and Treasury borrowing</span> at the same time investors were watching oil and war risk. For a weekly catch-up, the significance is that the US bond market is now a political arena: every major bill has an interest-rate shadow.`, sources: [{name:"Reuters Markets",url:"https://www.reuters.com/markets/"},{name:"CBO",url:"https://www.cbo.gov/"}], learn: {context:"When the government borrows more, investors may demand higher yields unless demand for Treasuries stays strong.", angles:["Deficit angle: higher rates make debt service more expensive.","Growth angle: some spending can raise future productivity.","Election angle: voters feel bond markets through mortgage and loan rates."], watch:"Watch Treasury auctions and updated fiscal estimates."}}
     ]},
     {topic: "US Politics", stories: [
-      {h: "War powers became the week's constitutional test", proseHTML: `The Iran crisis gave Congress a live test of whether post-9/11 habits of executive flexibility still hold. <span class="change">Lawmakers invoked war-powers deadlines and demanded clearer authorization for sustained US involvement</span>. The story belongs in the weekly tab because it links foreign policy to separation of powers, party discipline, and the politics of another Middle East conflict.`, sources: [{name:"Congress.gov",url:"https://www.congress.gov/"},{name:"AP",url:"https://apnews.com/"}], learn: {context:"War-powers debates can reshape political permission even when they do not force immediate withdrawal.", angles:["Constitutional angle: Congress controls authorization and funding.","Security angle: presidents argue speed matters in crises.","Political angle: intraparty defections show whether the issue is becoming toxic."], watch:"Watch privileged resolutions and amendment votes."}},
-      {h: "Map fights stayed central to the House majority", proseHTML: `This week reinforced that the midterms are being fought in courts and state capitals as much as on television. <span class="change">Redistricting litigation and state map disputes kept several House paths uncertain</span>. The impact is durable because candidate recruitment, fundraising, and voter outreach all depend on knowing what district exists.`, sources: [{name:"Brennan Center",url:"https://www.brennancenter.org/our-work/research-reports/redistricting-litigation-roundup-0"},{name:"AP",url:"https://apnews.com/hub/elections"}], learn: {context:"A few district-line changes can matter more than small national polling movements in a closely divided House.", angles:["Legal angle: courts must separate racial and partisan claims.","Campaign angle: uncertainty slows spending and organizing.","Democratic angle: voters experience representation through boundaries they did not choose."], watch:"Watch filing deadlines and emergency court orders."}}
+      {h: "War powers became the week's constitutional test", proseHTML: `The Iran crisis gave Congress a live test of whether post-9/11 habits of executive flexibility still hold. <span class="change">Lawmakers invoked war-powers deadlines and demanded clearer authorization for sustained US involvement</span>. The story belongs in the weekly tab because it links foreign policy to separation of powers, party discipline, and the politics of another Middle East conflict.`, sources: [{name:"Congress.gov",url:"https://www.congress.gov/"},{name:"AP",url:"https://apnews.com/"}], learn: {context:"War-powers debates can reshape political permission even when they do not force immediate withdrawal.", angles:["Constitutional angle: Congress controls authorization and funding.","Security angle: presidents argue speed matters in crises.","Political angle: intraparty defections show whether the issue is becoming toxic."], watch:"Watch privileged resolutions and amendment votes."}}
     ]},
     {topic: "Healthcare", stories: [
-      {h: "Ebola became the week's health-security anchor", proseHTML: `The most important health story of the week was not a new drug or hospital rule, but the return of a high-consequence outbreak response. <span class="change">The Bundibugyo Ebola outbreak pushed officials back toward containment basics because vaccine options are limited</span>. It still matters today because every delay in tracing or safe burial expands the number of contacts who must be monitored.`, sources: [{name:"WHO",url:"https://www.who.int/emergencies/disease-outbreak-news"},{name:"CDC",url:"https://www.cdc.gov/ebola/"}], learn: {context:"Ebola control is labor-intensive because responders must find contacts before symptoms appear and isolate cases quickly.", angles:["Science angle: strain-specific vaccine gaps matter.","Trust angle: communities must believe responders are safer than hiding.","Travel angle: routing rules are only as good as compliance."], watch:"Watch weekly WHO case counts and security around treatment centers."}},
-      {h: "Travel guidance became a public-health communication test", proseHTML: `The week showed how outbreak rules are also messages. <span class="change">CDC and WHO guidance around Congo travel became a signal to airlines, hospitals, schools, and border agencies</span>. The continuing relevance is that confusing guidance can either overreact and stigmatize travelers or underprepare health systems for a suspected case.`, sources: [{name:"CDC Travel Health",url:"https://wwwnc.cdc.gov/travel/notices"},{name:"WHO",url:"https://www.who.int/"}], learn: {context:"Public-health communication tries to change behavior without causing panic or concealment.", angles:["Preparedness angle: hospitals need triage instructions.","Diplomacy angle: restrictions can anger affected governments.","Epidemiology angle: targeted screening usually beats blanket bans."], watch:"Watch whether guidance levels change."}}
+      {h: "Ebola became the week's health-security anchor", proseHTML: `The most important health story of the week was not a new drug or hospital rule, but the return of a high-consequence outbreak response. <span class="change">The Bundibugyo Ebola outbreak pushed officials back toward containment basics because vaccine options are limited</span>. It still matters today because every delay in tracing or safe burial expands the number of contacts who must be monitored.`, sources: [{name:"WHO",url:"https://www.who.int/emergencies/disease-outbreak-news"},{name:"CDC",url:"https://www.cdc.gov/ebola/about/index.html"}], learn: {context:"Ebola control is labor-intensive because responders must find contacts before symptoms appear and isolate cases quickly.", angles:["Science angle: strain-specific vaccine gaps matter.","Trust angle: communities must believe responders are safer than hiding.","Travel angle: routing rules are only as good as compliance."], watch:"Watch weekly WHO case counts and security around treatment centers."}}
     ]},
     {topic: "Climate", stories: [
-      {h: "Heat exposed the electricity side of climate risk", proseHTML: `The week's heat story was also an infrastructure story. <span class="change">India's high power demand showed how extreme heat now tests grids, labor, health systems, and household budgets at once</span>. The story still matters because early monsoon timing will determine whether relief arrives or whether water and electricity stress compound.`, sources: [{name:"India Meteorological Department",url:"https://mausam.imd.gov.in/"},{name:"Reuters",url:"https://www.reuters.com/world/india/"}], learn: {context:"Cooling demand can create evening peaks after solar output falls, which makes storage and transmission crucial.", angles:["Adaptation angle: heat policy must include electricity planning.","Labor angle: outdoor work slows or becomes dangerous.","Political angle: blackouts during heatwaves can quickly become governance crises."], watch:"Watch heat warnings and monsoon progress."}},
-      {h: "Storm forecasts kept insurance risk in view", proseHTML: `The US climate story this week also moved through risk pricing. <span class="change">Seasonal hurricane forecasts reminded coastal states that disaster risk affects insurance and public finance before storms form</span>. The weekly impact is that homeowners, state-backed insurers, and local budgets are already responding to modelled risk rather than waiting for landfall.`, sources: [{name:"NOAA",url:"https://www.noaa.gov/"},{name:"AP",url:"https://apnews.com/hub/hurricanes"}], learn: {context:"Insurance markets turn climate risk into household costs through premiums, deductibles, and coverage withdrawals.", angles:["Household angle: higher premiums can price people out of homes.","State angle: public insurers become exposed when private firms retreat.","Climate angle: warmer water changes the risk baseline."], watch:"Watch early tropical activity and insurance filings."}}
+      {h: "Heat exposed the electricity side of climate risk", proseHTML: `The week's heat story was also an infrastructure story. <span class="change">India's high power demand showed how extreme heat now tests grids, labor, health systems, and household budgets at once</span>. The story still matters because early monsoon timing will determine whether relief arrives or whether water and electricity stress compound.`, sources: [{name:"India Meteorological Department",url:"https://mausam.imd.gov.in/"},{name:"Reuters",url:"https://www.reuters.com/world/india/"}], learn: {context:"Cooling demand can create evening peaks after solar output falls, which makes storage and transmission crucial.", angles:["Adaptation angle: heat policy must include electricity planning.","Labor angle: outdoor work slows or becomes dangerous.","Political angle: blackouts during heatwaves can quickly become governance crises."], watch:"Watch heat warnings and monsoon progress."}}
     ]},
     {topic: "Tech / AI", stories: [
-      {h: "AI controls moved from rules to prosecutions", proseHTML: `Export controls can look abstract until investigators start naming shipments and servers. <span class="change">Taiwan-linked AI server enforcement showed that the real fight is now over compliance chains, resellers, and end users</span>. It matters beyond one case because advanced chips are useful only when they reach dense clusters, which means small diversion routes can matter strategically.`, sources: [{name:"Reuters Technology",url:"https://www.reuters.com/technology/"},{name:"Taiwan News",url:"https://www.taiwannews.com.tw/news/6126962"}], learn: {context:"AI compute is both a commercial asset and a military-relevant capability.", angles:["Compliance angle: companies must police distributors.","Security angle: enforcement tries to slow restricted buyers.","Diplomacy angle: US controls depend on partner governments."], watch:"Watch new export-control guidance and reseller investigations."}},
-      {h: "Critical minerals stayed a quiet trade weapon", proseHTML: `Rare-earth licensing remained one of the week's quieter but consequential trade stories. <span class="change">China's control over processing and licensing continued to worry manufacturers even after high-level talks</span>. The significance is that supply chains can be disrupted without a formal embargo, simply through slow approvals and uncertain paperwork.`, sources: [{name:"Reuters China",url:"https://www.reuters.com/world/china/"},{name:"SCMP",url:"https://www.scmp.com/"}], learn: {context:"Critical-mineral leverage is often administrative, not dramatic.", angles:["Trade angle: uncertainty changes inventory behavior.","Defense angle: magnets are hard to substitute quickly.","Industrial angle: firms may pay to diversify even if China remains cheaper."], watch:"Watch license approvals and alternative processing investments."}}
-    ]},
-    {topic: "Latin America", stories: [
-      {h: "Mexico balanced cooperation and sovereignty", proseHTML: `The week showed why US-Mexico security cooperation is never only operational. <span class="change">Talks over cartels, migration, and border enforcement forced Mexico to cooperate while publicly defending sovereignty</span>. It still matters because tariff threats, fentanyl politics, and border security now sit inside one bilateral bargaining system.`, sources: [{name:"Reuters Americas",url:"https://www.reuters.com/world/americas/"},{name:"AP Mexico",url:"https://apnews.com/hub/mexico"}], learn: {context:"Sovereignty concerns shape how far Mexico can go with US-backed security operations.", angles:["US angle: fentanyl keeps pressure high.","Mexico angle: visible US influence can backfire domestically.","Trade angle: border politics can interrupt supply chains."], watch:"Watch seizures, extraditions, and tariff language."}},
-      {h: "Argentina's stabilization remained politically exposed", proseHTML: `Argentina's week was a reminder that macroeconomic stabilization is not the same as political durability. <span class="change">IMF-linked reserve and fiscal targets kept the Milei program under outside scrutiny</span>. The issue remains live because market confidence can return faster than household purchasing power, creating a dangerous gap between investors and voters.`, sources: [{name:"IMF",url:"https://www.imf.org/en/Countries/ARG"},{name:"Reuters",url:"https://www.reuters.com/world/americas/argentina/"}], learn: {context:"Stabilization programs often ask voters to accept short-term pain for longer-term credibility.", angles:["Market angle: reserves signal credibility.","Social angle: real wages decide tolerance.","Regional angle: Argentina affects trade, energy, and migration patterns."], watch:"Watch inflation, reserves, and street protests."}}
+      {h: "AI controls moved from rules to prosecutions", proseHTML: `Export controls can look abstract until investigators start naming shipments and servers. <span class="change">Taiwan-linked AI server enforcement showed that the real fight is now over compliance chains, resellers, and end users</span>. It matters beyond one case because advanced chips are useful only when they reach dense clusters, which means small diversion routes can matter strategically.`, sources: [{name:"Reuters Technology",url:"https://www.reuters.com/technology/"},{name:"Taiwan News",url:"https://www.taiwannews.com.tw/news/6126962"}], learn: {context:"AI compute is both a commercial asset and a military-relevant capability.", angles:["Compliance angle: companies must police distributors.","Security angle: enforcement tries to slow restricted buyers.","Diplomacy angle: US controls depend on partner governments."], watch:"Watch new export-control guidance and reseller investigations."}}
     ]},
     {topic: "Africa / Middle East", stories: [
-      {h: "Iran talks put sanctions and shipping into one bargain", proseHTML: `The week made clear that a nuclear arrangement cannot be separated from maritime security. <span class="change">Ceasefire discussions tied uranium limits, sanctions relief, and Hormuz access into one package</span>. The story remains relevant because a deal that lowers enrichment risk but leaves shipping vulnerable will not calm oil markets for long.`, sources: [{name:"AP",url:"https://apnews.com/article/e603a7759d6cbd70ce5ed01f439a29dc"},{name:"Axios",url:"https://www.axios.com/2026/05/24/iran-deal-strait-hormuz-sanctions-nuclear"}], learn: {context:"Diplomatic sequencing decides whether both sides trust that concessions will be reciprocated.", angles:["Nuclear angle: inspections must be credible.","Energy angle: Hormuz access is market-critical.","Regional angle: Gulf states want de-escalation without Iranian coercion."], watch:"Watch inspection details and sanctions waivers."}},
-      {h: "Sudan and Gaza kept humanitarian systems overloaded", proseHTML: `The week's conflict coverage again showed that aid systems are operating with too many crises at once. <span class="change">Sudan's famine risk and Gaza's displacement pressures kept humanitarian access at the center of diplomacy</span>. The continuing significance is that aid agencies are now managing security restrictions, funding shortfalls, and disease risk simultaneously.`, sources: [{name:"UN OCHA",url:"https://www.unocha.org/"},{name:"AP",url:"https://apnews.com/hub/israel-hamas-war"}], learn: {context:"Humanitarian systems fail gradually: insecurity, blocked roads, funding gaps, and disease all compound.", angles:["Humanitarian angle: access determines survival.","Diplomatic angle: pressure rarely produces immediate safe delivery.","Security angle: armed groups can use aid access as leverage."], watch:"Watch convoy access, famine classifications, and ceasefire talks."}}
-    ]},
-    {topic: "Europe / EU", stories: [
-      {h: "Europe searched for a Ukraine bridge before membership", proseHTML: `Ukraine's EU future remains politically central but procedurally slow. <span class="change">This week, proposals for staged or associate integration gave Europe a way to deepen ties before formal membership</span>. The importance is that interim steps can help Ukraine reform and signal permanence without forcing every budget and voting fight immediately.`, sources: [{name:"European Commission",url:"https://neighbourhood-enlargement.ec.europa.eu/enlargement-policy/ukraine_en"},{name:"Carnegie Europe",url:"https://carnegieeurope.eu/"}], learn: {context:"EU enlargement requires institutional, legal, and budget changes, so partial integration can be politically useful.", angles:["Ukraine angle: benefits before membership matter.","EU angle: staged accession can reduce enlargement fatigue.","Russia angle: irreversible integration changes Moscow's assumptions."], watch:"Watch Council language and funding proposals."}},
-      {h: "Turkey's opposition faced pressure between elections", proseHTML: `Turkey's week showed how political competition can be squeezed outside formal voting. <span class="change">Pressure on CHP-linked institutions kept the opposition's organizing environment unstable</span>. The relevance continues because Erdogan's challengers need functioning local governments and institutions to convert city wins into national power.`, sources: [{name:"Reuters",url:"https://www.reuters.com/world/middle-east/"},{name:"AP Turkey",url:"https://apnews.com/hub/turkey"}], learn: {context:"Democratic backsliding often works through legal and administrative pressure rather than canceled elections.", angles:["Institutional angle: party capacity matters.","NATO angle: domestic politics affects alliance behavior.","Opposition angle: pressure can divide or consolidate voters."], watch:"Watch court calendars and protest turnout."}}
-    ]},
-    {topic: "China", stories: [
-      {h: "Hukou reform returned as a growth tool", proseHTML: `China's week underlined that social policy and macroeconomics are now linked. <span class="change">Migrant-worker access to urban benefits became part of the demand story</span>, because families spend more when they can plan around schools, health care, and housing. It still matters because local governments must fund the services while already carrying debt and property-market stress.`, sources: [{name:"Reuters China",url:"https://www.reuters.com/world/china/"},{name:"China Daily",url:"https://www.chinadaily.com.cn/"}], learn: {context:"Hukou rules shape who can access city services, which affects consumption and inequality.", angles:["Growth angle: household confidence matters.","Fiscal angle: cities need money to expand services.","Social angle: migrant children are central to the reform stakes."], watch:"Watch local pilots and fiscal transfers."}},
-      {h: "Taiwan stayed the hinge of chips and deterrence", proseHTML: `Taiwan was again the place where technology and military policy met. <span class="change">AI export enforcement, arms debates, and Chinese pressure all reinforced Taiwan's centrality</span>. The story remains live because the same geography that produces advanced chips is also the geography most exposed to military coercion.`, sources: [{name:"Reuters Asia",url:"https://www.reuters.com/world/asia-pacific/"},{name:"Taiwan News",url:"https://www.taiwannews.com.tw/news/6126962"}], learn: {context:"Taiwan's chip role makes disruption costly for the global economy as well as regional security.", angles:["Tech angle: export controls require Taiwanese enforcement.","Defense angle: arms packages shape deterrence.","Diplomatic angle: reassurance can be read as provocation."], watch:"Watch Chinese exercises and US arms notifications."}}
+      {h: "Iran talks put sanctions and shipping into one bargain", proseHTML: `The week made clear that a nuclear arrangement cannot be separated from maritime security. <span class="change">Ceasefire discussions tied uranium limits, sanctions relief, and Hormuz access into one package</span>. The story remains relevant because a deal that lowers enrichment risk but leaves shipping vulnerable will not calm oil markets for long.`, sources: [{name:"AP",url:"https://apnews.com/article/e603a7759d6cbd70ce5ed01f439a29dc"},{name:"Axios",url:"https://www.axios.com/2026/05/24/iran-deal-strait-hormuz-sanctions-nuclear"}], learn: {context:"Diplomatic sequencing decides whether both sides trust that concessions will be reciprocated.", angles:["Nuclear angle: inspections must be credible.","Energy angle: Hormuz access is market-critical.","Regional angle: Gulf states want de-escalation without Iranian coercion."], watch:"Watch inspection details and sanctions waivers."}}
     ]},
     {topic: "War / Active Conflicts", stories: [
-      {h: "Russia's missile strategy kept pressure on civilians and grids", proseHTML: `Russia's week of missile signaling and strikes reinforced a familiar strategy: make Ukraine spend scarce defenses protecting cities and infrastructure. <span class="change">The Oreshnik deployment plan in Belarus widened the geography of the threat</span>. The importance is that Ukraine's biggest need is not only more weapons but a sustained interceptor pipeline.`, sources: [{name:"AP",url:"https://apnews.com/article/998aeaab5833ca397290d9ee2737b0e5"},{name:"Reuters",url:"https://www.reuters.com/world/europe/"}], learn: {context:"Air defense is a consumption war: each incoming missile forces expensive choices about what to intercept.", angles:["Military angle: Ukraine cannot protect everything.","Industrial angle: NATO production rates matter.","Escalation angle: Belarus basing adds regional risk."], watch:"Watch air-defense pledges and strike targets."}},
-      {h: "Pakistan's Quetta attack highlighted internal security fragility", proseHTML: `The week also showed how Pakistan's militant threat remains layered and local. <span class="change">A suicide bombing in Quetta put Balochistan's insecurity back into the national frame</span>. It matters because the province is tied to ports, minerals, and China-linked infrastructure, so attacks there carry economic and diplomatic costs.`, sources: [{name:"AP Pakistan",url:"https://apnews.com/hub/pakistan"},{name:"Reuters Asia",url:"https://www.reuters.com/world/asia-pacific/"}], learn: {context:"Balochistan combines separatist grievances, sectarian violence, and strategic infrastructure.", angles:["Security angle: attacks strain local forces.","Economic angle: investors watch project safety.","Governance angle: policing cannot solve political alienation alone."], watch:"Watch responsibility claims and provincial security changes."}}
+      {h: "Russia's missile strategy kept pressure on civilians and grids", proseHTML: `Russia's week of missile signaling and strikes reinforced a familiar strategy: make Ukraine spend scarce defenses protecting cities and infrastructure. <span class="change">The Oreshnik strike claims widened attention beyond normal drone-and-cruise-missile barrages</span>. The importance is that Ukraine's biggest need is not only more weapons but a sustained interceptor pipeline.`, sources: [{name:"AP",url:"https://apnews.com/article/998aeaab5833ca397290d9ee2737b0e5"},{name:"Reuters",url:"https://www.reuters.com/world/europe/"}], learn: {context:"Air defense is a consumption war: each incoming missile forces expensive choices about what to intercept.", angles:["Military angle: Ukraine cannot protect everything.","Industrial angle: NATO production rates matter.","Escalation angle: Belarus basing adds regional risk."], watch:"Watch air-defense pledges and strike targets."}}
     ]}
   ],
   analytical: [
-    {tag:"Iran / Energy", headline:"The Iran deal is now an oil-price, sanctions, and war-powers test at once", skeletonHTML:`<strong>Baseline:</strong> Iran diplomacy usually gets framed around uranium enrichment and sanctions, while oil markets separately price Gulf security risk. <strong>Move:</strong> The current framework joins those issues by tying ceasefire durability to Hormuz access, inspections, and sanctions relief. <strong>Shift:</strong> That means the deal's credibility will be measured by tanker traffic, insurance costs, and congressional reaction as much as by nuclear text. <strong>Why it matters:</strong> If the agreement calms shipping, it can ease inflation pressure and reduce the case for extended US military involvement; if it fails, the same crisis feeds energy prices, constitutional fights, and alliance pressure at once.`, stats:["Hormuz carries a large share of globally traded oil and liquefied natural gas, so even limited disruption can affect prices before barrels disappear.","The War Powers Resolution's 60-day clock gives Congress a concrete timeline for challenging sustained operations.","Oil-price pass-through is uneven: import-dependent poorer economies face the fastest fiscal and food-price strain."], sideA:{label:"Deal can de-escalate", text:"A verifiable framework lowers nuclear and shipping risk together, giving markets and Gulf partners a reason to step back."}, sideB:{label:"Deal may reward coercion", text:"If sanctions relief arrives before inspections and maritime restraint are proven, Iran gains leverage while preserving escalation tools."}, sideC:{label:"Markets are the referee", text:"Even if diplomats declare success, insurers and refiners will expose whether the corridor is actually trusted."}, sources:[{name:"AP",url:"https://apnews.com/article/e603a7759d6cbd70ce5ed01f439a29dc"},{name:"Axios",url:"https://www.axios.com/2026/05/24/iran-deal-strait-hormuz-sanctions-nuclear"}]},
-    {tag:"Public Health", headline:"Bundibugyo Ebola turns outbreak response into a trust and logistics contest", skeletonHTML:`<strong>Baseline:</strong> Ebola response works when cases are isolated early, contacts are traced, burials are made safer, and communities cooperate. <strong>Move:</strong> The Bundibugyo strain has limited vaccine tools, while reported treatment-center attacks and travel restrictions make routine containment harder. <strong>Shift:</strong> The main constraint is no longer only medical knowledge; it is whether responders can operate safely and whether families trust the response enough to report symptoms. <strong>Why it matters:</strong> A contained outbreak remains a regional emergency, but a response that loses community cooperation can create hidden transmission chains and export risk.`, stats:["WHO listed 746 suspected cases as of May 21, a scale large enough to make contact tracing labor-intensive.","Bundibugyo Ebola lacks the same approved vaccine base associated with Zaire Ebola, increasing reliance on non-pharmaceutical containment.","Travel-routing and hospital triage rules matter most before international spread, not after."], sideA:{label:"Containment is still possible", text:"Classic outbreak tools can work if tracing, isolation, and burial teams regain trust and security."}, sideB:{label:"Trust is the weak link", text:"If communities fear responders or treatment centers, cases hide and the official curve understates risk."}, sideC:{label:"Global systems angle", text:"The outbreak tests whether post-COVID surveillance networks can respond without triggering blunt travel politics."}, sources:[{name:"WHO",url:"https://www.who.int/emergencies/disease-outbreak-news"},{name:"CDC",url:"https://www.cdc.gov/ebola/"},{name:"AP",url:"https://apnews.com/"}]},
-    {tag:"Ukraine / Europe", headline:"Russia's missile pressure is becoming an industrial-capacity test for Ukraine's backers", skeletonHTML:`<strong>Baseline:</strong> Ukraine's air defense depends on Western systems whose interceptors are expensive and limited. <strong>Move:</strong> Russia's Oreshnik deployment plan in Belarus and continued long-range strikes force Ukraine to protect cities, power systems, and military targets with finite ammunition. <strong>Shift:</strong> The decisive question is no longer only what systems allies donate, but whether production can replace interceptors as fast as Russia launches missiles and drones. <strong>Why it matters:</strong> If the pipeline fails, Russia can impose civilian costs and economic disruption without needing a battlefield breakthrough.`, stats:["Ukraine says it hit 11 Russian oil facilities in May, showing Kyiv is also trying to strain Moscow's logistics.","Intermediate-range basing in Belarus would shorten warning times for some Ukrainian and regional targets.","Air-defense support must include launchers, radars, trained crews, and missiles, not one equipment category."], sideA:{label:"Support can blunt Russia", text:"Sustained allied production and layered defenses can reduce the strategic value of missile coercion."}, sideB:{label:"Russia can outlast stocks", text:"If Russia launches cheaper drones and missiles faster than allies produce interceptors, Ukraine faces impossible allocation choices."}, sideC:{label:"Europe's own test", text:"The crisis exposes whether Europe can scale defense industry fast enough for a long war."}, sources:[{name:"AP",url:"https://apnews.com/article/998aeaab5833ca397290d9ee2737b0e5"},{name:"Reuters",url:"https://www.reuters.com/world/europe/"}]},
-    {tag:"China / Technology", headline:"AI-chip controls now depend on partner enforcement, not just US rules", skeletonHTML:`<strong>Baseline:</strong> Washington restricts high-end AI chips to slow access by strategic competitors, but chips move through global distributors, servers, cloud contracts, and re-export routes. <strong>Move:</strong> Taiwan-linked enforcement around alleged server smuggling shows that the control regime has entered a prosecutorial phase. <strong>Shift:</strong> The weak point is no longer the text of US rules; it is whether partners can audit supply chains without paralyzing legitimate business. <strong>Why it matters:</strong> AI compute is becoming a strategic resource, so a few successful diversion routes can undermine years of policy.`, stats:["Advanced AI models require dense chip clusters, which makes server-level diversion strategically relevant.","Taiwan is both a chip-manufacturing hub and a security flashpoint, linking export controls to deterrence.","Rare-earth licensing shows China has its own administrative levers in technology supply chains."], sideA:{label:"Controls can work", text:"Partner prosecutions raise the cost of gray-market diversion and signal that rules have teeth."}, sideB:{label:"Leakage is inevitable", text:"High demand and global resale channels make full enforcement unrealistic without damaging legitimate trade."}, sideC:{label:"Supply-chain bargaining", text:"The chip fight and rare-earth fight increasingly mirror each other as administrative choke points."}, sources:[{name:"Reuters Technology",url:"https://www.reuters.com/technology/"},{name:"Taiwan News",url:"https://www.taiwannews.com.tw/news/6126962"}]},
-    {tag:"US Politics", headline:"War powers could turn the Iran crisis into a separation-of-powers fight", skeletonHTML:`<strong>Baseline:</strong> Presidents have often used force or protected maritime routes without new congressional authorization, while Congress has rarely forced a decisive confrontation. <strong>Move:</strong> The Iran crisis gives lawmakers a concrete 60-day frame and a visible policy target in Hormuz operations. <strong>Shift:</strong> The key question is whether opposition remains symbolic or becomes a coalition large enough to affect funding, authorizations, and campaign messaging. <strong>Why it matters:</strong> Constitutional process can alter strategy because allies, adversaries, and markets all watch whether the United States can sustain a policy politically.`, stats:["The 1973 War Powers Resolution is designed to force consultation and limit unauthorized hostilities after a set period.","A narrow House majority means a small number of defections can change the political meaning of a vote.","Defense authorization and appropriations bills give Congress leverage even when direct withdrawal votes fail."], sideA:{label:"Executive flexibility", text:"The president must protect US forces, allies, and shipping routes quickly in a crisis."}, sideB:{label:"Congressional authorization", text:"Sustained hostilities require explicit democratic consent, especially after decades of elastic war powers."}, sideC:{label:"Credibility risk", text:"A public legal fight can either strengthen legitimacy or signal division to Tehran and allies."}, sources:[{name:"Congress.gov",url:"https://www.congress.gov/"},{name:"AP",url:"https://apnews.com/"}]}
+    {tag:"Iran / Energy", headline:"The Iran deal is now an oil-price, sanctions, and war-powers test at once", deck:"A ceasefire framework only matters if it changes behavior at sea, in inspections, and inside Congress.", image:"https://www.nasa.gov/wp-content/uploads/2023/03/iss064e046338.jpg?w=1041", imageAlt:"Satellite view of the Strait of Hormuz", imageCredit:"NASA", imageCreditUrl:"https://www.nasa.gov/image-article/strait-of-hormuz/", skeletonHTML:`<strong>Baseline:</strong> Iran diplomacy usually gets framed around uranium enrichment and sanctions, while oil markets separately price Gulf security risk. <strong>Move:</strong> The current framework joins those issues by tying ceasefire durability to Hormuz access, inspections, and sanctions relief. <strong>Shift:</strong> That means the deal's credibility will be measured by tanker traffic, insurance costs, and congressional reaction as much as by nuclear text. <strong>Why it matters:</strong> If the agreement calms shipping, it can ease inflation pressure and reduce the case for extended US military involvement; if it fails, the same crisis feeds energy prices, constitutional fights, and alliance pressure at once.`, stats:["Hormuz carries a large share of globally traded oil and liquefied natural gas, so even limited disruption can affect prices before barrels disappear.","The War Powers Resolution's 60-day clock gives Congress a concrete timeline for challenging sustained operations.","Oil-price pass-through is uneven: import-dependent poorer economies face the fastest fiscal and food-price strain."], sideA:{label:"Deal can de-escalate", text:"A verifiable framework lowers nuclear and shipping risk together, giving markets and Gulf partners a reason to step back."}, sideB:{label:"Deal may reward coercion", text:"If sanctions relief arrives before inspections and maritime restraint are proven, Iran gains leverage while preserving escalation tools."}, sideC:{label:"Markets are the referee", text:"Even if diplomats declare success, insurers and refiners will expose whether the corridor is actually trusted."}, sources:[{name:"AP",url:"https://apnews.com/article/e603a7759d6cbd70ce5ed01f439a29dc"},{name:"Axios",url:"https://www.axios.com/2026/05/24/iran-deal-strait-hormuz-sanctions-nuclear"}]},
+    {tag:"Public Health", headline:"Bundibugyo Ebola turns outbreak response into a trust and logistics contest", deck:"With vaccine options limited, the decisive tools are tracing, safe burials, security, and community consent.", image:"https://www.cdc.gov/ebola/media/images/2024/04/Ebola_virus_purple.jpg", imageAlt:"Microscopic image of Ebola virus", imageCredit:"CDC", imageCreditUrl:"https://www.cdc.gov/ebola/about/index.html", skeletonHTML:`<strong>Baseline:</strong> Ebola response works when cases are isolated early, contacts are traced, burials are made safer, and communities cooperate. <strong>Move:</strong> The Bundibugyo strain has limited vaccine tools, while reported treatment-center attacks and travel restrictions make routine containment harder. <strong>Shift:</strong> The main constraint is no longer only medical knowledge; it is whether responders can operate safely and whether families trust the response enough to report symptoms. <strong>Why it matters:</strong> A contained outbreak remains a regional emergency, but a response that loses community cooperation can create hidden transmission chains and export risk.`, stats:["WHO listed 746 suspected cases as of May 21, a scale large enough to make contact tracing labor-intensive.","CDC notes Ebola can have mortality as high as 80% to 90% without effective treatment and supportive care.","Travel-routing and hospital triage rules matter most before international spread, not after."], sideA:{label:"Containment is still possible", text:"Classic outbreak tools can work if tracing, isolation, and burial teams regain trust and security."}, sideB:{label:"Trust is the weak link", text:"If communities fear responders or treatment centers, cases hide and the official curve understates risk."}, sideC:{label:"Global systems angle", text:"The outbreak tests whether post-COVID surveillance networks can respond without triggering blunt travel politics."}, sources:[{name:"WHO",url:"https://www.who.int/emergencies/disease-outbreak-news"},{name:"CDC",url:"https://www.cdc.gov/ebola/about/index.html"}]},
+    {tag:"Ukraine / Europe", headline:"Russia's missile pressure is becoming an industrial-capacity test for Ukraine's backers", deck:"The war's air-defense problem is now about production tempo as much as weapons donations.", image:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Building_on_Valeriya_Lobanovskoho_Avenue%2C_6A%2C_after_missile_strike%2C_2022-02-26_%2803%29.jpg/1280px-Building_on_Valeriya_Lobanovskoho_Avenue%2C_6A%2C_after_missile_strike%2C_2022-02-26_%2803%29.jpg", imageAlt:"Kyiv residential building damaged after a missile strike", imageCredit:"Wikimedia Commons", imageCreditUrl:"https://commons.wikimedia.org/wiki/File:Building_on_Valeriya_Lobanovskoho_Avenue,_6A,_after_missile_strike,_2022-02-26_(03).jpg", skeletonHTML:`<strong>Baseline:</strong> Ukraine's air defense depends on Western systems whose interceptors are expensive and limited. <strong>Move:</strong> Russia's Oreshnik use in a mass attack and continued long-range strikes force Ukraine to protect cities, power systems, and military targets with finite ammunition. <strong>Shift:</strong> The decisive question is no longer only what systems allies donate, but whether production can replace interceptors as fast as Russia launches missiles and drones. <strong>Why it matters:</strong> If the pipeline fails, Russia can impose civilian costs and economic disruption without needing a battlefield breakthrough.`, stats:["AP reported the attack included 600 strike drones and 90 missiles, a scale designed to exhaust defenses as much as destroy targets.","Ukraine's Air Force said defenses destroyed or jammed 549 drones and 55 missiles, showing both success and saturation risk.","Air-defense support must include launchers, radars, trained crews, and missiles, not one equipment category."], sideA:{label:"Support can blunt Russia", text:"Sustained allied production and layered defenses can reduce the strategic value of missile coercion."}, sideB:{label:"Russia can outlast stocks", text:"If Russia launches cheaper drones and missiles faster than allies produce interceptors, Ukraine faces impossible allocation choices."}, sideC:{label:"Europe's own test", text:"The crisis exposes whether Europe can scale defense industry fast enough for a long war."}, sources:[{name:"AP",url:"https://apnews.com/article/998aeaab5833ca397290d9ee2737b0e5"},{name:"Reuters",url:"https://www.reuters.com/world/europe/"}]},
+    {tag:"China / Technology", headline:"AI-chip controls now depend on partner enforcement, not just US rules", deck:"The policy fight has moved from export-control text to prosecutors, resellers, and end-use audits.", image:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/TSMC_Fab5.JPG/1280px-TSMC_Fab5.JPG", imageAlt:"TSMC fabrication plant in Hsinchu Science Park, Taiwan", imageCredit:"Wikimedia Commons", imageCreditUrl:"https://commons.wikimedia.org/wiki/File:TSMC_Fab5.JPG", skeletonHTML:`<strong>Baseline:</strong> Washington restricts high-end AI chips to slow access by strategic competitors, but chips move through global distributors, servers, cloud contracts, and re-export routes. <strong>Move:</strong> Taiwan-linked enforcement around alleged server smuggling shows that the control regime has entered a prosecutorial phase. <strong>Shift:</strong> The weak point is no longer the text of US rules; it is whether partners can audit supply chains without paralyzing legitimate business. <strong>Why it matters:</strong> AI compute is becoming a strategic resource, so a few successful diversion routes can undermine years of policy.`, stats:["Advanced AI models require dense chip clusters, which makes server-level diversion strategically relevant.","Taiwan is both a chip-manufacturing hub and a security flashpoint, linking export controls to deterrence.","Rare-earth licensing shows China has its own administrative levers in technology supply chains."], sideA:{label:"Controls can work", text:"Partner prosecutions raise the cost of gray-market diversion and signal that rules have teeth."}, sideB:{label:"Leakage is inevitable", text:"High demand and global resale channels make full enforcement unrealistic without damaging legitimate trade."}, sideC:{label:"Supply-chain bargaining", text:"The chip fight and rare-earth fight increasingly mirror each other as administrative choke points."}, sources:[{name:"Reuters Technology",url:"https://www.reuters.com/technology/"},{name:"Taiwan News",url:"https://www.taiwannews.com.tw/news/6126962"}]},
+    {tag:"US Politics", headline:"War powers could turn the Iran crisis into a separation-of-powers fight", deck:"The fight is not only whether the operation works, but who is constitutionally allowed to sustain it.", image:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/United_States_Capitol_west_front_edit2.jpg/1280px-United_States_Capitol_west_front_edit2.jpg", imageAlt:"United States Capitol west front", imageCredit:"Wikimedia Commons", imageCreditUrl:"https://commons.wikimedia.org/wiki/File:United_States_Capitol_west_front_edit2.jpg", skeletonHTML:`<strong>Baseline:</strong> Presidents have often used force or protected maritime routes without new congressional authorization, while Congress has rarely forced a decisive confrontation. <strong>Move:</strong> The Iran crisis gives lawmakers a concrete 60-day frame and a visible policy target in Hormuz operations. <strong>Shift:</strong> The key question is whether opposition remains symbolic or becomes a coalition large enough to affect funding, authorizations, and campaign messaging. <strong>Why it matters:</strong> Constitutional process can alter strategy because allies, adversaries, and markets all watch whether the United States can sustain a policy politically.`, stats:["The 1973 War Powers Resolution is designed to force consultation and limit unauthorized hostilities after a set period.","A narrow House majority means a small number of defections can change the political meaning of a vote.","Defense authorization and appropriations bills give Congress leverage even when direct withdrawal votes fail."], sideA:{label:"Executive flexibility", text:"The president must protect US forces, allies, and shipping routes quickly in a crisis."}, sideB:{label:"Congressional authorization", text:"Sustained hostilities require explicit democratic consent, especially after decades of elastic war powers."}, sideC:{label:"Credibility risk", text:"A public legal fight can either strengthen legitimacy or signal division to Tehran and allies."}, sources:[{name:"Congress.gov",url:"https://www.congress.gov/"},{name:"AP",url:"https://apnews.com/"}]}
   ],
   opinion: [
     {label:"National Review Column", title:"The Wrong Way to Talk About the War in Iran", author:"Noah Rothman", publication:"National Review", date:"May 2026", subtitle:"Rothman argues that US leaders weaken their position when they describe Iran policy as theater rather than as a strategic contest over coercion and deterrence.", proseHTML:`The column responds to a live argument over whether the Iran crisis should be framed as another avoidable Middle East entanglement or as a necessary defense of navigation, allies, and nonproliferation. Rothman argues that careless rhetoric makes it harder to explain why force, sanctions, and diplomacy may all be required at different points. The value for extemp is that it highlights the communication problem: even a defensible policy can lose support if leaders cannot separate deterrence from escalation. The pushback is that rhetoric discipline does not solve the underlying risk of sliding into a broader war.`, claim:"Strategic seriousness requires explaining interests, not performing outrage or anti-war branding.", matters:"It gives speakers a way to analyze presidential messaging as a policy tool, not just a media habit.", pushback:"The argument can understate public exhaustion with open-ended Middle East commitments.", sources:[{name:"National Review",url:"https://www.nationalreview.com/2026/05/the-wrong-way-to-talk-about-the-war-in-iran/"}]},
@@ -587,7 +530,6 @@ const briefing = {
 };
 
 const titles = {wire: "The Wire", weekly: "The Weekly", analytical: "The Analytical", opinion: "The Opinion"};
-let activeTab = "wire";
 
 function sourceHTML(sources) {
   return `<div class="wire-sources">Sources:${sources.map(s => `<a class="source-link" href="${s.url}" target="_blank" rel="noopener noreferrer">${s.name}</a>`).join(" /")}</div>`;
@@ -598,26 +540,29 @@ function learnHTML(learn) {
   return `<details class="learn"><summary>Learn more</summary><div class="learn-body"><h4>Deeper context</h4><p>${learn.context}</p><h4>Three angles</h4><ul>${learn.angles.map(a => `<li>${a}</li>`).join("")}</ul><h4>What to watch</h4><p>${learn.watch}</p></div></details>`;
 }
 
+function renderHeadline() {
+  const h = briefing.headline;
+  document.getElementById("headlineDay").innerHTML = `<div class="headline-copy"><div class="headline-label">${h.topic}</div><h2>${h.h}</h2><p>${h.deck}</p></div><figure class="headline-media"><img class="headline-photo" src="${h.image}" alt="${h.imageAlt}" loading="lazy"><figcaption class="image-credit">Image: <a class="source-link" href="${h.imageCreditUrl}" target="_blank" rel="noopener noreferrer">${h.imageCredit}</a></figcaption></figure>`;
+}
+
 function renderWireList(list) {
   return list.map(group => `<details class="topic"><summary><span class="topic-label">${group.topic}</span><span class="topic-count">${group.stories.length} stories</span></summary><div class="topic-body">${group.stories.map(story => `<article class="wire-item"><h2 class="wire-headline">${story.h}</h2><p class="wire-prose">${story.proseHTML}</p>${sourceHTML(story.sources)}${learnHTML(story.learn)}</article>`).join("")}</div></details>`).join("");
 }
 
+function imageHTML(item) {
+  if (!item.image) return "";
+  return `<figure class="analytical-image"><img src="${item.image}" alt="${item.imageAlt || ""}" loading="lazy"><figcaption class="image-credit">Image: <a class="source-link" href="${item.imageCreditUrl || item.image}" target="_blank" rel="noopener noreferrer">${item.imageCredit || "Source"}</a></figcaption></figure>`;
+}
+
 function renderAnalytical() {
-  return briefing.analytical.map(item => `<article class="analytical-card"><div class="analytical-tag">${item.tag}</div><h2>${item.headline}</h2><p class="skeleton">${item.skeletonHTML}</p><div class="stats-grid">${item.stats.map(s => `<div class="stat"><strong>Key number</strong>${s}</div>`).join("")}</div><div class="angles-grid"><div class="angle"><strong>${item.sideA.label}</strong>${item.sideA.text}</div><div class="angle"><strong>${item.sideB.label}</strong>${item.sideB.text}</div><div class="angle"><strong>${item.sideC.label}</strong>${item.sideC.text}</div></div>${sourceHTML(item.sources)}</article>`).join("");
+  return briefing.analytical.map(item => `<details class="analytical-file"><summary><div class="analytical-summary"><div class="analytical-tag">${item.tag}</div><h2>${item.headline}</h2>${item.deck ? `<p class="analytical-deck">${item.deck}</p>` : ""}</div></summary><div class="analytical-body">${imageHTML(item)}<p class="skeleton">${item.skeletonHTML}</p><section class="stats-block"><h3>Key Stats With Setup</h3>${item.stats.map(s => `<p>${s}</p>`).join("")}</section><div class="angles-title">Three Angles</div><div class="angles-grid"><div class="angle angle-a"><strong>${item.sideA.label}</strong>${item.sideA.text}</div><div class="angle angle-b"><strong>${item.sideB.label}</strong>${item.sideB.text}</div><div class="angle angle-c"><strong>${item.sideC.label}</strong>${item.sideC.text}</div></div>${sourceHTML(item.sources)}</div></details>`).join("");
 }
 
 function renderOpinion() {
   return briefing.opinion.map(item => `<article class="opinion-card"><div class="opinion-label">${item.label}</div><h2>${item.title}</h2><p class="opinion-meta">${item.author} - ${item.publication}, ${item.date}</p><p class="opinion-subtitle"><strong>${item.subtitle}</strong></p><p class="opinion-prose">${item.proseHTML}</p><div class="opinion-boxes"><div class="opinion-box"><strong>The Claim</strong>${item.claim}</div><div class="opinion-box"><strong>Why It Matters</strong>${item.matters}</div><div class="opinion-box"><strong>Pushback</strong>${item.pushback}</div></div>${sourceHTML(item.sources)}</article>`).join("");
 }
 
-function renderShell() {
-  document.getElementById("featuredGrid").innerHTML = briefing.featured.map(f => `<article class="featured-card"><div class="featured-label">${f.topic}</div><h2>${f.h}</h2><p>${f.deck}</p></article>`).join("");
-  document.getElementById("radarList").innerHTML = briefing.radar.map(x => `<p>${x}</p>`).join("");
-  document.getElementById("numbersList").innerHTML = briefing.numbers.map(x => `<p><strong>${x.split(":")[0]}:</strong>${x.includes(":") ? x.substring(x.indexOf(":") + 1) : x}</p>`).join("");
-}
-
 function renderTab(tab) {
-  activeTab = tab;
   document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.toggle("active", btn.dataset.tab === tab));
   document.getElementById("editionTitle").textContent = titles[tab];
   document.getElementById("editionIntro").textContent = briefing.intros[tab];
@@ -636,14 +581,13 @@ function applyTheme(theme) {
 
 function initTheme() {
   const saved = localStorage.getItem("dig-theme");
-  const preferred = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-  applyTheme(saved || preferred);
+  applyTheme(saved || "light");
 }
 
 document.querySelectorAll(".tab-btn").forEach(btn => btn.addEventListener("click", () => renderTab(btn.dataset.tab)));
 document.getElementById("themeToggle").addEventListener("click", () => applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark"));
 
-renderShell();
+renderHeadline();
 initTheme();
 renderTab("wire");
 </script>
